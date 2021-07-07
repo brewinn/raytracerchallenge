@@ -44,8 +44,11 @@ wrong, feel free to contact the current maintainer.
 
 ## License
 
-This project is licensed under GPL-3.0. For more information, see the LICENSE
-file in the project's root directory.
+The Unity Test Project files are licensed under the MIT license, see
+tests/Unity/license.txt for more information.
+
+This rest of the project is licensed under GPL-3.0. For more information, see
+the LICENSE file in the project's root directory.
 
 ## Project Status
 
