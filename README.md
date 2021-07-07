@@ -32,9 +32,9 @@ This will compile and link the current tests. To run:
 ## Roadmap
 
 - [x] Setup a testing framework
-- [] Add a makefile for easier building
-- [] Chapter 1: Tuples, Points, and Vectors
-- [] Chapter 2: Drawing on a Canvas
+- [ ] Add a makefile for easier building
+- [ ] Chapter 1: Tuples, Points, and Vectors
+- [ ] Chapter 2: Drawing on a Canvas
 
 ## Contributing
 
