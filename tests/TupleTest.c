@@ -50,3 +50,20 @@ TEST(Tuple, VectorCreatesTupleWithWEqualsZero)
 	TEST_ASSERT_EQUAL_FLOAT(3, tuple.z);
 	TEST_ASSERT_EQUAL_FLOAT(0, tuple.w);
 }
+
+TEST(Tuple, EqualsIsTrueForIdenticalTuples)
+{
+	Tuple tuple1, tuple2;
+	tuple1 = Tuple_Create(1, 1, 1, 1);
+	tuple2 = Tuple_Create(1, 1, 1, 1);
+	TEST_ASSERT(Tuple_Equals(tuple1, tuple2));
+}
+
+TEST(Tuple, EqualsIsFalseForDifferentTuples)
+{
+	Tuple tuple1, tuple2;
+	tuple1 = Tuple_Create(1, 1, 1, 1);
+	tuple2 = Tuple_Create(1, 0, 1, 1);
+	TEST_ASSERT(!Tuple_Equals(tuple1, tuple2));
+}
+
