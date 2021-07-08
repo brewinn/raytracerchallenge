@@ -30,3 +30,23 @@ TEST(Tuple, TupleWithWEqualsZeroIsAVector)
 	TEST_ASSERT_EQUAL_FLOAT(3.1, tuple.z);
 	TEST_ASSERT_EQUAL_FLOAT(0.0, tuple.w);
 }
+
+TEST(Tuple, PointCreatesTupleWithWEqualsOne)
+{
+	Tuple tuple;
+	tuple = Tuple_CreatePoint(4, -4, 3);
+	TEST_ASSERT_EQUAL_FLOAT(4, tuple.x);
+	TEST_ASSERT_EQUAL_FLOAT(-4, tuple.y);
+	TEST_ASSERT_EQUAL_FLOAT(3, tuple.z);
+	TEST_ASSERT_EQUAL_FLOAT(1, tuple.w);
+}
+
+TEST(Tuple, VectorCreatesTupleWithWEqualsZero)
+{
+	Tuple tuple;
+	tuple = Tuple_CreateVector(4, -4, 3);
+	TEST_ASSERT_EQUAL_FLOAT(4, tuple.x);
+	TEST_ASSERT_EQUAL_FLOAT(-4, tuple.y);
+	TEST_ASSERT_EQUAL_FLOAT(3, tuple.z);
+	TEST_ASSERT_EQUAL_FLOAT(0, tuple.w);
+}
