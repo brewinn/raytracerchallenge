@@ -20,3 +20,13 @@ TEST(Tuple, TupleWithWEqualsOneIsAPoint)
 	TEST_ASSERT_EQUAL_FLOAT(3.1, tuple.z);
 	TEST_ASSERT_EQUAL_FLOAT(1.0, tuple.w);
 }
+
+TEST(Tuple, TupleWithWEqualsZeroIsAVector)
+{
+	Tuple tuple;
+	tuple = Tuple_Create(4.3, -4.2, 3.1, 0.0);
+	TEST_ASSERT_EQUAL_FLOAT(4.3, tuple.x);
+	TEST_ASSERT_EQUAL_FLOAT(-4.2, tuple.y);
+	TEST_ASSERT_EQUAL_FLOAT(3.1, tuple.z);
+	TEST_ASSERT_EQUAL_FLOAT(0.0, tuple.w);
+}
