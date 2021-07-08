@@ -11,5 +11,7 @@ struct Tuple{
 };
 
 Tuple Tuple_Create(float x, float y, float z, float w);
+Tuple Tuple_CreatePoint(float x, float y, float z);
+Tuple Tuple_CreateVector(float x, float y, float z);
 
 #endif /* __TUPLE__ */
