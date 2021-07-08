@@ -2,5 +2,5 @@
 
 TEST_GROUP_RUNNER(Tuple)
 {
-	RUN_TEST_CASE(Tuple, Failure);
+	RUN_TEST_CASE(Tuple, TupleWithWEqualsOneIsAPoint);
 }
