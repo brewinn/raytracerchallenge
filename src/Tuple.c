@@ -108,3 +108,12 @@ float Tuple_Dot(Tuple tuple1, Tuple tuple2)
 		tuple1.z * tuple2.z +
 		tuple1.w * tuple2.w ;
 }
+
+Tuple Tuple_Cross(Tuple tuple1, Tuple tuple2)
+{
+	float x, y, z;
+	x = tuple1.y * tuple2.z - tuple1.z * tuple2.y;
+	y = tuple1.z * tuple2.x - tuple1.x * tuple2.z;
+	z = tuple1.x * tuple2.y - tuple1.y * tuple2.x;
+	return Tuple_CreateVector(x, y, z);
+}

@@ -154,3 +154,13 @@ TEST(Tuple, DotProductOfTwoTuples)
 	float dotProduct = Tuple_Dot(tuple1, tuple2);
 	TEST_ASSERT(dotProduct == 20);
 }
+
+TEST(Tuple, CrossProductOfTwoVectors)
+{
+	tuple1 = Tuple_CreateVector(1, 2, 3);
+	tuple2 = Tuple_CreateVector(2, 3, 4);
+	tuple = Tuple_Cross(tuple1, tuple2);
+	AssertTupleEquals(-1, 2, -1, 0);
+	tuple = Tuple_Cross(tuple2, tuple1);
+	AssertTupleEquals(1, -2, 1, 0);
+}
