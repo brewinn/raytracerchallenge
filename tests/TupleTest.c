@@ -103,3 +103,17 @@ TEST(Tuple, SubtractingTwoVectorsYieldsAVector)
 	tuple = Tuple_Subtract(tuple1, tuple2);
 	AssertTwoTuplesEqual(tuple, Tuple_CreateVector(0, 1, 1));
 }
+
+TEST(Tuple, SubtractingAVectorFromTheZeroVector)
+{
+	tuple1 = Tuple_CreateVector(0, 0, 0);
+	tuple2 = Tuple_CreateVector(1, -2, 3);
+	tuple = Tuple_Subtract(tuple1, tuple2);
+	AssertTwoTuplesEqual(tuple, Tuple_CreateVector(-1, 2, -3));
+}
+
+TEST(Tuple, TupleNegationNegatesComponentwise)
+{
+	tuple = Tuple_Negate(Tuple_Create(1, -2, 3, -4));
+	AssertTupleEquals(-1, 2, -3, 4);
+}
