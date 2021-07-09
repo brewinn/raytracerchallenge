@@ -8,4 +8,5 @@ TEST_GROUP_RUNNER(Tuple)
 	RUN_TEST_CASE(Tuple, VectorCreatesTupleWithWEqualsZero);
 	RUN_TEST_CASE(Tuple, EqualsIsTrueForIdenticalTuples);
 	RUN_TEST_CASE(Tuple, EqualsIsFalseForDifferentTuples);
+	RUN_TEST_CASE(Tuple, TupleAdditionAddsComponentwise);
 }

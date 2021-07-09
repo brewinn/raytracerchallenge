@@ -59,3 +59,10 @@ TEST(Tuple, EqualsIsFalseForDifferentTuples)
 	TEST_ASSERT(!Tuple_Equals(tuple1, tuple2));
 }
 
+TEST(Tuple, TupleAdditionAddsComponentwise)
+{
+	tuple1 = Tuple_Create(1, 2, 7, 1);
+	tuple2 = Tuple_Create(1, 1.5, 0, -1);
+	tuple = Tuple_Add(tuple1, tuple2);
+	TupleAssertEquals(2, 3.5, 7, 0);
+}
