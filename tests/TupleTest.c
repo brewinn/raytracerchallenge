@@ -78,7 +78,15 @@ TEST(Tuple, TupleSubtractionSubtractsComponentwise)
 TEST(Tuple, SubtractingTwoPointsYieldsAVector)
 {
 	tuple1 = Tuple_CreatePoint(1, 1, 1);
-	tuple2 = Tuple_CreatePoint(0, 0, 0);
+	tuple2 = Tuple_CreatePoint(1, 0, 0);
 	tuple = Tuple_Subtract(tuple1, tuple2);
-	TEST_ASSERT(Tuple_Equals(tuple, Tuple_CreateVector(1, 1, 1)));
+	TEST_ASSERT(Tuple_Equals(tuple, Tuple_CreateVector(0, 1, 1)));
+}
+
+TEST(Tuple, SubtractingAPointAndAVectorYieldsAPoint)
+{
+	tuple1 = Tuple_CreatePoint(1, 1, 1);
+	tuple2 = Tuple_CreateVector(1, 0, 0);
+	tuple = Tuple_Subtract(tuple1, tuple2);
+	TEST_ASSERT(Tuple_Equals(tuple, Tuple_CreatePoint(0, 1, 1)));
 }

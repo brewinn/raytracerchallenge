@@ -11,4 +11,5 @@ TEST_GROUP_RUNNER(Tuple)
 	RUN_TEST_CASE(Tuple, TupleAdditionAddsComponentwise);
 	RUN_TEST_CASE(Tuple, TupleSubtractionSubtractsComponentwise);
 	RUN_TEST_CASE(Tuple, SubtractingTwoPointsYieldsAVector);
+	RUN_TEST_CASE(Tuple, SubtractingAPointAndAVectorYieldsAPoint);
 }
