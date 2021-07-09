@@ -56,3 +56,13 @@ Tuple Tuple_Negate(Tuple tuple)
 			    -tuple.z, 
 			    -tuple.w);
 }
+
+Tuple Tuple_Multiply(Tuple tuple, float scalar)
+{
+	float x, y, z, w;
+	x = tuple.x * scalar;
+	y = tuple.y * scalar;
+	z = tuple.z * scalar;
+	w = tuple.w * scalar;
+	return Tuple_Create(x, y, z, w);
+}

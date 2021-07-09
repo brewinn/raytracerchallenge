@@ -19,5 +19,6 @@ bool Tuple_Equals(Tuple tuple1, Tuple tuple2);
 Tuple Tuple_Add(Tuple tuple1, Tuple tuple2);
 Tuple Tuple_Subtract(Tuple tuple1, Tuple tuple2);
 Tuple Tuple_Negate(Tuple tuple);
+Tuple Tuple_Multiply(Tuple tuple, float scalar);
 
 #endif /* __TUPLE__ */
