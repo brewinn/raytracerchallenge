@@ -90,3 +90,11 @@ TEST(Tuple, SubtractingAPointAndAVectorYieldsAPoint)
 	tuple = Tuple_Subtract(tuple1, tuple2);
 	TEST_ASSERT(Tuple_Equals(tuple, Tuple_CreatePoint(0, 1, 1)));
 }
+
+TEST(Tuple, SubtractingTwoVectorsYieldsAVector)
+{
+	tuple1 = Tuple_CreateVector(1, 1, 1);
+	tuple2 = Tuple_CreateVector(1, 0, 0);
+	tuple = Tuple_Subtract(tuple1, tuple2);
+	TEST_ASSERT(Tuple_Equals(tuple, Tuple_CreateVector(0, 1, 1)));
+}
