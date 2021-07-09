@@ -3,6 +3,8 @@
 
 TEST_GROUP(Tuple);
 
+static Tuple tuple, tuple1, tuple2;
+
 TEST_SETUP(Tuple)
 {
 }
@@ -11,49 +13,40 @@ TEST_TEAR_DOWN(Tuple)
 {
 }
 
+static void TupleAssertEquals(float x, float y, float z, float w)
+{
+	TEST_ASSERT_EQUAL_FLOAT(x, tuple.x);
+	TEST_ASSERT_EQUAL_FLOAT(y, tuple.y);
+	TEST_ASSERT_EQUAL_FLOAT(z, tuple.z);
+	TEST_ASSERT_EQUAL_FLOAT(w, tuple.w);
+}
+
 TEST(Tuple, TupleWithWEqualsOneIsAPoint)
 {
-	Tuple tuple;
 	tuple = Tuple_Create(4.3, -4.2, 3.1, 1.0);
-	TEST_ASSERT_EQUAL_FLOAT(4.3, tuple.x);
-	TEST_ASSERT_EQUAL_FLOAT(-4.2, tuple.y);
-	TEST_ASSERT_EQUAL_FLOAT(3.1, tuple.z);
-	TEST_ASSERT_EQUAL_FLOAT(1.0, tuple.w);
+	TupleAssertEquals(4.3, -4.2, 3.1, 1.0);
 }
 
 TEST(Tuple, TupleWithWEqualsZeroIsAVector)
 {
-	Tuple tuple;
 	tuple = Tuple_Create(4.3, -4.2, 3.1, 0.0);
-	TEST_ASSERT_EQUAL_FLOAT(4.3, tuple.x);
-	TEST_ASSERT_EQUAL_FLOAT(-4.2, tuple.y);
-	TEST_ASSERT_EQUAL_FLOAT(3.1, tuple.z);
-	TEST_ASSERT_EQUAL_FLOAT(0.0, tuple.w);
+	TupleAssertEquals(4.3, -4.2, 3.1, 0.0);
 }
 
 TEST(Tuple, PointCreatesTupleWithWEqualsOne)
 {
-	Tuple tuple;
 	tuple = Tuple_CreatePoint(4, -4, 3);
-	TEST_ASSERT_EQUAL_FLOAT(4, tuple.x);
-	TEST_ASSERT_EQUAL_FLOAT(-4, tuple.y);
-	TEST_ASSERT_EQUAL_FLOAT(3, tuple.z);
-	TEST_ASSERT_EQUAL_FLOAT(1, tuple.w);
+	TupleAssertEquals(4, -4, 3, 1);
 }
 
 TEST(Tuple, VectorCreatesTupleWithWEqualsZero)
 {
-	Tuple tuple;
 	tuple = Tuple_CreateVector(4, -4, 3);
-	TEST_ASSERT_EQUAL_FLOAT(4, tuple.x);
-	TEST_ASSERT_EQUAL_FLOAT(-4, tuple.y);
-	TEST_ASSERT_EQUAL_FLOAT(3, tuple.z);
-	TEST_ASSERT_EQUAL_FLOAT(0, tuple.w);
+	TupleAssertEquals(4, -4, 3, 0);
 }
 
 TEST(Tuple, EqualsIsTrueForIdenticalTuples)
 {
-	Tuple tuple1, tuple2;
 	tuple1 = Tuple_Create(1, 1, 1, 1);
 	tuple2 = Tuple_Create(1, 1, 1, 1);
 	TEST_ASSERT(Tuple_Equals(tuple1, tuple2));
@@ -61,7 +54,6 @@ TEST(Tuple, EqualsIsTrueForIdenticalTuples)
 
 TEST(Tuple, EqualsIsFalseForDifferentTuples)
 {
-	Tuple tuple1, tuple2;
 	tuple1 = Tuple_Create(1, 1, 1, 1);
 	tuple2 = Tuple_Create(1, 0, 1, 1);
 	TEST_ASSERT(!Tuple_Equals(tuple1, tuple2));
