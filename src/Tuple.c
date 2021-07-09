@@ -48,3 +48,11 @@ Tuple Tuple_Subtract(Tuple tuple1, Tuple tuple2)
 	w = tuple1.w - tuple2.w;
 	return Tuple_Create(x, y, z, w);
 }
+
+Tuple Tuple_Negate(Tuple tuple)
+{
+	return Tuple_Create(-tuple.x, 
+			    -tuple.y, 
+			    -tuple.z, 
+			    -tuple.w);
+}
