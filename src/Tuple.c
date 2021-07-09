@@ -1,4 +1,5 @@
 #include "Tuple.h"
+#include <math.h>
 
 Tuple Tuple_Create(float x, float y, float z, float w)
 {
@@ -75,4 +76,14 @@ Tuple Tuple_Divide(Tuple tuple, float scalar)
 	z = tuple.z / scalar;
 	w = tuple.w / scalar;
 	return Tuple_Create(x, y, z, w);
+}
+
+float Tuple_Magnitude(Tuple tuple)
+{
+	float x2, y2, z2, w2;
+	x2 = tuple.x * tuple.x;
+	y2 = tuple.y * tuple.y;
+	z2 = tuple.z * tuple.z;
+	w2 = tuple.w * tuple.w;
+	return sqrtf(x2 + y2 + z2 + w2);
 }

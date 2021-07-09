@@ -21,5 +21,6 @@ Tuple Tuple_Subtract(Tuple tuple1, Tuple tuple2);
 Tuple Tuple_Negate(Tuple tuple);
 Tuple Tuple_Multiply(Tuple tuple, float scalar);
 Tuple Tuple_Divide(Tuple tuple, float scalar);
+float Tuple_Magnitude(Tuple tuple);
 
 #endif /* __TUPLE__ */
