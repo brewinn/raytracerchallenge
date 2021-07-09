@@ -20,7 +20,7 @@ compiler you choose.
 For example, using the GNU's _gcc_ in the _tests_ directory:
 
 ```
-gcc -I Unity Unity/*.c *.c -o TestOutput.test
+gcc -lm -I Unity -I ../include Unity/*.c *.c ../src/*.c -o TestOutput.test
 ```
 
 This will compile and link the current tests. To run:
@@ -29,11 +29,17 @@ This will compile and link the current tests. To run:
 ./TestOutput.test
 ```
 
+The projectile.c file can be compiled from the project root with
+
+```
+gcc -lm -I include src/Tuple.c src/projectile.c
+```
+
 ## Roadmap
 
 - [x] Setup a testing framework
 - [ ] Add a makefile for easier building
-- [ ] Chapter 1: Tuples, Points, and Vectors
+- [x] Chapter 1: Tuples, Points, and Vectors
 - [ ] Chapter 2: Drawing on a Canvas
 
 ## Contributing
