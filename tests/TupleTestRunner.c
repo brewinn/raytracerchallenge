@@ -19,4 +19,5 @@ TEST_GROUP_RUNNER(Tuple)
 	RUN_TEST_CASE(Tuple, DivideTupleByScalar);
 	RUN_TEST_CASE(Tuple, MagnitudeCalculatesVectorLength);
 	RUN_TEST_CASE(Tuple, NormalizeReturnsUnitVector);
+	RUN_TEST_CASE(Tuple, DotProductOfTwoTuples);
 }

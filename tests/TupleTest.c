@@ -146,3 +146,11 @@ TEST(Tuple, NormalizeReturnsUnitVector)
 	tuple = Tuple_Normalize(Tuple_CreateVector(2, 1, 2));
 	AssertTupleEquals(2.0/3, 1.0/3, 2.0/3, 0);
 }
+
+TEST(Tuple, DotProductOfTwoTuples)
+{
+	tuple1 = Tuple_Create(1, 2, 3, 4);
+	tuple2 = Tuple_Create(4, 3, 2, 1);
+	float dotProduct = Tuple_Dot(tuple1, tuple2);
+	TEST_ASSERT(dotProduct == 20);
+}

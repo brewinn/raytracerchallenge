@@ -100,3 +100,11 @@ Tuple Tuple_Normalize(Tuple tuple)
 	magnitude = Tuple_Magnitude(tuple);
 	return Tuple_Divide(tuple, magnitude);
 }
+
+float Tuple_Dot(Tuple tuple1, Tuple tuple2)
+{
+	return  tuple1.x * tuple2.x +
+		tuple1.y * tuple2.y +
+		tuple1.z * tuple2.z +
+		tuple1.w * tuple2.w ;
+}

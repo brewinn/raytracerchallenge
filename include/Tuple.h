@@ -23,5 +23,6 @@ Tuple Tuple_Multiply(Tuple tuple, float scalar);
 Tuple Tuple_Divide(Tuple tuple, float scalar);
 float Tuple_Magnitude(Tuple tuple);
 Tuple Tuple_Normalize(Tuple tuple);
+float Tuple_Dot(Tuple tuple1, Tuple tuple2);
 
 #endif /* __TUPLE__ */
