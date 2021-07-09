@@ -123,3 +123,9 @@ TEST(Tuple, MultiplyTupleByScalar)
 	tuple = Tuple_Multiply(Tuple_Create(1, -2, 3, -4), 3.5);
 	AssertTupleEquals(3.5, -7, 10.5, -14);
 }
+
+TEST(Tuple, DivideTupleByScalar)
+{
+	tuple = Tuple_Divide(Tuple_Create(1, -2, 3, -4), 2);
+	AssertTupleEquals(0.5, -1, 1.5, -2);
+}
