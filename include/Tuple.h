@@ -17,5 +17,6 @@ Tuple Tuple_CreatePoint(float x, float y, float z);
 Tuple Tuple_CreateVector(float x, float y, float z);
 bool Tuple_Equals(Tuple tuple1, Tuple tuple2);
 Tuple Tuple_Add(Tuple tuple1, Tuple tuple2);
+Tuple Tuple_Subtraction(Tuple tuple1, Tuple tuple2);
 
 #endif /* __TUPLE__ */

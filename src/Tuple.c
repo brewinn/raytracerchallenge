@@ -38,3 +38,13 @@ Tuple Tuple_Add(Tuple tuple1, Tuple tuple2)
 	w = tuple1.w + tuple2.w;
 	return Tuple_Create(x, y, z, w);
 }
+
+Tuple Tuple_Subtraction(Tuple tuple1, Tuple tuple2)
+{
+	float x, y, z, w;
+	x = tuple1.x - tuple2.x;
+	y = tuple1.y - tuple2.y;
+	z = tuple1.z - tuple2.z;
+	w = tuple1.w - tuple2.w;
+	return Tuple_Create(x, y, z, w);
+}
