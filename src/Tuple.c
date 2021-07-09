@@ -1,5 +1,11 @@
 #include "Tuple.h"
 #include <math.h>
+#include <stdio.h>
+
+static void Tuple_Print(Tuple t)
+{
+	printf("Tuple values: x=%f, y=%f, z=%f, w=%f\n", t.x, t.y, t.z, t.w);
+}
 
 Tuple Tuple_Create(float x, float y, float z, float w)
 {
@@ -86,4 +92,11 @@ float Tuple_Magnitude(Tuple tuple)
 	z2 = tuple.z * tuple.z;
 	w2 = tuple.w * tuple.w;
 	return sqrtf(x2 + y2 + z2 + w2);
+}
+
+Tuple Tuple_Normalize(Tuple tuple)
+{
+	float magnitude;
+	magnitude = Tuple_Magnitude(tuple);
+	return Tuple_Divide(tuple, magnitude);
 }
