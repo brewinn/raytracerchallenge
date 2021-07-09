@@ -2,6 +2,8 @@
 #include <math.h>
 #include <stdio.h>
 
+enum {VECTOR, POINT};
+
 static void Tuple_Print(Tuple t)
 {
 	printf("Tuple values: x=%f, y=%f, z=%f, w=%f\n", t.x, t.y, t.z, t.w);
@@ -15,12 +17,12 @@ Tuple Tuple_Create(float x, float y, float z, float w)
 
 Tuple Tuple_CreatePoint(float x, float y, float z)
 {
-	return Tuple_Create(x, y, z, 1);
+	return Tuple_Create(x, y, z, POINT);
 }
 
 Tuple Tuple_CreateVector(float x, float y, float z)
 {
-	return Tuple_Create(x, y, z, 0);
+	return Tuple_Create(x, y, z, VECTOR);
 }
 
 bool Tuple_Equals(Tuple tuple1, Tuple tuple2)
@@ -96,8 +98,7 @@ float Tuple_Magnitude(Tuple tuple)
 
 Tuple Tuple_Normalize(Tuple tuple)
 {
-	float magnitude;
-	magnitude = Tuple_Magnitude(tuple);
+	float magnitude = Tuple_Magnitude(tuple);
 	return Tuple_Divide(tuple, magnitude);
 }
 
