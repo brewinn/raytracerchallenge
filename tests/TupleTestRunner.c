@@ -15,4 +15,5 @@ TEST_GROUP_RUNNER(Tuple)
 	RUN_TEST_CASE(Tuple, SubtractingTwoVectorsYieldsAVector);
 	RUN_TEST_CASE(Tuple, SubtractingAVectorFromTheZeroVector);
 	RUN_TEST_CASE(Tuple, TupleNegationNegatesComponentwise);
+	RUN_TEST_CASE(Tuple, MultiplyTupleByScalar);
 }

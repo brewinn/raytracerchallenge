@@ -117,3 +117,9 @@ TEST(Tuple, TupleNegationNegatesComponentwise)
 	tuple = Tuple_Negate(Tuple_Create(1, -2, 3, -4));
 	AssertTupleEquals(-1, 2, -3, 4);
 }
+
+TEST(Tuple, MultiplyTupleByScalar)
+{
+	tuple = Tuple_Multiply(Tuple_Create(1, -2, 3, -4), 3.5);
+	AssertTupleEquals(3.5, -7, 10.5, -14);
+}
