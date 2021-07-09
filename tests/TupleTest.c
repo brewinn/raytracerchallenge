@@ -129,3 +129,14 @@ TEST(Tuple, DivideTupleByScalar)
 	tuple = Tuple_Divide(Tuple_Create(1, -2, 3, -4), 2);
 	AssertTupleEquals(0.5, -1, 1.5, -2);
 }
+
+TEST(Tuple, MagnitudeCalculatesVectorLength)
+{
+	float magnitude1, magnitude2, magnitude3;
+	magnitude1 = Tuple_Magnitude(Tuple_CreateVector(1, 0, 0));
+	magnitude2 = Tuple_Magnitude(Tuple_CreateVector(0, 3, 4));
+	magnitude3 = Tuple_Magnitude(Tuple_CreateVector(1, 2, 2));
+	TEST_ASSERT(magnitude1 == 1);
+	TEST_ASSERT(magnitude2 == 5);
+	TEST_ASSERT(magnitude3 == 3);
+}
