@@ -71,6 +71,6 @@ TEST(Tuple, TupleSubtractionSubtractsComponentwise)
 {
 	tuple1 = Tuple_Create(1, 2, 0, 1);
 	tuple2 = Tuple_Create(1, 1.5, 7, -1);
-	tuple = Tuple_Subtraction(tuple1, tuple2);
+	tuple = Tuple_Subtract(tuple1, tuple2);
 	TupleAssertEquals(0, 0.5, -7, 2);
 }
