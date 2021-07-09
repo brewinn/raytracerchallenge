@@ -21,6 +21,11 @@ static void TupleAssertEquals(float x, float y, float z, float w)
 	TEST_ASSERT_EQUAL_FLOAT(w, tuple.w);
 }
 
+static void AssertTwoTuplesEqual(Tuple t1, Tuple t2)
+{
+	TEST_ASSERT(Tuple_Equals(t1, t2));
+}
+
 TEST(Tuple, TupleWithWEqualsOneIsAPoint)
 {
 	tuple = Tuple_Create(4.3, -4.2, 3.1, 1.0);
@@ -49,7 +54,7 @@ TEST(Tuple, EqualsIsTrueForIdenticalTuples)
 {
 	tuple1 = Tuple_Create(1, 1, 1, 1);
 	tuple2 = Tuple_Create(1, 1, 1, 1);
-	TEST_ASSERT(Tuple_Equals(tuple1, tuple2));
+	AssertTwoTuplesEqual(tuple1, tuple2);
 }
 
 TEST(Tuple, EqualsIsFalseForDifferentTuples)
@@ -80,7 +85,7 @@ TEST(Tuple, SubtractingTwoPointsYieldsAVector)
 	tuple1 = Tuple_CreatePoint(1, 1, 1);
 	tuple2 = Tuple_CreatePoint(1, 0, 0);
 	tuple = Tuple_Subtract(tuple1, tuple2);
-	TEST_ASSERT(Tuple_Equals(tuple, Tuple_CreateVector(0, 1, 1)));
+	AssertTwoTuplesEqual(tuple, Tuple_CreateVector(0, 1, 1));
 }
 
 TEST(Tuple, SubtractingAPointAndAVectorYieldsAPoint)
@@ -88,7 +93,7 @@ TEST(Tuple, SubtractingAPointAndAVectorYieldsAPoint)
 	tuple1 = Tuple_CreatePoint(1, 1, 1);
 	tuple2 = Tuple_CreateVector(1, 0, 0);
 	tuple = Tuple_Subtract(tuple1, tuple2);
-	TEST_ASSERT(Tuple_Equals(tuple, Tuple_CreatePoint(0, 1, 1)));
+	AssertTwoTuplesEqual(tuple, Tuple_CreatePoint(0, 1, 1));
 }
 
 TEST(Tuple, SubtractingTwoVectorsYieldsAVector)
@@ -96,5 +101,5 @@ TEST(Tuple, SubtractingTwoVectorsYieldsAVector)
 	tuple1 = Tuple_CreateVector(1, 1, 1);
 	tuple2 = Tuple_CreateVector(1, 0, 0);
 	tuple = Tuple_Subtract(tuple1, tuple2);
-	TEST_ASSERT(Tuple_Equals(tuple, Tuple_CreateVector(0, 1, 1)));
+	AssertTwoTuplesEqual(tuple, Tuple_CreateVector(0, 1, 1));
 }
