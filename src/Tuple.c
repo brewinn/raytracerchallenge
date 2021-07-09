@@ -28,3 +28,13 @@ bool Tuple_Equals(Tuple tuple1, Tuple tuple2)
 		return false;
 	return true;
 }
+
+Tuple Tuple_Add(Tuple tuple1, Tuple tuple2)
+{
+	float x, y, z, w;
+	x = tuple1.x + tuple2.x;
+	y = tuple1.y + tuple2.y;
+	z = tuple1.z + tuple2.z;
+	w = tuple1.w + tuple2.w;
+	return Tuple_Create(x, y, z, w);
+}
