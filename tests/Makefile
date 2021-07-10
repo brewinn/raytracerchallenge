@@ -6,7 +6,7 @@
 #  clean: remove test binaries, if present
 #  cleanall: remove test binaries and object files, if present
 
-.PHONY = all run runv clean
+.PHONY = all run runv clean cleanall
 
 CC = gcc
 CFLAGS = -lm
