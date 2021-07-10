@@ -1,2 +1,5 @@
 # Ignore Vim session data
 Session.vim
+
+# Ignore obj files
+*.o
