@@ -13,32 +13,24 @@ end up with a functional ray tracer.
 This project is built on a Linux (Arch-based) distribution. It is not tested
 for Windows or MacOS.
 
-Currently, there is no makefile for automated building of the project. To use
-what is currently in the project, compile, link, and run with whichever C
-compiler you choose. 
-
-For example, using the GNU's _gcc_ in the _tests_ directory:
+Project can be run using one of the Makefiles in either the project root, the src directory, or the tests directory. The _BASE_DIR_ variable will need to be edited to reflect the path of the repository's root. The usage options of each Makefile is given within the file itself. For example, running 
 
 ```
-gcc -lm -I Unity -I ../include Unity/*.c *.c ../src/*.c -o TestOutput.test
+make
 ```
 
-This will compile and link the current tests. To run:
+in the project's root directory will compile and run all tests and src programs, then delete the test and program binaries. This will also fill the obj file with compiled objects, which will make future compilations quicker. To delete these, run
 
 ```
-./TestOutput.test
+make cleanall
 ```
 
-The projectile.c file can be compiled from the project root with
-
-```
-gcc -lm -I include src/Tuple.c src/projectile.c
-```
+from any directory with a Makefile.
 
 ## Roadmap
 
 - [x] Setup a testing framework
-- [ ] Add a makefile for easier building
+- [x] Add a makefile for easier building
 - [x] Chapter 1: Tuples, Points, and Vectors
 - [ ] Chapter 2: Drawing on a Canvas
 
