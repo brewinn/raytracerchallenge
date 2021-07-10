@@ -1,29 +1,47 @@
 
 # Usage:
-#  all: compile, link, and run all tests and sources, and then delete binaries
-#  test: compile, link, and run all tests 
+#  all: compile, link, and run all tests and sources, then delete binaries
+#  test: compile, link, and run all tests, then delete binaries
+#  program: compile, link, and run all programs then delete binaries
+#  clean: remove binaries, if present
 #  cleanall: remove binaries and object files, if present
 
-.PHONY = all test cleanall
+.PHONY = all test program clean cleanall
 
 BASE_DIR = $(HOME)/repos/raytracerchallenge
 OBJ_DIR = $(BASE_DIR)/obj
 SRC_DIR = $(BASE_DIR)/src
 TESTS_DIR = $(BASE_DIR)/tests
 
-all: test
+all: test program
 
 test:
-	@echo "Compiling tests..."
+	@echo "Compiling and running tests..."
 	@echo "================================"
 	@$(MAKE) -C $(TESTS_DIR)
 	@echo "================================"
 	@echo "Done."
 
-cleanall:
+program:
+	@echo "Compiling and running programs..."
+	@echo "================================"
+	@$(MAKE) -C $(SRC_DIR)
+	@echo "================================"
+	@echo "Done."
+
+clean:
 	@echo "Removing test binaries..."
 	@echo "================================"
 	@$(MAKE) -C $(TESTS_DIR) clean
 	@echo "================================"
 	@echo "Done."
+	@echo "Removing program binaries..."
+	@echo "================================"
+	@$(MAKE) -C $(SRC_DIR) clean
+	@echo "================================"
+	@echo "Done."
 
+cleanall: clean
+	@echo -n "Removing object files..."
+	@rm -rf $(wildcard $(OBJ_DIR)/*.o)
+	@echo "Done."
