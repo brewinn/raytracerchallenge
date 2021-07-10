@@ -40,16 +40,16 @@ all: run clean
 
 run: AllTests.test
 	@echo "Running tests..."
-	@echo "================================"
+	@echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	@-./AllTests.test
-	@echo "================================"
+	@echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	@echo "Done."
 
 runv: AllTests.test
 	@echo "Running tests verbosely..."
-	@echo "================================"
+	@echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	@-./AllTests.test -v
-	@echo "================================"
+	@echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	@echo "Done."
 
 clean:
