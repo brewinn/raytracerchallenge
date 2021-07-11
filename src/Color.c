@@ -23,3 +23,12 @@ Color Color_Subtract(Color color1, Color color2)
 	blue = color1.blue - color2.blue;
 	return Color_Create(red, green, blue);
 }
+
+Color Color_Multiply(Color color, int scalar)
+{
+	float red, green, blue;
+	red = color.red * scalar;
+	green = color.green * scalar;
+	blue = color.blue * scalar;
+	return Color_Create(red, green, blue);
+}

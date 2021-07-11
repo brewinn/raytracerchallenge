@@ -43,3 +43,9 @@ TEST(Color, ColorSubtractionYieldsAnotherColor)
 	color = Color_Subtract(color1, color2);
 	AssertColorEquals(0.2, 0.5, 0.5);
 }
+
+TEST(Color, ColorMultiplicationWithScalarYieldsAnotherColor)
+{
+	color = Color_Multiply(Color_Create(0.2, 0.3, 0.4), 2);
+	AssertColorEquals(0.4, 0.6, 0.8);
+}
