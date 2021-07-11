@@ -24,8 +24,11 @@ PROJECT_SRC := $(SRC_DIR)/*.c
 
 OBJECT_FILES = AllTests.o \
 		Tuple.o \
+		Color.o \
 		TupleTest.o \
 		TupleTestRunner.o \
+		ColorTest.o \
+		ColorTestRunner.o \
 		unity_fixture.o \
 		unity_memory.o \
 		unity.o
@@ -74,6 +77,11 @@ $(OBJ_DIR)/%.o: %.c
 	@echo "Done."
 
 $(OBJ_DIR)/Tuple.o: $(SRC_DIR)/Tuple.c $(INCLUDE_DIR)/Tuple.h
+	@echo -n "Compiling "$@"..."
+	@$(CC) -c -I $(INCLUDE_DIR) $< -o $@
+	@echo "Done."
+
+$(OBJ_DIR)/Color.o: $(SRC_DIR)/Color.c $(INCLUDE_DIR)/Color.h
 	@echo -n "Compiling "$@"..."
 	@$(CC) -c -I $(INCLUDE_DIR) $< -o $@
 	@echo "Done."
