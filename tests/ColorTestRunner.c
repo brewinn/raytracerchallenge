@@ -2,8 +2,8 @@
 
 TEST_GROUP_RUNNER(Color)
 {
-	RUN_TEST_CASE(Color, ColorIsThreeTuple);
-	RUN_TEST_CASE(Color, ColorAdditionYieldsAnotherColor);
-	RUN_TEST_CASE(Color, ColorSubtractionYieldsAnotherColor);
-	RUN_TEST_CASE(Color, ColorMultiplicationWithScalarYieldsAnotherColor);
+	RUN_TEST_CASE(Color, ColorCreateStoresThreeTuple);
+	RUN_TEST_CASE(Color, ColorAdditionAddsComponents);
+	RUN_TEST_CASE(Color, ColorSubtractionSubtractsComponents);
+	RUN_TEST_CASE(Color, ColorMultiplicationWithScalarMultipliesComponentsByScalar);
 }

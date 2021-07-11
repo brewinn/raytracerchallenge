@@ -22,13 +22,13 @@ void AssertColorEquals(float red, float green, float blue)
 	TEST_ASSERT_EQUAL_FLOAT(blue, color.blue);
 }
 
-TEST(Color, ColorIsThreeTuple)
+TEST(Color, ColorCreateStoresThreeTuple)
 {
 	color = Color_Create(-0.5, 0.4, 1.7);
 	AssertColorEquals(-0.5, 0.4, 1.7);
 }
 
-TEST(Color, ColorAdditionYieldsAnotherColor)
+TEST(Color, ColorAdditionAddsComponents)
 {
 	color1 = Color_Create(0.9, 0.6, 0.75);
 	color2 = Color_Create(0.7, 0.1, 0.25);
@@ -36,7 +36,7 @@ TEST(Color, ColorAdditionYieldsAnotherColor)
 	AssertColorEquals(1.6, 0.7, 1.0);
 }
 
-TEST(Color, ColorSubtractionYieldsAnotherColor)
+TEST(Color, ColorSubtractionSubtractsComponents)
 {
 	color1 = Color_Create(0.9, 0.6, 0.75);
 	color2 = Color_Create(0.7, 0.1, 0.25);
@@ -44,7 +44,7 @@ TEST(Color, ColorSubtractionYieldsAnotherColor)
 	AssertColorEquals(0.2, 0.5, 0.5);
 }
 
-TEST(Color, ColorMultiplicationWithScalarYieldsAnotherColor)
+TEST(Color, ColorMultiplicationWithScalarMultipliesComponentsByScalar)
 {
 	color = Color_Multiply(Color_Create(0.2, 0.3, 0.4), 2);
 	AssertColorEquals(0.4, 0.6, 0.8);
