@@ -13,13 +13,19 @@ end up with a functional ray tracer.
 This project is built on a Linux (Arch-based) distribution. It is not tested
 for Windows or MacOS.
 
-Project can be run using one of the Makefiles in either the project root, the src directory, or the tests directory. The _BASE_DIR_ variable will need to be edited to reflect the path of the repository's root. The usage options of each Makefile is given within the file itself. For example, running 
+Project can be run using one of the Makefiles in either the project root, the
+src directory, or the tests directory. The _BASE_DIR_ variable will need to be
+edited to reflect the path of the repository's root. The usage options of each
+Makefile is given within the file itself. For example, running 
 
 ```
 make
 ```
 
-in the project's root directory will compile and run all tests and src programs, then delete the test and program binaries. This will also fill the obj file with compiled objects, which will make future compilations quicker. To delete these, run
+in the project's root directory will compile and run all tests and src
+programs, then delete the test and program binaries. This will also fill the
+obj file with compiled objects, which will make future compilations quicker. To
+delete these, run
 
 ```
 make cleanall
@@ -33,6 +39,21 @@ from any directory with a Makefile.
 - [x] Add a makefile for easier building
 - [x] Chapter 1: Tuples, Points, and Vectors
 - [ ] Chapter 2: Drawing on a Canvas
+- [ ] Chapter 3: Matrices
+- [ ] Chapter 4: Matrix Transformations
+- [ ] Chapter 5: Ray-Sphere Intersections
+- [ ] Chapter 6: Light and Shading
+- [ ] Chapter 7: Making a Scene
+- [ ] Chapter 8: Shadows
+- [ ] Chapter 9: Planes
+- [ ] Chapter 10: Patterns
+- [ ] Chapter 11: Reflection and Refraction
+- [ ] Chapter 12: Cubes
+- [ ] Chapter 13: Cylinders
+- [ ] Chapter 14: Groups
+- [ ] Chapter 15: Triangles
+- [ ] Chapter 16: Constructive Solid Geometry (CSG)
+- [ ] Chapter 17: Next Steps
 
 ## Contributing
 
