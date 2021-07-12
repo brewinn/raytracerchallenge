@@ -46,6 +46,14 @@ TEST(Color, ColorSubtractionSubtractsComponents)
 
 TEST(Color, ColorMultiplicationWithScalarMultipliesComponentsByScalar)
 {
-	color = Color_Multiply(Color_Create(0.2, 0.3, 0.4), 2);
+	color = Color_ScalarMultiply(Color_Create(0.2, 0.3, 0.4), 2);
 	AssertColorEquals(0.4, 0.6, 0.8);
+}
+
+TEST(Color, TwoColorMultiplicationMultipliesComponents)
+{
+	color1 = Color_Create(1, 0.2, 0.4);
+	color2 = Color_Create(0.9, 1, 0.1);
+	color = Color_Multiply(color1, color2);
+	AssertColorEquals(0.9, 0.2, 0.04);
 }
