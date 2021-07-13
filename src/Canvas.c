@@ -44,7 +44,6 @@ void Canvas_WritePixel(Canvas canvas, int x, int y, Color color)
 {
 	if(CanvasOutOfBounds(canvas, x, y))
 	{
-		/* Error message? */
 		return;
 	}
 
@@ -56,7 +55,7 @@ Color Canvas_PixelAt(Canvas canvas, int x, int y)
 {
 	if(CanvasOutOfBounds(canvas, x, y))
 	{
-		/* Error message? */
+		fprintf(stderr, "Warning, attempted to read out-of-bounds pixel!\n");
 		return Color_Create(0, 0, 0);
 	}
 
