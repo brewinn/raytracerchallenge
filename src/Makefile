@@ -36,17 +36,22 @@ cleanall: clean
 	@rm -rf $(wildcard $(OBJ_DIR)/*.o)
 	@echo "Done."
 
-projectile.out: $(OBJ_DIR)/projectile.o $(OBJ_DIR)/Tuple.o
+projectile.out: $(OBJ_DIR)/projectile.o $(OBJ_DIR)/Tuple.o $(OBJ_DIR)/Canvas.o $(OBJ_DIR)/Color.o
 	@echo -n "Linking projectile.out..." 
 	@$(CC) $(CFLAGS) $^ -o $@ 
 	@echo "Done."
 
-$(OBJ_DIR)/projectile.o: projectile.c $(INCLUDE_DIR)/Tuple.h
+$(OBJ_DIR)/projectile.o: projectile.c $(INCLUDE_DIR)/Tuple.h $(INCLUDE_DIR)/Canvas.h 
 	@echo -n "Compiling projectile.c..." 
 	@$(CC) -c $(CFLAGS) -I $(INCLUDE_DIR) $< -o $@ 
 	@echo "Done."
 
-$(OBJ_DIR)/Tuple.o: Tuple.c $(INCLUDE_DIR)/Tuple.h
-	@echo -n "Compiling Tuple.c..." 
+$(OBJ_DIR)/Canvas.o: Canvas.c $(INCLUDE_DIR)/Canvas.h $(INCLUDE_DIR)/Color.h
+	@echo -n "Compiling "$<"..." 
+	@$(CC) -c $(CFLAGS) -I $(INCLUDE_DIR) $< -o $@ 
+	@echo "Done."
+
+$(OBJ_DIR)/%.o: %.c $(INCLUDE_DIR)/%.h
+	@echo -n "Compiling "$<"..." 
 	@$(CC) -c $(CFLAGS) -I $(INCLUDE_DIR) $< -o $@ 
 	@echo "Done."
