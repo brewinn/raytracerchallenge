@@ -3,3 +3,10 @@ Session.vim
 
 # Ignore obj files
 *.o
+
+# Ignore valgrind files
+vgcore*
+
+# Ignore ppm files in src and test directory
+*.ppm
+!img/*.ppm
