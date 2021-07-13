@@ -80,5 +80,7 @@ int main(int argc, char ** argv)
 	printTrajectory(projectile, environment);
 	plotTrajectory(canvas, projectile, environment);
 
+	Canvas_Destroy(canvas);
+
 	return 0;
 }
