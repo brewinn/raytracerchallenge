@@ -3,10 +3,14 @@
 #  all: compile, link, and run all tests, and then delete binaries
 #  run: compile, link, and run all tests 
 #  runv: compile, link, and run tests verbosely
+#  runl: compile, link, run, and monitor memory usage of tests (requires
+#  valgrind)
+#  memcheck: compile, link, run, and monitor memory usage of tests, then remove
+#   binaries (requires valgrind)
 #  clean: remove test binaries, if present
 #  cleanall: remove test binaries and object files, if present
 
-.PHONY = all run runv clean cleanall
+.PHONY = all run runv runl memcheck clean cleanall
 
 CC = gcc
 CFLAGS = -lm
@@ -23,15 +27,21 @@ UNITY_SRC := $(UNITY_DIR)/*.c
 PROJECT_SRC := $(SRC_DIR)/*.c
 
 OBJECT_FILES = AllTests.o \
+	        Utilities.o \
 		Tuple.o \
 		Color.o \
 		Canvas.o \
+		Matrix.o \
+		UtilitiesTest.o \
+		UtilitiesTestRunner.o \
 		TupleTest.o \
 		TupleTestRunner.o \
 		ColorTest.o \
 		ColorTestRunner.o \
 		CanvasTest.o \
 		CanvasTestRunner.o \
+		MatrixTest.o \
+		MatrixTestRunner.o \
 		unity_fixture.o \
 		unity_memory.o \
 		unity.o
@@ -58,6 +68,15 @@ runv: AllTests.test
 	@echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	@echo "Done."
 
+runl: AllTests.test
+	@echo "Running tests with memcheck..."
+	@echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+	@-valgrind --leak-check=yes ./AllTests.test
+	@echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+	@echo "Done."
+
+memcheck: runl clean
+
 clean:
 	@echo -n "Cleaning up test binaries..."
 	@rm -rf $(TEST_BINS)
@@ -79,17 +98,7 @@ $(OBJ_DIR)/%.o: %.c
 	@$(CC) -c -I $(UNITY_DIR) -I $(INCLUDE_DIR) $< -o $@
 	@echo "Done."
 
-$(OBJ_DIR)/Tuple.o: $(SRC_DIR)/Tuple.c $(INCLUDE_DIR)/Tuple.h
-	@echo -n "Compiling "$@"..."
-	@$(CC) -c -I $(INCLUDE_DIR) $< -o $@
-	@echo "Done."
-
-$(OBJ_DIR)/Color.o: $(SRC_DIR)/Color.c $(INCLUDE_DIR)/Color.h
-	@echo -n "Compiling "$@"..."
-	@$(CC) -c -I $(INCLUDE_DIR) $< -o $@
-	@echo "Done."
-
-$(OBJ_DIR)/Canvas.o: $(SRC_DIR)/Canvas.c $(INCLUDE_DIR)/Canvas.h
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE_DIR)/%.h
 	@echo -n "Compiling "$@"..."
 	@$(CC) -c -I $(INCLUDE_DIR) $< -o $@
 	@echo "Done."
