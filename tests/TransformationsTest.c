@@ -52,3 +52,40 @@ TEST(Transformations, TranslationDoesNotAffectVectors)
 	AssertTuplesEqual();
 }
 
+TEST(Transformations, ScalingMultipliesComponents)
+{
+	Tuple point = Tuple_CreatePoint(-4, 6, 8);
+	transformation = Transformation_Scale(2, 3, 4);
+	actual = Matrix_MultiplyTuple(transformation, point);
+	expected = Tuple_CreatePoint(-8, 18, 32);
+	AssertTuplesEqual();
+}
+
+TEST(Transformations, ScalingAffectsVectors)
+{
+	Tuple point = Tuple_CreateVector(-4, 6, 8);
+	transformation = Transformation_Scale(2, 3, 4);
+	actual = Matrix_MultiplyTuple(transformation, point);
+	expected = Tuple_CreateVector(-8, 18, 32);
+	AssertTuplesEqual();
+}
+
+TEST(Transformations, InverseScalingDividesComponents)
+{
+	Tuple point = Tuple_CreateVector(-4, 6, 8);
+	Matrix scale = Transformation_Scale(2, 3, 4);
+	transformation = Matrix_Inverse(scale);
+	actual = Matrix_MultiplyTuple(transformation, point);
+	Matrix_Destroy(&scale);
+	expected = Tuple_CreateVector(-2, 2, 2);
+	AssertTuplesEqual();
+}
+
+TEST(Transformations, NegativeScalingReflects)
+{
+	Tuple point = Tuple_CreateVector(2, 3, 4);
+	transformation = Transformation_Scale(-1, 1, 1);
+	actual = Matrix_MultiplyTuple(transformation, point);
+	expected = Tuple_CreateVector(-2, 3, 4);
+	AssertTuplesEqual();
+}
