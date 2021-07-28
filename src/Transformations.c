@@ -1,4 +1,5 @@
 #include "Transformations.h"
+#include <math.h>
 
 Matrix Transformation_Translation(float x, float y, float z)
 {
@@ -17,4 +18,40 @@ Matrix Transformation_Scale(float x, float y, float z)
 	Matrix_SetValue(scale, 2, 2, z);
 	Matrix_SetValue(scale, 3, 3, 1);
 	return scale;
+}
+
+Matrix Transformation_RotationX(float radians)
+{
+	Matrix rotation = Matrix_Create(4, 4);
+	Matrix_SetValue(rotation, 0, 0, 1);
+	Matrix_SetValue(rotation, 1, 1, cosf(radians));
+	Matrix_SetValue(rotation, 1, 2, -sinf(radians));
+	Matrix_SetValue(rotation, 2, 1, sinf(radians));
+	Matrix_SetValue(rotation, 2, 2, cosf(radians));
+	Matrix_SetValue(rotation, 3, 3, 1);
+	return rotation;
+}
+
+Matrix Transformation_RotationY(float radians)
+{
+	Matrix rotation = Matrix_Create(4, 4);
+	Matrix_SetValue(rotation, 0, 0, cosf(radians));
+	Matrix_SetValue(rotation, 0, 2, sinf(radians));
+	Matrix_SetValue(rotation, 1, 1, 1);
+	Matrix_SetValue(rotation, 2, 0, -sinf(radians));
+	Matrix_SetValue(rotation, 2, 2, cosf(radians));
+	Matrix_SetValue(rotation, 3, 3, 1);
+	return rotation;
+}
+
+Matrix Transformation_RotationZ(float radians)
+{
+	Matrix rotation = Matrix_Create(4, 4);
+	Matrix_SetValue(rotation, 0, 0, cosf(radians));
+	Matrix_SetValue(rotation, 0, 1, -sinf(radians));
+	Matrix_SetValue(rotation, 1, 0, sinf(radians));
+	Matrix_SetValue(rotation, 1, 1, cosf(radians));
+	Matrix_SetValue(rotation, 2, 2, 1);
+	Matrix_SetValue(rotation, 3, 3, 1);
+	return rotation;
 }
