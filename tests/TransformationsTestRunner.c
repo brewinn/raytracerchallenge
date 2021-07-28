@@ -14,3 +14,13 @@ TEST_GROUP_RUNNER(Transformations)
 	RUN_TEST_CASE(Transformations, RotationAboutYAxisMovesPoint);
 	RUN_TEST_CASE(Transformations, RotationAboutZAxisMovesPoint);
 }
+
+TEST_GROUP_RUNNER(Shears)
+{
+	RUN_TEST_CASE(Shears, ShearXInProportionToY);
+	RUN_TEST_CASE(Shears, ShearXInProportionToZ);
+	RUN_TEST_CASE(Shears, ShearYInProportionToX);
+	RUN_TEST_CASE(Shears, ShearYInProportionToZ);
+	RUN_TEST_CASE(Shears, ShearZInProportionToX);
+	RUN_TEST_CASE(Shears, ShearZInProportionToY);
+}

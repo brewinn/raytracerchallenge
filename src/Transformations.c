@@ -55,3 +55,15 @@ Matrix Transformation_RotationZ(float radians)
 	Matrix_SetValue(rotation, 3, 3, 1);
 	return rotation;
 }
+
+Matrix Transformation_Shear(float Xy, float Xz, float Yx, float Yz, float Zx, float Zy)
+{
+	Matrix shear = Matrix_Identity(4);
+	Matrix_SetValue(shear, 0, 1, Xy);
+	Matrix_SetValue(shear, 0, 2, Xz);
+	Matrix_SetValue(shear, 1, 0, Yx);
+	Matrix_SetValue(shear, 1, 2, Yz);
+	Matrix_SetValue(shear, 2, 0, Zx);
+	Matrix_SetValue(shear, 2, 1, Zy);
+	return shear;
+}

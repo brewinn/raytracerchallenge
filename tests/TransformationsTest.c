@@ -2,7 +2,7 @@
 #include "Transformations.h"
 #include "Utilities.h"
 
-static Tuple expected, actual;
+static Tuple point, expected, actual;
 static Matrix transformation;
 
 TEST_GROUP(Transformations);
@@ -36,7 +36,7 @@ static void AssertTupleFloatsEqual()
 
 TEST(Transformations, TranslationMovesAPoint)
 {
-	Tuple point = Tuple_CreatePoint(-3, 4, 5);
+	point = Tuple_CreatePoint(-3, 4, 5);
 	transformation = Transformation_Translation(5, -3, 2);
 	actual = Matrix_MultiplyTuple(transformation, point);
 	expected = Tuple_CreatePoint(2, 1, 7);
@@ -45,7 +45,7 @@ TEST(Transformations, TranslationMovesAPoint)
 
 TEST(Transformations, InverseTranslationMovesPointInOtherDirection)
 {
-	Tuple point = Tuple_CreatePoint(-3, 4, 5);
+	point = Tuple_CreatePoint(-3, 4, 5);
 	Matrix translation = Transformation_Translation(5, -3, 2);
 	transformation = Matrix_Inverse(translation);
 	actual = Matrix_MultiplyTuple(transformation, point);
@@ -65,7 +65,7 @@ TEST(Transformations, TranslationDoesNotAffectVectors)
 
 TEST(Transformations, ScalingMultipliesComponents)
 {
-	Tuple point = Tuple_CreatePoint(-4, 6, 8);
+	point = Tuple_CreatePoint(-4, 6, 8);
 	transformation = Transformation_Scale(2, 3, 4);
 	actual = Matrix_MultiplyTuple(transformation, point);
 	expected = Tuple_CreatePoint(-8, 18, 32);
@@ -74,7 +74,7 @@ TEST(Transformations, ScalingMultipliesComponents)
 
 TEST(Transformations, ScalingAffectsVectors)
 {
-	Tuple point = Tuple_CreateVector(-4, 6, 8);
+	point = Tuple_CreateVector(-4, 6, 8);
 	transformation = Transformation_Scale(2, 3, 4);
 	actual = Matrix_MultiplyTuple(transformation, point);
 	expected = Tuple_CreateVector(-8, 18, 32);
@@ -83,7 +83,7 @@ TEST(Transformations, ScalingAffectsVectors)
 
 TEST(Transformations, InverseScalingDividesComponents)
 {
-	Tuple point = Tuple_CreateVector(-4, 6, 8);
+	point = Tuple_CreateVector(-4, 6, 8);
 	Matrix scale = Transformation_Scale(2, 3, 4);
 	transformation = Matrix_Inverse(scale);
 	actual = Matrix_MultiplyTuple(transformation, point);
@@ -94,7 +94,7 @@ TEST(Transformations, InverseScalingDividesComponents)
 
 TEST(Transformations, NegativeScalingReflects)
 {
-	Tuple point = Tuple_CreateVector(2, 3, 4);
+	point = Tuple_CreateVector(2, 3, 4);
 	transformation = Transformation_Scale(-1, 1, 1);
 	actual = Matrix_MultiplyTuple(transformation, point);
 	expected = Tuple_CreateVector(-2, 3, 4);
@@ -103,7 +103,7 @@ TEST(Transformations, NegativeScalingReflects)
 
 TEST(Transformations, RotationAboutXAxisMovesPoint)
 {
-	Tuple point = Tuple_CreatePoint(0, 1, 0);
+	point = Tuple_CreatePoint(0, 1, 0);
 	transformation = Transformation_RotationX(M_PI/4);
 	actual = Matrix_MultiplyTuple(transformation, point);
 	expected = Tuple_CreatePoint(0, sqrtf(2)/2, sqrtf(2)/2);
@@ -117,7 +117,7 @@ TEST(Transformations, RotationAboutXAxisMovesPoint)
 
 TEST(Transformations, InverseXRotationRotatesInOppositeDirection)
 {
-	Tuple point = Tuple_CreatePoint(0, 1, 0);
+	point = Tuple_CreatePoint(0, 1, 0);
 	Matrix rotation = Transformation_RotationX(M_PI/4);
 	transformation = Matrix_Inverse(rotation);
 	actual = Matrix_MultiplyTuple(transformation, point);
@@ -128,7 +128,7 @@ TEST(Transformations, InverseXRotationRotatesInOppositeDirection)
 
 TEST(Transformations, RotationAboutYAxisMovesPoint)
 {
-	Tuple point = Tuple_CreatePoint(0, 0, 1);
+	point = Tuple_CreatePoint(0, 0, 1);
 	transformation = Transformation_RotationY(M_PI/4);
 	actual = Matrix_MultiplyTuple(transformation, point);
 	expected = Tuple_CreatePoint(sqrtf(2)/2, 0, sqrtf(2)/2);
@@ -142,7 +142,7 @@ TEST(Transformations, RotationAboutYAxisMovesPoint)
 
 TEST(Transformations, RotationAboutZAxisMovesPoint)
 {
-	Tuple point = Tuple_CreatePoint(0, 1, 0);
+	point = Tuple_CreatePoint(0, 1, 0);
 	transformation = Transformation_RotationZ(M_PI/4);
 	actual = Matrix_MultiplyTuple(transformation, point);
 	expected = Tuple_CreatePoint(-sqrtf(2)/2, sqrtf(2)/2, 0);
@@ -152,4 +152,54 @@ TEST(Transformations, RotationAboutZAxisMovesPoint)
 	actual = Matrix_MultiplyTuple(transformation, point);
 	expected = Tuple_CreatePoint(-1, 0, 0);
 	AssertTupleFloatsEqual();
+}
+
+TEST_GROUP(Shears);
+
+TEST_SETUP(Shears)
+{
+	point = Tuple_CreatePoint(2, 3, 4);
+}
+
+TEST_TEAR_DOWN(Shears)
+{
+	actual = Matrix_MultiplyTuple(transformation, point);
+	Matrix_Destroy(&transformation);
+	AssertTuplesEqual();
+}
+
+TEST(Shears, ShearXInProportionToY)
+{
+	transformation = Transformation_Shear(1, 0, 0, 0, 0, 0);
+	expected = Tuple_CreatePoint(5, 3, 4);
+}
+
+TEST(Shears, ShearXInProportionToZ)
+{
+	transformation = Transformation_Shear(0, 1, 0, 0, 0, 0);
+	expected = Tuple_CreatePoint(6, 3, 4);
+}
+
+TEST(Shears, ShearYInProportionToX)
+{
+	transformation = Transformation_Shear(0, 0, 1, 0, 0, 0);
+	expected = Tuple_CreatePoint(2, 5, 4);
+}
+
+TEST(Shears, ShearYInProportionToZ)
+{
+	transformation = Transformation_Shear(0, 0, 0, 1, 0, 0);
+	expected = Tuple_CreatePoint(2, 7, 4);
+}
+
+TEST(Shears, ShearZInProportionToX)
+{
+	transformation = Transformation_Shear(0, 0, 0, 0, 1, 0);
+	expected = Tuple_CreatePoint(2, 3, 6);
+}
+
+TEST(Shears, ShearZInProportionToY)
+{
+	transformation = Transformation_Shear(0, 0, 0, 0, 0, 1);
+	expected = Tuple_CreatePoint(2, 3, 7);
 }

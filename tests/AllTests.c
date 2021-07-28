@@ -13,6 +13,7 @@ static void RunAllTests(void)
 	RUN_TEST_GROUP(Matrix);
 	RUN_TEST_GROUP(MatrixOperations);
 	RUN_TEST_GROUP(Transformations);
+	RUN_TEST_GROUP(Shears);
 }
 
 int main(int argc, const char * argv[])
