@@ -32,6 +32,7 @@ OBJECT_FILES = AllTests.o \
 		Color.o \
 		Canvas.o \
 		Matrix.o \
+		Transformations.o \
 		UtilitiesTest.o \
 		UtilitiesTestRunner.o \
 		TupleTest.o \
@@ -42,6 +43,8 @@ OBJECT_FILES = AllTests.o \
 		CanvasTestRunner.o \
 		MatrixTest.o \
 		MatrixTestRunner.o \
+		TransformationsTest.o \
+		TransformationsTestRunner.o \
 		unity_fixture.o \
 		unity_memory.o \
 		unity.o
