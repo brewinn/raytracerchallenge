@@ -10,3 +10,6 @@ vgcore*
 # Ignore ppm files in src and test directory
 *.ppm
 !img/*.ppm
+
+# Ignore ctags
+tags
