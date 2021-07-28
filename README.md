@@ -43,7 +43,7 @@ in the _img_ directory are the results of previous compilations.
 - [x] Chapter 1: Tuples, Points, and Vectors
 - [x] Chapter 2: Drawing on a Canvas
 - [x] Chapter 3: Matrices
-- [ ] Chapter 4: Matrix Transformations
+- [x] Chapter 4: Matrix Transformations
 - [ ] Chapter 5: Ray-Sphere Intersections
 - [ ] Chapter 6: Light and Shading
 - [ ] Chapter 7: Making a Scene
@@ -57,6 +57,13 @@ in the _img_ directory are the results of previous compilations.
 - [ ] Chapter 15: Triangles
 - [ ] Chapter 16: Constructive Solid Geometry (CSG)
 - [ ] Chapter 17: Next Steps
+
+## TO-DO
+
+This section contains a list of changes (mostly refactors) that are planned but not yet implemented.
+
+- [ ] Swap parameter order of Canvas_WriteToPPM function
+- [ ] Change Makefiles to attain project's directory automatically
 
 ## Contributing
 
