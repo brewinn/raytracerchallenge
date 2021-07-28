@@ -24,3 +24,9 @@ TEST_GROUP_RUNNER(Shears)
 	RUN_TEST_CASE(Shears, ShearZInProportionToX);
 	RUN_TEST_CASE(Shears, ShearZInProportionToY);
 }
+
+TEST_GROUP_RUNNER(TransformationSequence)
+{
+	RUN_TEST_CASE(TransformationSequence, IndividualTransformationsAreAppliedSequentially);
+	RUN_TEST_CASE(TransformationSequence, ChainedTransformationsAreAppliedInReverseOrder);
+}

@@ -203,3 +203,45 @@ TEST(Shears, ShearZInProportionToY)
 	transformation = Transformation_Shear(0, 0, 0, 0, 0, 1);
 	expected = Tuple_CreatePoint(2, 3, 7);
 }
+
+TEST_GROUP(TransformationSequence);
+
+static Matrix rotation, scale, translation;
+
+TEST_SETUP(TransformationSequence)
+{
+	point = Tuple_CreatePoint(1, 0, 1);
+	rotation = Transformation_RotationX(M_PI/2);
+	scale = Transformation_Scale(5, 5, 5);
+	translation = Transformation_Translation(10, 5, 7);
+}
+
+TEST_TEAR_DOWN(TransformationSequence)
+{
+	Matrix_Destroy(&rotation);
+	Matrix_Destroy(&scale);
+	Matrix_Destroy(&translation);
+}
+
+TEST(TransformationSequence, IndividualTransformationsAreAppliedSequentially)
+{
+	actual = Matrix_MultiplyTuple(rotation, point);
+	expected = Tuple_CreatePoint(1, -1, 0);
+	AssertTupleFloatsEqual();
+	actual = Matrix_MultiplyTuple(scale, actual);
+	expected = Tuple_CreatePoint(5, -5, 0);
+	AssertTupleFloatsEqual();
+	actual = Matrix_MultiplyTuple(translation, actual);
+	expected = Tuple_CreatePoint(15, 0, 7);
+	AssertTupleFloatsEqual();
+}
+
+TEST(TransformationSequence, ChainedTransformationsAreAppliedInReverseOrder)
+{
+	transformation = Matrix_Multiply(scale, rotation);
+	Matrix_Copy(transformation, Matrix_Multiply(translation, transformation));
+	actual = Matrix_MultiplyTuple(transformation, point);
+	Matrix_Destroy(&transformation);
+	expected = Tuple_CreatePoint(15, 0, 7);
+	AssertTupleFloatsEqual();
+}
