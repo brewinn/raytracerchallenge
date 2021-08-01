@@ -46,7 +46,7 @@ cleanall: clean
 	@rm -rf $(wildcard $(OBJ_DIR)/*.o)
 	@echo "Done."
 
-projectile.out: $(OBJ_DIR)/projectile.o $(OBJ_DIR)/Tuple.o $(OBJ_DIR)/Canvas.o $(OBJ_DIR)/Color.o
+projectile.out: $(OBJ_DIR)/projectile.o $(OBJ_DIR)/Tuple.o $(OBJ_DIR)/Canvas.o $(OBJ_DIR)/Color.o $(OBJ_DIR)/Utilities.o
 	@echo -n "Linking projectile.out..." 
 	@$(CC) $(CFLAGS) $^ -o $@ 
 	@echo "Done."

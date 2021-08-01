@@ -15,6 +15,7 @@ static void RunAllTests(void)
 	RUN_TEST_GROUP(Transformations);
 	RUN_TEST_GROUP(Shears);
 	RUN_TEST_GROUP(TransformationSequence);
+	RUN_TEST_GROUP(Ray);
 }
 
 int main(int argc, const char * argv[])
