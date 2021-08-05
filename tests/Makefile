@@ -15,7 +15,7 @@
 CC = gcc
 CFLAGS = -lm
 
-BASE_DIR = $(HOME)/repos/raytracerchallenge
+BASE_DIR = ..
 OBJ_DIR = $(BASE_DIR)/obj
 SRC_DIR = $(BASE_DIR)/src
 INCLUDE_DIR = $(BASE_DIR)/include
