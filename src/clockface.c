@@ -28,7 +28,7 @@ int main(int argc, char ** argv)
 	Matrix_Destroy(&scale);
 	Matrix_Destroy(&translation);
 
-	Canvas_WriteToPPM("clockface.ppm", canvas);
+	Canvas_WriteToPPM(canvas, "clockface.ppm");
 	Canvas_Destroy(canvas);
 
 	return 0;

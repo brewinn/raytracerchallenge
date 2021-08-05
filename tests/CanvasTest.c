@@ -98,7 +98,7 @@ static void ReadLine(FILE * file, char * line)
 TEST_SETUP(CanvasToPPM)
 {
 	canvas = Canvas_Create(10, 10);
-	Canvas_WriteToPPM("test.ppm", canvas);
+	Canvas_WriteToPPM(canvas, "test.ppm");
 	file = fopen("test.ppm", "r");
 }
 
@@ -143,7 +143,7 @@ TEST_SETUP(CanvasWithColor)
 {
 	canvas = Canvas_Create(10, 10);
 	Canvas_FillColor(canvas, Color_Create(0.75, 0.76, 0.77));
-	Canvas_WriteToPPM("test.ppm", canvas);
+	Canvas_WriteToPPM(canvas, "test.ppm");
 	file = fopen("test.ppm", "r");
 }
 

@@ -62,7 +62,7 @@ void plotTrajectory(Canvas canvas, Projectile projectile, Environment environmen
 		plotPosition(canvas, projectile);
 		projectile = tick(projectile, environment);
 	}
-	Canvas_WriteToPPM("trajectory.ppm", canvas);
+	Canvas_WriteToPPM(canvas, "trajectory.ppm");
 }
 
 int main(int argc, char ** argv)

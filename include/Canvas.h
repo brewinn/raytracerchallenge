@@ -15,7 +15,7 @@ Canvas Canvas_Create(int width, int height);
 void Canvas_Destroy(Canvas canvas);
 void Canvas_WritePixel(Canvas canvas, int x, int y, Color color);
 Color Canvas_PixelAt(Canvas canvas, int x, int y);
-void Canvas_WriteToPPM(const char * filename, Canvas canvas);
+void Canvas_WriteToPPM(Canvas canvas, const char * filename);
 void Canvas_FillColor(Canvas canvas, Color color);
 
 #endif /* __CANVAS__ */

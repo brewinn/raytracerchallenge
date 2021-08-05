@@ -141,7 +141,7 @@ static void WritePPMBody(FILE * ppm, Canvas canvas)
 	}
 }
 
-void Canvas_WriteToPPM(const char * filename, Canvas canvas)
+void Canvas_WriteToPPM(Canvas canvas, const char * filename)
 {
 	FILE * ppm;
 	ppm = FileOpen(filename);
