@@ -63,7 +63,8 @@ in the _img_ directory are the results of previous compilations.
 This section contains a list of changes (mostly refactors) that are planned but not yet implemented.
 
 - [x] Swap parameter order of Canvas_WriteToPPM function
-- [ ] Change Makefiles to attain project's directory automatically
+- [x] Change Makefiles to attain project's directory automatically
+	- Used a workaround, must invoke Makefiles from their respective directories
 
 ## Contributing
 
