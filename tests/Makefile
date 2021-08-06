@@ -34,6 +34,7 @@ OBJECT_FILES = AllTests.o \
 		Matrix.o \
 		Transformations.o \
 		Ray.o \
+		Sphere.o \
 		UtilitiesTest.o \
 		UtilitiesTestRunner.o \
 		TupleTest.o \
@@ -48,6 +49,8 @@ OBJECT_FILES = AllTests.o \
 		TransformationsTestRunner.o \
 		RayTest.o \
 		RayTestRunner.o \
+		SphereTest.o \
+		SphereTestRunner.o \
 		unity_fixture.o \
 		unity_memory.o \
 		unity.o
@@ -100,17 +103,17 @@ AllTests.test: $(OBJ)
 	@echo "Done."
 
 $(OBJ_DIR)/%.o: %.c
-	@echo -n "Compiling "$@"..."
+	@echo -n "Compiling "$(notdir $@)"..."
 	@$(CC) -c -I $(UNITY_DIR) -I $(INCLUDE_DIR) $< -o $@
 	@echo "Done."
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE_DIR)/%.h
-	@echo -n "Compiling "$@"..."
+	@echo -n "Compiling "$(notdir $@)"..."
 	@$(CC) -c -I $(INCLUDE_DIR) $< -o $@
 	@echo "Done."
 
 $(OBJ_DIR)/%.o: $(UNITY_DIR)/%.c $(UNITY_DIR)/%.h
-	@echo -n "Compiling "$@"..."
+	@echo -n "Compiling "$(notdir $@)"..."
 	@$(CC) -c -I $(INCLUDE_DIR) $< -o $@
 	@echo "Done."
 
