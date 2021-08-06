@@ -14,8 +14,9 @@ This project is built on a Linux (Arch-based) distribution. It is not tested
 for Windows or MacOS.
 
 Project can be run using one of the Makefiles in either the project root, the
-src directory, or the tests directory. The _BASE_DIR_ variable will need to be
-edited to reflect the path of the repository's root. The usage options of each
+src directory, or the tests directory. Makefiles should be run from their
+containing directory, so the Makefile at the project's root should be run with
+the user's working directory at the project's root. The usage options of each
 Makefile is given within the file itself. For example, running 
 
 ```
