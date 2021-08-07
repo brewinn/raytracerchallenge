@@ -16,6 +16,7 @@ static void RunAllTests(void)
 	RUN_TEST_GROUP(Shears);
 	RUN_TEST_GROUP(TransformationSequence);
 	RUN_TEST_GROUP(Ray);
+	RUN_TEST_GROUP(RayTransforms);
 	RUN_TEST_GROUP(Intersection);
 	RUN_TEST_GROUP(Intersections);
 	RUN_TEST_GROUP(Sphere);

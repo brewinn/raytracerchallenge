@@ -1,5 +1,6 @@
 #include "unity_fixture.h"
 #include "Ray.h"
+#include "Transformations.h"
 
 static Tuple origin, direction;
 static Ray ray;
@@ -52,5 +53,57 @@ TEST(Ray, PositionComputesPointAlongRay)
 	TEST_ASSERT_TRUE(Tuple_Equals(expected, actual));
 	expected = Tuple_CreatePoint(4.5, 3, 4);
 	actual = Ray_Position(ray, 2.5);
+	TEST_ASSERT_TRUE(Tuple_Equals(expected, actual));
+}
+
+static Matrix transformation;
+
+TEST_GROUP(RayTransforms);
+
+TEST_SETUP(RayTransforms)
+{
+	origin = Tuple_CreatePoint(1, 2, 3);
+	direction = Tuple_CreateVector(0, 1, 0);
+	ray = Ray_Create(origin, direction);
+}
+
+TEST_TEAR_DOWN(RayTransforms)
+{
+	Matrix_Destroy(&transformation);
+}
+
+TEST(RayTransforms, TransformReturnsRay)
+{
+	transformation = Matrix_Identity(4);
+	Ray transformedRay = Ray_Transform(ray, transformation);
+	Tuple expected = Tuple_CreatePoint(1, 2, 3);
+	Tuple actual = transformedRay.origin;
+	TEST_ASSERT_TRUE(Tuple_Equals(expected, actual));
+	expected = Tuple_CreateVector(0, 1, 0);
+	actual = transformedRay.direction;
+	TEST_ASSERT_TRUE(Tuple_Equals(expected, actual));
+}
+
+TEST(RayTransforms, TranslationMovesRayOrigin)
+{
+	transformation = Transformation_Translation(3, 4, 5);
+	Ray transformedRay = Ray_Transform(ray, transformation);
+	Tuple expected = Tuple_CreatePoint(4, 6, 8);
+	Tuple actual = transformedRay.origin;
+	TEST_ASSERT_TRUE(Tuple_Equals(expected, actual));
+	expected = Tuple_CreateVector(0, 1, 0);
+	actual = transformedRay.direction;
+	TEST_ASSERT_TRUE(Tuple_Equals(expected, actual));
+}
+
+TEST(RayTransforms, ScaleChangesBothRayOriginAndDirection)
+{
+	transformation = Transformation_Scale(2, 3, 4);
+	Ray transformedRay = Ray_Transform(ray, transformation);
+	Tuple expected = Tuple_CreatePoint(2, 6, 12);
+	Tuple actual = transformedRay.origin;
+	TEST_ASSERT_TRUE(Tuple_Equals(expected, actual));
+	expected = Tuple_CreateVector(0, 3, 0);
+	actual = transformedRay.direction;
 	TEST_ASSERT_TRUE(Tuple_Equals(expected, actual));
 }
