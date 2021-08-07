@@ -3,6 +3,7 @@
 #  all: compile, link, and run all tests, and then delete binaries
 #  run: compile, link, and run all tests 
 #  runv: compile, link, and run tests verbosely
+#  verbose: compile, link, and run tests verbosely, then delete binaries
 #  runl: compile, link, run, and monitor memory usage of tests (requires
 #  valgrind)
 #  memcheck: compile, link, run, and monitor memory usage of tests, then remove
@@ -10,7 +11,7 @@
 #  clean: remove test binaries, if present
 #  cleanall: remove test binaries and object files, if present
 
-.PHONY = all run runv runl memcheck clean cleanall
+.PHONY = all run runv verbose runl memcheck clean cleanall
 
 CC = gcc
 CFLAGS = -lm
@@ -79,6 +80,8 @@ runv: AllTests.test
 	@-./AllTests.test -v
 	@echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	@echo "Done."
+
+verbose: runv clean
 
 runl: AllTests.test
 	@echo "Running tests with memcheck..."

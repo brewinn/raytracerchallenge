@@ -5,10 +5,12 @@
 #  program: compile, link, and run all programs then delete binaries
 #  memcheck: compile, link, and check test binary for memory leaks (requires
 #  valgrind)
+#  verbose: compile, link, and run all tests with the verbose option, then
+#  delete binaries
 #  clean: remove binaries, if present
 #  cleanall: remove binaries and object files, if present
 
-.PHONY = all test program memcheck clean cleanall
+.PHONY = all test program memcheck verbose clean cleanall
 
 BASE_DIR = .
 OBJ_DIR = $(BASE_DIR)/obj
@@ -34,6 +36,13 @@ memcheck:
 	@echo "Checking tests for memory leaks..."
 	@echo "================================"
 	@$(MAKE) -C $(TESTS_DIR) memcheck
+	@echo "================================"
+	@echo "Done."
+
+verbose:
+	@echo "Running tests with verbose option..."
+	@echo "================================"
+	@$(MAKE) -C $(TESTS_DIR) verbose
 	@echo "================================"
 	@echo "Done."
 
