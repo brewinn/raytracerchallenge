@@ -34,6 +34,7 @@ OBJECT_FILES = AllTests.o \
 		Matrix.o \
 		Transformations.o \
 		Ray.o \
+		Intersection.o \
 		Sphere.o \
 		UtilitiesTest.o \
 		UtilitiesTestRunner.o \
@@ -49,6 +50,8 @@ OBJECT_FILES = AllTests.o \
 		TransformationsTestRunner.o \
 		RayTest.o \
 		RayTestRunner.o \
+		IntersectionTest.o \
+		IntersectionTestRunner.o \
 		SphereTest.o \
 		SphereTestRunner.o \
 		unity_fixture.o \
