@@ -14,7 +14,7 @@ This project is built on a Linux (Arch-based) distribution. It is not tested
 for Windows or MacOS.
 
 Project can be run using one of the Makefiles in either the project root, the
-src directory, or the tests directory. Makefiles should be run from their
+_src_ directory, or the tests directory. Makefiles should be run from their
 containing directory, so the Makefile at the project's root should be run with
 the user's working directory at the project's root. The usage options of each
 Makefile is given within the file itself. For example, running 
@@ -23,7 +23,7 @@ Makefile is given within the file itself. For example, running
 make
 ```
 
-in the project's root directory will compile and run all tests and src
+in the project's root directory will compile and run all tests and _src_
 programs, then delete the test and program binaries. This will also fill the
 obj file with compiled objects, which will make future compilations quicker. To
 delete these, run
@@ -45,7 +45,7 @@ in the _img_ directory are the results of previous compilations.
 - [x] Chapter 2: Drawing on a Canvas
 - [x] Chapter 3: Matrices
 - [x] Chapter 4: Matrix Transformations
-- [ ] Chapter 5: Ray-Sphere Intersections
+- [x] Chapter 5: Ray-Sphere Intersections
 - [ ] Chapter 6: Light and Shading
 - [ ] Chapter 7: Making a Scene
 - [ ] Chapter 8: Shadows
@@ -63,9 +63,13 @@ in the _img_ directory are the results of previous compilations.
 
 This section contains a list of changes (mostly refactors) that are planned but not yet implemented.
 
-- [x] Swap parameter order of Canvas_WriteToPPM function
+- [x] Swap parameter order of _Canvas_WriteToPPM_ function
 - [x] Change Makefiles to attain project's directory automatically
 	- Used a workaround, must invoke Makefiles from their respective directories
+- [ ] Add _const_ modifiers were appropriate
+- [ ] Change Makefiles to be more resilient to added sources
+- [ ] Add _Shape_ 'parent struct' to deal with multiple shapes
+	- This probably won't be necessary until chapter 9
 
 ## Contributing
 
