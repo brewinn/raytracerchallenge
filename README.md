@@ -25,7 +25,7 @@ make
 
 in the project's root directory will compile and run all tests and _src_
 programs, then delete the test and program binaries. This will also fill the
-obj file with compiled objects, which will make future compilations quicker. To
+_obj_ directory with compiled objects, which will make future compilations quicker. To
 delete these, run
 
 ```
@@ -34,7 +34,7 @@ make cleanall
 
 from any directory with a Makefile.
 
-By default, images are placed in the directory of containing executable. Images
+By default, images are placed in the directory of executable that created them. Images
 in the _img_ directory are the results of previous compilations.
 
 ## Roadmap
