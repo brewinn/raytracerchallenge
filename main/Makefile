@@ -14,8 +14,12 @@ CC = gcc
 CFLAGS = -lm
 
 BASE_DIR = ..
+SRC_DIR = $(BASE_DIR)/src
 OBJ_DIR = $(BASE_DIR)/obj
 INCLUDE_DIR = $(BASE_DIR)/include
+
+vpath %.h $(INCLUDE_DIR)
+vpath %.c $(SRC_DIR)
 
 BIN := projectile.out \
        clockface.out \

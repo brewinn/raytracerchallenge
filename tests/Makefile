@@ -1,4 +1,3 @@
-
 # Usage:
 #  all: compile, link, and run all tests, and then delete binaries
 #  run: compile, link, and run all tests 
@@ -23,45 +22,21 @@ INCLUDE_DIR = $(BASE_DIR)/include
 TESTS_DIR = $(BASE_DIR)/tests
 UNITY_DIR = $(TESTS_DIR)/Unity
 
-TEST_SRC := $(TESTS_DIR)/*.c
-UNITY_SRC := $(UNITY_DIR)/*.c
-PROJECT_SRC := $(SRC_DIR)/*.c
+vpath %.h $(INCLUDE_DIR)
+vpath %.h $(UNITY_DIR)
+vpath %.c $(SRC_DIR)
+vpath %.c $(TESTS_DIR)
+vpath %.c $(UNITY_DIR)
 
-OBJECT_FILES = AllTests.o \
-	        Utilities.o \
-		Tuple.o \
-		Color.o \
-		Canvas.o \
-		Matrix.o \
-		Transformations.o \
-		Ray.o \
-		Intersection.o \
-		Sphere.o \
-		UtilitiesTest.o \
-		UtilitiesTestRunner.o \
-		TupleTest.o \
-		TupleTestRunner.o \
-		ColorTest.o \
-		ColorTestRunner.o \
-		CanvasTest.o \
-		CanvasTestRunner.o \
-		MatrixTest.o \
-		MatrixTestRunner.o \
-		TransformationsTest.o \
-		TransformationsTestRunner.o \
-		RayTest.o \
-		RayTestRunner.o \
-		IntersectionTest.o \
-		IntersectionTestRunner.o \
-		SphereTest.o \
-		SphereTestRunner.o \
-		unity_fixture.o \
-		unity_memory.o \
-		unity.o
-
+TEST_SRC := $(wildcard $(TESTS_DIR)/*.c)
+UNITY_SRC := $(wildcard $(UNITY_DIR)/*.c)
+PROJECT_SRC := $(wildcard $(SRC_DIR)/*.c)
 
 SRC := $(UNITY_SRC) $(TEST_SRC) $(PROJECT_SRC)
-OBJ := $(patsubst %.o, $(OBJ_DIR)/%.o, $(OBJECT_FILES))
+
+SRC_FILES = $(notdir $(SRC))
+
+OBJ := $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
 TEST_BINS := AllTests.test
 

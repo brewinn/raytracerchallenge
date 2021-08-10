@@ -14,7 +14,7 @@
 
 BASE_DIR = .
 OBJ_DIR = $(BASE_DIR)/obj
-SRC_DIR = $(BASE_DIR)/src
+PROGRAM_DIR = $(BASE_DIR)/main
 TESTS_DIR = $(BASE_DIR)/tests
 
 all: test program
@@ -29,7 +29,7 @@ test:
 program:
 	@echo "Compiling and running programs..."
 	@echo "================================"
-	@$(MAKE) -C $(SRC_DIR)
+	@$(MAKE) -C $(PROGRAM_DIR)
 	@echo "================================"
 	@echo "Done."
 memcheck:
