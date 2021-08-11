@@ -66,7 +66,7 @@ This section contains a list of changes (mostly refactors) that are planned but 
 - [x] Swap parameter order of _Canvas_WriteToPPM_ function
 - [x] Change Makefiles to attain project's directory automatically
 	- Used a workaround, must invoke Makefiles from their respective directories
-- [ ] Add _const_ modifiers were appropriate
+- [x] Add _const_ modifiers were appropriate
 - [x] Change Makefiles to be more resilient to added sources
 - [ ] Add _Shape_ 'parent struct' to deal with multiple shapes
 	- This probably won't be necessary until chapter 9
