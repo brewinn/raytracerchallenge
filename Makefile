@@ -6,10 +6,12 @@
 #  valgrind)
 #  verbose: compile, link, and run all tests with the verbose option, then
 #  delete binaries
+#  buildclean: compile, link, and run tests and programs after removing all
+#  objects and binaries
 #  clean: remove binaries, if present
 #  cleanall: remove binaries and object files, if present
 
-.PHONY = all test program memcheck verbose clean cleanall
+.PHONY = all test program memcheck verbose buildclean clean cleanall
 
 BASE_DIR = .
 OBJ_DIR = $(BASE_DIR)/obj
@@ -44,6 +46,8 @@ verbose:
 	@$(MAKE) -C $(TESTS_DIR) verbose
 	@echo "================================"
 	@echo "Done."
+
+buildclean: cleanall all
 
 clean:
 	@echo "Removing test binaries..."
