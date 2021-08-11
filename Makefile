@@ -1,4 +1,3 @@
-
 # Usage:
 #  all: compile, link, and run all tests and sources, then delete binaries
 #  test: compile, link, and run all tests, then delete binaries
@@ -54,7 +53,7 @@ clean:
 	@echo "Done."
 	@echo "Removing program binaries..."
 	@echo "================================"
-	@$(MAKE) -C $(SRC_DIR) clean
+	@$(MAKE) -C $(PROGRAM_DIR) clean
 	@echo "================================"
 	@echo "Done."
 

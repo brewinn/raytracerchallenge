@@ -1,4 +1,3 @@
-
 # Usage:
 #  all: compile, link, and run all programs, and then delete binaries
 #  run: compile, link, and run all programs 
@@ -9,6 +8,7 @@
 #  cleanall: remove programs binaries and object files, if present
 
 .PHONY = all run projectile clockface sphereCast clean cleanall
+.SECONDARY:; # Prevents make from removing program object files
 
 CC = gcc
 CFLAGS = -lm
@@ -26,29 +26,29 @@ OBJ_FILES := $(patsubst %.c, %.o, $(SRC_FILES))
 DEP_FILES := $(patsubst %.o, %.d, $(OBJ_FILES))
 
 OBJ := $(addprefix $(OBJ_DIR)/,$(OBJ_FILES))
-BIN := projectile.out \
-       clockface.out \
-       sphereCast.out
+BIN := projectile.program \
+       clockface.program \
+       sphereCast.program
 
 all: run clean
 
 run: projectile clockface sphereCast
 
-projectile: projectile.out
+projectile: projectile.program
 	@echo "Running "$<"..."
 	@echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-	@./projectile.out
+	@./projectile.program
 	@echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	@echo "Done."
 
-clockface: clockface.out
+clockface: clockface.program
 	@echo -n "Running "$<"..."
-	@./clockface.out
+	@./clockface.program
 	@echo "Done."
 
-sphereCast: sphereCast.out
+sphereCast: sphereCast.program
 	@echo -n "Running "$<"..."
-	@./sphereCast.out
+	@./sphereCast.program
 	@echo "Done."
 
 clean:
@@ -63,7 +63,7 @@ cleanall: clean
 
 ### Binaries ###
 
-%.out: $(OBJ_DIR)/%.o $(OBJ)
+%.program: $(OBJ_DIR)/%.o $(OBJ)
 	@echo -n "Linking "$(notdir $<)"..." 
 	@$(CC) $(CFLAGS) $^ -o $@ 
 	@echo "Done."
