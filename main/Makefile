@@ -21,6 +21,11 @@ INCLUDE_DIR = $(BASE_DIR)/include
 vpath %.h $(INCLUDE_DIR)
 vpath %.c $(SRC_DIR)
 
+SRC_FILES := $(notdir $(wildcard $(SRC_DIR)/*.c))
+OBJ_FILES := $(patsubst %.c, %.o, $(SRC_FILES))
+DEP_FILES := $(patsubst %.o, %.d, $(OBJ_FILES))
+
+OBJ := $(addprefix $(OBJ_DIR)/,$(OBJ_FILES))
 BIN := projectile.out \
        clockface.out \
        sphereCast.out
@@ -58,39 +63,19 @@ cleanall: clean
 
 ### Binaries ###
 
-projectile.out: $(OBJ_DIR)/projectile.o $(OBJ_DIR)/Tuple.o $(OBJ_DIR)/Canvas.o $(OBJ_DIR)/Color.o $(OBJ_DIR)/Utilities.o
-	@echo -n "Linking projectile.out..." 
-	@$(CC) $(CFLAGS) $^ -o $@ 
-	@echo "Done."
-
-clockface.out: $(OBJ_DIR)/clockface.o $(OBJ_DIR)/Transformations.o $(OBJ_DIR)/Matrix.o $(OBJ_DIR)/Tuple.o $(OBJ_DIR)/Canvas.o $(OBJ_DIR)/Color.o $(OBJ_DIR)/Utilities.o
-	@echo -n "Linking clockface.out..." 
-	@$(CC) $(CFLAGS) $^ -o $@ 
-	@echo "Done."
-
-sphereCast.out: $(OBJ_DIR)/sphereCast.o $(OBJ_DIR)/Canvas.o $(OBJ_DIR)/Color.o $(OBJ_DIR)/Sphere.o $(OBJ_DIR)/Ray.o $(OBJ_DIR)/Intersection.o $(OBJ_DIR)/Transformations.o $(OBJ_DIR)/Matrix.o $(OBJ_DIR)/Tuple.o $(OBJ_DIR)/Utilities.o
-	@echo -n "Linking sphereCast.out..." 
+%.out: $(OBJ_DIR)/%.o $(OBJ)
+	@echo -n "Linking "$(notdir $<)"..." 
 	@$(CC) $(CFLAGS) $^ -o $@ 
 	@echo "Done."
 
 ### Objects ###
 
-$(OBJ_DIR)/projectile.o: projectile.c $(INCLUDE_DIR)/Tuple.h $(INCLUDE_DIR)/Canvas.h 
-	@echo -n "Compiling projectile.c..." 
+$(OBJ_DIR)/%.o: %.c 
+	@echo -n "Compiling "$<"..." 
 	@$(CC) -c $(CFLAGS) -I $(INCLUDE_DIR) $< -o $@ 
 	@echo "Done."
 
-$(OBJ_DIR)/clockface.o: clockface.c $(INCLUDE_DIR)/Transformations.h $(INCLUDE_DIR)/Canvas.h
-	@echo -n "Compiling clockface.c..." 
-	@$(CC) -c $(CFLAGS) -I $(INCLUDE_DIR) $< -o $@ 
-	@echo "Done."
-
-$(OBJ_DIR)/sphereCast.o: sphereCast.c $(INCLUDE_DIR)/Canvas.h
-	@echo -n "Compiling sphereCast.c..." 
-	@$(CC) -c $(CFLAGS) -I $(INCLUDE_DIR) $< -o $@ 
-	@echo "Done."
-
-$(OBJ_DIR)/%.o: %.c $(INCLUDE_DIR)/%.h
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE_DIR)/%.h
 	@echo -n "Compiling "$<"..." 
 	@$(CC) -c $(CFLAGS) -I $(INCLUDE_DIR) $< -o $@ 
 	@echo "Done."
