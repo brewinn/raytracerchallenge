@@ -14,7 +14,7 @@ Tuple Ray_Position(Ray ray, float time)
 	return Tuple_Add(ray.origin, distance);
 }
 
-Ray Ray_Transform(Ray ray, Matrix transformation)
+Ray Ray_Transform(Ray ray, const Matrix transformation)
 {
 	Tuple origin = Matrix_MultiplyTuple(transformation, ray.origin);
 	Tuple direction = Matrix_MultiplyTuple(transformation, ray.direction);

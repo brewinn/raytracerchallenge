@@ -25,12 +25,12 @@ void Sphere_Destroy(Sphere* spherePtr)
 	*spherePtr = NULL;
 }
 
-int Sphere_GetId(Sphere sphere)
+int Sphere_GetId(const Sphere sphere)
 {
 	return sphere->id;
 }
 
-Intersections Sphere_Intersect(Sphere sphere, Ray ray)
+Intersections Sphere_Intersect(const Sphere sphere, Ray ray)
 {
 	Matrix transform = Matrix_Inverse(sphere->transformation);
 	Ray transformedRay = Ray_Transform(ray, transform);
@@ -57,12 +57,12 @@ Intersections Sphere_Intersect(Sphere sphere, Ray ray)
 	return xs;
 }
 
-Matrix Sphere_GetTransformation(Sphere sphere)
+Matrix Sphere_GetTransformation(const Sphere sphere)
 {
 	return sphere->transformation;
 }
 
-static void AssertMatrixCorrectDimensions(Matrix matrix)
+static void AssertMatrixCorrectDimensions(const Matrix matrix)
 {
 	if(Matrix_GetColumns(matrix) != 4 || Matrix_GetRows(matrix) != 4)
 		exit(-1);

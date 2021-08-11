@@ -53,30 +53,30 @@ void Intersection_SetIntersection(Intersections xs, int index, Intersection inte
 	xs->intersections[index] = intersection;
 }
 
-int Intersection_GetCount(Intersections xs)
+int Intersection_GetCount(const Intersections xs)
 {
 	return xs->count;
 }
 
-float Intersection_GetTime(Intersections xs, int index)
+float Intersection_GetTime(const Intersections xs, int index)
 {
 	CheckWithinBounds(xs, index);
 	return xs->intersections[index].time;
 }
 
-objType Intersection_GetObjectType(Intersections xs, int index)
+objType Intersection_GetObjectType(const Intersections xs, int index)
 {
 	CheckWithinBounds(xs, index);
 	return xs->intersections[index].type;
 }
 
-Intersection Intersection_GetIntersection(Intersections xs, int index)
+Intersection Intersection_GetIntersection(const Intersections xs, int index)
 {
 	CheckWithinBounds(xs, index);
 	return xs->intersections[index];
 }
 
-Intersections Intersection_Aggregate(int count, Intersection* intersections)
+Intersections Intersection_Aggregate(int count, const Intersection* intersections)
 {
 	Intersections xs = Intersection_Create(count);
 	for(int k = 0; k < count; k++)
@@ -86,7 +86,7 @@ Intersections Intersection_Aggregate(int count, Intersection* intersections)
 	return xs;
 }
 
-bool Intersection_Hit(Intersections xs, Intersection* hitPtr)
+bool Intersection_Hit(const Intersections xs, Intersection* hitPtr)
 {
 	Intersection currentHit = {-1, NONE};
 	for(int k = 0; k < xs->count; k++)

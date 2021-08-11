@@ -60,7 +60,7 @@ void Matrix_SetValue(Matrix matrix, int row, int column, float value)
 	matrix->values[row][column] = value;
 }
 
-float Matrix_ValueAt(Matrix matrix, int row, int column)
+float Matrix_ValueAt(const Matrix matrix, int row, int column)
 {
 	if(!WithinMatrixBounds(matrix, row, column))
 	{
@@ -70,12 +70,12 @@ float Matrix_ValueAt(Matrix matrix, int row, int column)
 	return matrix->values[row][column];
 }
 
-int Matrix_GetRows(Matrix matrix)
+int Matrix_GetRows(const Matrix matrix)
 {
 	return matrix->nrows;
 }
 
-int Matrix_GetColumns(Matrix matrix)
+int Matrix_GetColumns(const Matrix matrix)
 {
 	return matrix->ncolumns;
 }
@@ -94,7 +94,7 @@ static bool CheckMatrixValuesEqual(Matrix matrix1, Matrix matrix2)
 	return true;
 }
 
-bool Matrix_Equals(Matrix matrix1, Matrix matrix2)
+bool Matrix_Equals(const Matrix matrix1, const Matrix matrix2)
 {
 	bool MatricesSameDimensions = (matrix1->nrows == matrix2->nrows) 
 		& (matrix1->ncolumns == matrix2->ncolumns);
@@ -112,14 +112,14 @@ void Matrix_Assign(Matrix * lhsPtr, Matrix * rhsPtr)
 	*rhsPtr = NULL;
 }
 
-void Matrix_Copy(Matrix destination, Matrix source)
+void Matrix_Copy(Matrix destination, const Matrix source)
 {
 	FreeMatrixValues(destination);
 	*destination = *source;
 	free(source);
 }
 
-static Matrix MultiplyValidMatrices(Matrix matrix1, Matrix matrix2)
+static Matrix MultiplyValidMatrices(const Matrix matrix1, const Matrix matrix2)
 {
 	Matrix matrix = Matrix_Create(matrix1->nrows, matrix2->ncolumns);
 	for(int row = 0; row < matrix->nrows; row++)
@@ -135,7 +135,7 @@ static Matrix MultiplyValidMatrices(Matrix matrix1, Matrix matrix2)
 	return matrix;
 }
 
-Matrix Matrix_Multiply(Matrix matrix1, Matrix matrix2)
+Matrix Matrix_Multiply(const Matrix matrix1, const Matrix matrix2)
 {
 	bool CanMultiplyMatrices = matrix1->ncolumns == matrix2->nrows;
 	if(!CanMultiplyMatrices)
@@ -156,7 +156,7 @@ static Matrix TupleToMatrix(Tuple tuple)
 	return mtuple;
 }
 
-static Tuple MatrixToTuple(Matrix mtuple)
+static Tuple MatrixToTuple(const Matrix mtuple)
 {
 	float x, y, z, w;
 	x = Matrix_ValueAt(mtuple, 0, 0);
@@ -167,7 +167,7 @@ static Tuple MatrixToTuple(Matrix mtuple)
 	return Tuple_Create(x, y, z, w);
 }
 
-Tuple Matrix_MultiplyTuple(Matrix matrix, Tuple tuple)
+Tuple Matrix_MultiplyTuple(const Matrix matrix, Tuple tuple)
 {
 	if((matrix->nrows != 4) | (matrix->ncolumns != 4))
 	{
@@ -198,7 +198,7 @@ const Matrix Matrix_Identity(int dimension)
 	return identity;
 }
 
-static void FillTransposedMatrix(Matrix transpose, Matrix matrix)
+static void FillTransposedMatrix(Matrix transpose, const Matrix matrix)
 {
 	for(int row = 0; row < matrix->nrows; row++)
 		for(int column = 0; column < matrix->ncolumns; column++)
@@ -208,14 +208,14 @@ static void FillTransposedMatrix(Matrix transpose, Matrix matrix)
 		}
 }
 
-Matrix Matrix_Transpose(Matrix matrix)
+Matrix Matrix_Transpose(const Matrix matrix)
 {
 	Matrix transpose = Matrix_Create(matrix->ncolumns, matrix->nrows);
 	FillTransposedMatrix(transpose, matrix);
 	return transpose;
 }
 
-static void CheckValidSubmatrix(Matrix matrix, int row, int column)
+static void CheckValidSubmatrix(const Matrix matrix, int row, int column)
 {
 	if(!WithinMatrixBounds(matrix, row, column))
 	{
@@ -229,7 +229,7 @@ static void CheckValidSubmatrix(Matrix matrix, int row, int column)
 	}
 }
 
-static void FillSubmatrix(Matrix submatrix, Matrix matrix, int row, int column)
+static void FillSubmatrix(Matrix submatrix, const Matrix matrix, int row, int column)
 {
 	for(int i = 0; i < submatrix->nrows; i++)
 		for(int j = 0; j < submatrix->ncolumns; j++)
@@ -245,7 +245,7 @@ static void FillSubmatrix(Matrix submatrix, Matrix matrix, int row, int column)
 		}
 }
 
-Matrix Matrix_Submatrix(Matrix matrix, int row, int column)
+Matrix Matrix_Submatrix(const Matrix matrix, int row, int column)
 {
 	CheckValidSubmatrix(matrix, row, column);
 	Matrix submatrix = Matrix_Create(matrix->nrows - 1, matrix->ncolumns - 1);
@@ -253,7 +253,7 @@ Matrix Matrix_Submatrix(Matrix matrix, int row, int column)
 	return submatrix;
 }
 
-static void CheckMatrixIsSquare(Matrix matrix)
+static void CheckMatrixIsSquare(const Matrix matrix)
 {
 	if(matrix->nrows != matrix->ncolumns)
 	{
@@ -262,7 +262,7 @@ static void CheckMatrixIsSquare(Matrix matrix)
 	}
 }
 
-float Matrix_Determinant(Matrix matrix)
+float Matrix_Determinant(const Matrix matrix)
 {
 	CheckMatrixIsSquare(matrix);
 
@@ -285,7 +285,7 @@ float Matrix_Determinant(Matrix matrix)
 	return determinant;
 }
 
-float Matrix_Minor(Matrix matrix, int row, int column)
+float Matrix_Minor(const Matrix matrix, int row, int column)
 {
 	Matrix submatrix = Matrix_Submatrix(matrix, row, column);
 	float minor = Matrix_Determinant(submatrix);
@@ -293,7 +293,7 @@ float Matrix_Minor(Matrix matrix, int row, int column)
 	return minor;
 }
 
-float Matrix_Cofactor(Matrix matrix, int row, int column)
+float Matrix_Cofactor(const Matrix matrix, int row, int column)
 {
 	bool FlipMinorSign = ((row + column)%2 == 1);
 	if(FlipMinorSign)
@@ -301,7 +301,7 @@ float Matrix_Cofactor(Matrix matrix, int row, int column)
 	return Matrix_Minor(matrix, row, column);
 }
 
-Matrix Matrix_Inverse(Matrix matrix)
+Matrix Matrix_Inverse(const Matrix matrix)
 {
 	float determinant = Matrix_Determinant(matrix);
 	int rows, columns;

@@ -13,6 +13,6 @@ struct Ray{
 
 Ray Ray_Create(Tuple origin, Tuple direction);
 Tuple Ray_Position(Ray ray, float time);
-Ray Ray_Transform(Ray ray, Matrix transformation);
+Ray Ray_Transform(Ray ray, const Matrix transformation);
 
 #endif /* __RAY__ */

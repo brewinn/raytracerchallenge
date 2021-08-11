@@ -51,7 +51,7 @@ void Canvas_WritePixel(Canvas canvas, int x, int y, Color color)
 	canvas.pixels[pixelOffset] = color;
 }
 
-Color Canvas_PixelAt(Canvas canvas, int x, int y)
+Color Canvas_PixelAt(const Canvas canvas, int x, int y)
 {
 	if(CanvasOutOfBounds(canvas, x, y))
 	{
@@ -85,7 +85,7 @@ static int NumberWidth(int number)
 	return length;
 }
 
-static void WritePPMHeader(FILE * ppm, Canvas canvas)
+static void WritePPMHeader(FILE * ppm, const Canvas canvas)
 {
 	fprintf(ppm, "P3\n");
 	fprintf(ppm, "%d %d\n", canvas.width, canvas.height);
@@ -127,7 +127,7 @@ static void SetNewRow(FILE * ppm, int * lineWidthPointer)
 	return;
 }
 
-static void WritePPMBody(FILE * ppm, Canvas canvas)
+static void WritePPMBody(FILE * ppm, const Canvas canvas)
 {
 	int lineWidth = 0;
 	for(int y = 0; y < canvas.height; y++)
@@ -141,7 +141,7 @@ static void WritePPMBody(FILE * ppm, Canvas canvas)
 	}
 }
 
-void Canvas_WriteToPPM(Canvas canvas, const char * filename)
+void Canvas_WriteToPPM(const Canvas canvas, const char * filename)
 {
 	FILE * ppm;
 	ppm = FileOpen(filename);
