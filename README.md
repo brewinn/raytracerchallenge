@@ -4,9 +4,10 @@ A WIP implementation of a ray tracer based on the book by Jamis Buck.
 ## Description
 
 This project seeks to implement a ray tracer based on _The Ray Tracer
-Challenge_ by Jamis Buck in C.  At the moment the project is just a skeleton,
-but as the chapters are worked through over the next couple of weeks, we should
-end up with a functional ray tracer.
+Challenge_ by Jamis Buck in C. Everything up to chapter 5 has been implemented
+so far. While there is not a ray-tracer just yet, the underlying elements are
+falling into place. Additionally, three programs have been made which produce
+images that can be seen in the _img_ folder. 
 
 ## Usage
 
