@@ -67,7 +67,7 @@ This section contains a list of changes (mostly refactors) that are planned but 
 - [x] Change Makefiles to attain project's directory automatically
 	- Used a workaround, must invoke Makefiles from their respective directories
 - [ ] Add _const_ modifiers were appropriate
-- [ ] Change Makefiles to be more resilient to added sources
+- [x] Change Makefiles to be more resilient to added sources
 - [ ] Add _Shape_ 'parent struct' to deal with multiple shapes
 	- This probably won't be necessary until chapter 9
 
