@@ -6,6 +6,17 @@ TEST_GROUP_RUNNER(Sphere)
 	RUN_TEST_CASE(Sphere, SphereReturnsUniqueID);
 }
 
+TEST_GROUP_RUNNER(SphereNormals)
+{
+	RUN_TEST_CASE(SphereNormals, NormalAtPointOnXAxis);
+	RUN_TEST_CASE(SphereNormals, NormalAtPointOnYAxis);
+	RUN_TEST_CASE(SphereNormals, NormalAtPointOnZAxis);
+	RUN_TEST_CASE(SphereNormals, NormalAtNonaxialPoint);
+	RUN_TEST_CASE(SphereNormals, NormalIsNormalized);
+	RUN_TEST_CASE(SphereNormals, NormalOfTranslatedSphere);
+	RUN_TEST_CASE(SphereNormals, NormalOfTransformedSphere);
+}
+
 TEST_GROUP_RUNNER(SphereTransformation)
 {
 	RUN_TEST_CASE(SphereTransformation, DefaultTransformationIsIdentity);

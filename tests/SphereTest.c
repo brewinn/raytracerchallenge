@@ -32,6 +32,96 @@ TEST(Sphere, SphereReturnsUniqueID)
 	TEST_ASSERT_EQUAL_INT(3, id);
 }
 
+static Tuple pointOnSphere, expectedTuple, actualTuple;
+
+TEST_GROUP(SphereNormals);
+
+TEST_SETUP(SphereNormals)
+{
+	sphere = Sphere_Create();
+}
+
+TEST_TEAR_DOWN(SphereNormals)
+{
+	Sphere_Destroy(&sphere);
+}
+
+static void AssertTuplesEqual()
+{
+	TEST_ASSERT_FLOAT_WITHIN(1e-5, expectedTuple.x, actualTuple.x);
+	TEST_ASSERT_FLOAT_WITHIN(1e-5, expectedTuple.y, actualTuple.y);
+	TEST_ASSERT_FLOAT_WITHIN(1e-5, expectedTuple.z, actualTuple.z);
+	TEST_ASSERT_FLOAT_WITHIN(1e-5, expectedTuple.w, actualTuple.w);
+}
+
+TEST(SphereNormals, NormalAtPointOnXAxis)
+{
+	pointOnSphere = Tuple_CreatePoint(1, 0, 0);
+	actualTuple = Sphere_NormalAt(sphere, pointOnSphere);
+	expectedTuple = Tuple_CreateVector(1, 0, 0);
+	AssertTuplesEqual();
+}
+
+TEST(SphereNormals, NormalAtPointOnYAxis)
+{
+	pointOnSphere = Tuple_CreatePoint(0, 1, 0);
+	actualTuple = Sphere_NormalAt(sphere, pointOnSphere);
+	expectedTuple = Tuple_CreateVector(0, 1, 0);
+	AssertTuplesEqual();
+}
+
+TEST(SphereNormals, NormalAtPointOnZAxis)
+{
+	pointOnSphere = Tuple_CreatePoint(0, 0, 1);
+	actualTuple = Sphere_NormalAt(sphere, pointOnSphere);
+	expectedTuple = Tuple_CreateVector(0, 0, 1);
+	AssertTuplesEqual();
+}
+
+TEST(SphereNormals, NormalAtNonaxialPoint)
+{
+	float value = sqrtf(3)/3;
+	pointOnSphere = Tuple_CreatePoint(value, value, value);
+	actualTuple = Sphere_NormalAt(sphere, pointOnSphere);
+	expectedTuple = Tuple_CreateVector(value, value, value);
+	AssertTuplesEqual();
+}
+
+TEST(SphereNormals, NormalIsNormalized)
+{
+	float value = sqrtf(3)/3;
+	pointOnSphere = Tuple_CreatePoint(value, value, value);
+	actualTuple = Sphere_NormalAt(sphere, pointOnSphere);
+	expectedTuple = Tuple_Normalize(Tuple_CreateVector(value, value, value));
+	AssertTuplesEqual();
+}
+
+TEST(SphereNormals, NormalOfTranslatedSphere)
+{
+	float value = sqrtf(2)/2;
+	Matrix transformation = Transformation_Translation(0, 1, 0);
+	Sphere_SetTransformation(sphere, transformation);
+	pointOnSphere = Tuple_CreatePoint(0, 1 + value, value);
+	actualTuple = Sphere_NormalAt(sphere, pointOnSphere);
+	expectedTuple = Tuple_CreateVector(0, value, value);
+	AssertTuplesEqual();
+}
+
+TEST(SphereNormals, NormalOfTransformedSphere)
+{
+	float value = sqrtf(2)/2;
+	Matrix t1 = Transformation_Scale(1, 0.5, 1);
+	Matrix t2 = Transformation_RotationZ(M_PI/5);
+	Matrix transformation = Matrix_Multiply(t1, t2);
+	Matrix_Destroy(&t1);
+	Matrix_Destroy(&t2);
+	Sphere_SetTransformation(sphere, transformation);
+	pointOnSphere = Tuple_CreatePoint(0, value, -value);
+	actualTuple = Sphere_NormalAt(sphere, pointOnSphere);
+	expectedTuple = Tuple_CreateVector(0, 0.97014, -0.24254);
+	AssertTuplesEqual();
+}
+
 static Matrix expectedMatrix, actualMatrix;
 
 TEST_GROUP(SphereTransformation);

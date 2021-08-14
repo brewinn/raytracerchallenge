@@ -13,6 +13,7 @@ int Sphere_GetId(const Sphere sphere);
 Intersections Sphere_Intersect(const Sphere sphere, Ray ray);
 Matrix Sphere_GetTransformation(const Sphere sphere);
 void Sphere_SetTransformation(Sphere sphere, Matrix transformation);
+Tuple Sphere_NormalAt(Sphere sphere, Tuple point);
 
 
 #endif /* __SPHERE__ */

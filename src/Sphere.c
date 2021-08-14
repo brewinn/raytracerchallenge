@@ -74,3 +74,17 @@ void Sphere_SetTransformation(Sphere sphere, Matrix transformation)
 	Matrix_Destroy(&(sphere->transformation));
 	sphere->transformation = transformation;
 }
+
+Tuple Sphere_NormalAt(Sphere sphere, Tuple point)
+{
+	Tuple origin = Tuple_CreatePoint(0, 0, 0);
+	Matrix inverseTransform = Matrix_Inverse(sphere->transformation);
+	Tuple objectPoint = Matrix_MultiplyTuple(inverseTransform, point);
+	Tuple objectNormal = Tuple_Subtract(objectPoint, origin);
+	Matrix worldTransformation = Matrix_Transpose(inverseTransform);
+	Tuple worldNormal = Matrix_MultiplyTuple(worldTransformation, objectNormal);
+	Matrix_Destroy(&worldTransformation);
+	Matrix_Destroy(&inverseTransform);
+	worldNormal.w = 0;
+	return Tuple_Normalize(worldNormal);
+}

@@ -20,6 +20,7 @@ static void RunAllTests(void)
 	RUN_TEST_GROUP(Intersection);
 	RUN_TEST_GROUP(Intersections);
 	RUN_TEST_GROUP(Sphere);
+	RUN_TEST_GROUP(SphereNormals);
 	RUN_TEST_GROUP(SphereTransformation);
 	RUN_TEST_GROUP(SphereIntersections);
 	RUN_TEST_GROUP(TransformedSphereIntersections);
