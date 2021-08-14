@@ -24,7 +24,7 @@ Color Color_Subtract(Color color1, Color color2)
 	return Color_Create(red, green, blue);
 }
 
-Color Color_ScalarMultiply(Color color, int scalar)
+Color Color_ScalarMultiply(Color color, float scalar)
 {
 	float red, green, blue;
 	red = color.red * scalar;
