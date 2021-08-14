@@ -24,6 +24,7 @@ static void RunAllTests(void)
 	RUN_TEST_GROUP(SphereTransformation);
 	RUN_TEST_GROUP(SphereIntersections);
 	RUN_TEST_GROUP(TransformedSphereIntersections);
+	RUN_TEST_GROUP(Lights);
 }
 
 int main(int argc, const char * argv[])
