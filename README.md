@@ -4,9 +4,9 @@ A WIP implementation of a ray tracer based on the book by Jamis Buck.
 ## Description
 
 This project seeks to implement a ray tracer based on _The Ray Tracer
-Challenge_ by Jamis Buck in C. Everything up to chapter 5 has been implemented
-so far. While there is not a ray-tracer just yet, the underlying elements are
-falling into place. Additionally, three programs have been made which produce
+Challenge_ by Jamis Buck in C. Everything up to chapter 6 has been implemented
+so far. While there is not a full ray-tracer just yet, the underlying elements are
+falling into place. Additionally, three programs in the _main_ directory have been made which produce
 images that can be seen in the _img_ folder. 
 
 ## Usage
@@ -15,7 +15,7 @@ This project is built on a Linux (Arch-based) distribution. It is not tested
 for Windows or MacOS.
 
 Project can be run using one of the Makefiles in either the project root, the
-_src_ directory, or the tests directory. Makefiles should be run from their
+_main_ directory, or the tests directory. Makefiles should be run from their
 containing directory, so the Makefile at the project's root should be run with
 the user's working directory at the project's root. The usage options of each
 Makefile is given within the file itself. For example, running 
@@ -24,7 +24,7 @@ Makefile is given within the file itself. For example, running
 make
 ```
 
-in the project's root directory will compile and run all tests and _src_
+in the project's root directory will compile and run all tests and _main_
 programs, then delete the test and program binaries. This will also fill the
 _obj_ directory with compiled objects, which will make future compilations quicker. To
 delete these, run
@@ -47,7 +47,7 @@ in the _img_ directory are the results of previous compilations.
 - [x] Chapter 3: Matrices
 - [x] Chapter 4: Matrix Transformations
 - [x] Chapter 5: Ray-Sphere Intersections
-- [ ] Chapter 6: Light and Shading
+- [x] Chapter 6: Light and Shading
 - [ ] Chapter 7: Making a Scene
 - [ ] Chapter 8: Shadows
 - [ ] Chapter 9: Planes
@@ -71,12 +71,14 @@ This section contains a list of changes (mostly refactors) that are planned but 
 - [x] Change Makefiles to be more resilient to added sources
 - [ ] Add _Shape_ 'parent struct' to deal with multiple shapes
 	- This probably won't be necessary until chapter 9
+- [ ] Add _Shape_ pointer or similar identifier to _Intersection_
+	- The end of chapter 6 implied that there should be a reference in _Intersection_
 
 ## Contributing
 
 This is a personal project and hence is not seeking additional collaborators.
 That said, code reviews and bug reports are welcome. If you find something
-wrong, feel free to contact the current maintainer.
+wrong, feel free to contact the current maintainer (brewinn@protonmail.com).
 
 ## License
 
