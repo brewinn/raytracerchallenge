@@ -1,4 +1,5 @@
 #include "Materials.h"
+#include <stdbool.h>
 #include <math.h>
 
 Material Material_Create()
@@ -13,50 +14,73 @@ Material Material_Create()
 	return material;
 }
 
-Color Material_Lighting(Material material, Light light, Tuple point, Tuple eyev, Tuple normalv)
+static bool lightIsOppositeSurface(Light light, Tuple point, Tuple normalv)
 {
-	Color effectiveColor = Color_Multiply(material.color, light.intensity);
 	Tuple lightv = Tuple_Normalize(Tuple_Subtract(light.position, point));
-	Color ambient = Color_ScalarMultiply(effectiveColor, material.ambient);
-
-	Color diffuse, specular;
-	Color black = Color_Create(0, 0, 0);
 	float lightDotNormal = Tuple_Dot(lightv, normalv);
 	if(lightDotNormal < 0)
 	{
-		diffuse = black;
-		specular = black;
+		return true;
 	}
-	else {
-		diffuse = Color_ScalarMultiply(
-				Color_ScalarMultiply(
-					effectiveColor, 
-					material.diffuse
-					), 
-				lightDotNormal
-				);
+	return false;
+}
 
-		Tuple reflectv = Tuple_Reflect(
-				 Tuple_Negate(lightv), 
-				 normalv
-				 );
+static Color CalculateAmbient(Material material, Light light)
+{
+	Color effectiveColor = Color_Multiply(material.color, light.intensity);
+	Color ambient = Color_ScalarMultiply(effectiveColor, material.ambient);
+	return ambient;
+}
 
-		float reflectDotEye = Tuple_Dot(reflectv, eyev);
-		if( reflectDotEye <= 0)
-		{
-			specular = black;
-		}
-		else{
-			float factor = powf(reflectDotEye, material.shininess);
-			specular = Color_ScalarMultiply(
-					Color_ScalarMultiply(
-						light.intensity,
-						material.specular),
-					factor
-					);
-		}
+static Color CalculateDiffuse(Material material, Light light, Tuple point, Tuple normalv)
+{
+	Color effectiveColor = Color_Multiply(material.color, light.intensity);
+	Tuple lightv = Tuple_Normalize(Tuple_Subtract(light.position, point));
+	float lightDotNormal = Tuple_Dot(lightv, normalv);
+	Color diffuse = Color_ScalarMultiply(
+			Color_ScalarMultiply(
+				effectiveColor, 
+				material.diffuse
+				), 
+			lightDotNormal
+			);
+	return diffuse;
+}
 
+static Color CalculateSpecular(Material material, Light light, Tuple point, Tuple eyev, Tuple normalv)
+{
+	Tuple lightv = Tuple_Normalize(Tuple_Subtract(light.position, point));
+
+	Tuple reflectv = Tuple_Reflect(
+			 Tuple_Negate(lightv), 
+			 normalv
+			 );
+	
+	float reflectDotEye = Tuple_Dot(reflectv, eyev);
+	if( reflectDotEye <= 0)
+	{
+		Color black = Color_Create(0, 0, 0);
+		return black;
 	}
+
+	float factor = powf(reflectDotEye, material.shininess);
+	Color specular = Color_ScalarMultiply(
+			Color_ScalarMultiply(
+				light.intensity,
+				material.specular),
+			factor
+			);
+	
+	return specular;
+}
+
+Color Material_Lighting(Material material, Light light, Tuple point, Tuple eyev, Tuple normalv)
+{
+	Color ambient = CalculateAmbient(material, light);
+	if(lightIsOppositeSurface(light, point, normalv))
+		return ambient;
+	Color diffuse = CalculateDiffuse(material, light, point, normalv);
+	Color specular = CalculateSpecular(material, light, point, eyev, normalv);
 	Color result = Color_Add(
 			Color_Add(
 				ambient,
