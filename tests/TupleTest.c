@@ -1,5 +1,6 @@
 #include "unity_fixture.h"
 #include "Tuple.h"
+#include <math.h>
 
 TEST_GROUP(Tuple);
 
@@ -15,10 +16,10 @@ TEST_TEAR_DOWN(Tuple)
 
 static void AssertTupleEquals(float x, float y, float z, float w)
 {
-	TEST_ASSERT_EQUAL_FLOAT(x, tuple.x);
-	TEST_ASSERT_EQUAL_FLOAT(y, tuple.y);
-	TEST_ASSERT_EQUAL_FLOAT(z, tuple.z);
-	TEST_ASSERT_EQUAL_FLOAT(w, tuple.w);
+	TEST_ASSERT_FLOAT_WITHIN(1e-5, x, tuple.x);
+	TEST_ASSERT_FLOAT_WITHIN(1e-5, y, tuple.y);
+	TEST_ASSERT_FLOAT_WITHIN(1e-5, z, tuple.z);
+	TEST_ASSERT_FLOAT_WITHIN(1e-5, w, tuple.w);
 }
 
 static void AssertTwoTuplesEqual(Tuple t1, Tuple t2)
@@ -163,4 +164,21 @@ TEST(Tuple, CrossProductOfTwoVectors)
 	AssertTupleEquals(-1, 2, -1, 0);
 	tuple = Tuple_Cross(tuple2, tuple1);
 	AssertTupleEquals(1, -2, 1, 0);
+}
+
+TEST(Tuple, ReflectingAVectorAt45Degrees)
+{
+	tuple1 = Tuple_CreateVector(1, -1, 0);
+	tuple2 = Tuple_CreateVector(0, 1, 0);
+	tuple = Tuple_Reflect(tuple1, tuple2);
+	AssertTupleEquals(1, 1, 0, 0);
+}
+
+TEST(Tuple, ReflectingAVectorOffASlantedSurface)
+{
+	tuple1 = Tuple_CreateVector(0, -1, 0);
+	float value = sqrtf(2)/2;
+	tuple2 = Tuple_CreateVector(value, value, 0);
+	tuple = Tuple_Reflect(tuple1, tuple2);
+	AssertTupleEquals(1, 0, 0, 0);
 }

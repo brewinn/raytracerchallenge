@@ -119,3 +119,11 @@ Tuple Tuple_Cross(Tuple tuple1, Tuple tuple2)
 	z = tuple1.x * tuple2.y - tuple1.y * tuple2.x;
 	return Tuple_CreateVector(x, y, z);
 }
+
+Tuple Tuple_Reflect(Tuple vector, Tuple normal)
+{
+	float dotProduct = Tuple_Dot(vector, normal);
+	Tuple changeVector = Tuple_Multiply(normal, 2*dotProduct);
+	Tuple reflection = Tuple_Subtract(vector, changeVector);
+	return reflection;
+}
