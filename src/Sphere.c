@@ -7,6 +7,7 @@ static int idCounter = 0;
 typedef struct SphereStruct{
 	int id;
 	Matrix transformation;
+	Material material;
 } SphereStruct;
 
 Sphere Sphere_Create(void)
@@ -14,6 +15,7 @@ Sphere Sphere_Create(void)
 	Sphere sphere = malloc(sizeof(SphereStruct));
 	sphere->id = ++idCounter;
 	sphere->transformation = Matrix_Identity(4);
+	sphere->material = Material_Create();
 	return sphere;
 }
 
@@ -87,4 +89,14 @@ Tuple Sphere_NormalAt(Sphere sphere, Tuple point)
 	Matrix_Destroy(&inverseTransform);
 	worldNormal.w = 0;
 	return Tuple_Normalize(worldNormal);
+}
+
+Material Sphere_GetMaterial(Sphere sphere)
+{
+	return sphere->material;
+}
+
+void Sphere_SetMaterial(Sphere sphere, Material material)
+{
+	sphere->material = material;
 }

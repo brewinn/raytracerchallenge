@@ -32,6 +32,21 @@ TEST(Sphere, SphereReturnsUniqueID)
 	TEST_ASSERT_EQUAL_INT(3, id);
 }
 
+TEST(Sphere, SphereHasAMaterial)
+{
+	Material material = Sphere_GetMaterial(sphere);
+	TEST_ASSERT_EQUAL_FLOAT(0.1, material.ambient);
+}
+
+TEST(Sphere, CanSetSphereMaterial)
+{
+	Material expected = Material_Create();
+	expected.ambient = 1;
+	Sphere_SetMaterial(sphere, expected);
+	Material actual = Sphere_GetMaterial(sphere);
+	TEST_ASSERT_EQUAL_FLOAT(expected.ambient, actual.ambient);
+}
+
 static Tuple pointOnSphere, expectedTuple, actualTuple;
 
 TEST_GROUP(SphereNormals);

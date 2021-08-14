@@ -4,6 +4,8 @@ TEST_GROUP_RUNNER(Sphere)
 {
 	RUN_TEST_CASE(Sphere, SphereCreateReturnsSphere);
 	RUN_TEST_CASE(Sphere, SphereReturnsUniqueID);
+	RUN_TEST_CASE(Sphere, SphereHasAMaterial);
+	RUN_TEST_CASE(Sphere, CanSetSphereMaterial);
 }
 
 TEST_GROUP_RUNNER(SphereNormals)
