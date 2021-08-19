@@ -3,6 +3,8 @@
 static void RunAllTests(void)
 {
 	RUN_TEST_GROUP(Utilities);
+	RUN_TEST_GROUP(LinkedList);
+	RUN_TEST_GROUP(MultipleNodeLinkedList);
 	RUN_TEST_GROUP(Tuple);
 	RUN_TEST_GROUP(Color);
 	RUN_TEST_GROUP(CanvasInit);
