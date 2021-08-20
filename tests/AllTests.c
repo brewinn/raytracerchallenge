@@ -20,6 +20,7 @@ static void RunAllTests(void)
 	RUN_TEST_GROUP(Ray);
 	RUN_TEST_GROUP(RayTransforms);
 	RUN_TEST_GROUP(Intersection);
+	RUN_TEST_GROUP(MultipleIntersection);
 	RUN_TEST_GROUP(Intersections);
 	RUN_TEST_GROUP(Sphere);
 	RUN_TEST_GROUP(SphereNormals);
@@ -29,6 +30,8 @@ static void RunAllTests(void)
 	RUN_TEST_GROUP(Lights);
 	RUN_TEST_GROUP(Materials);
 	RUN_TEST_GROUP(MaterialLighting);
+	RUN_TEST_GROUP(World);
+	RUN_TEST_GROUP(DefaultWorld);
 }
 
 int main(int argc, const char * argv[])
