@@ -146,6 +146,7 @@ void* LinkedList_RemoveEnd(LinkedList list)
 	Node* node = list->head;
 	while(node->next->next != NULL)
 		node = node->next;
+	nodeValue = node->next->data;
 	free(node->next);
 	node->next = NULL;
 	return nodeValue;
