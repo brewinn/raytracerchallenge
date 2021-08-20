@@ -107,3 +107,125 @@ bool Intersection_Hit(const Intersections xs, Intersection* hitPtr)
 	return false;
 
 }
+
+Intersections Intersection_Combine(Intersections xs1, Intersections xs2)
+{
+	int count1 = xs1->count;
+	int count2 = xs2->count;
+	if(count1 == 0)
+	{
+		Intersection_Destroy(&xs1);
+		return xs2;
+	}
+	if(count2 == 0)
+	{
+		Intersection_Destroy(&xs2);
+		return xs1;
+	}
+	Intersections xs = Intersection_Create(count1 + count2);
+	for(int i = 0; i < xs->count; i++)
+	{
+		if(i < count1)
+			Intersection_SetIntersection(
+					xs, 
+					i, 
+					Intersection_GetIntersection(xs1, i)
+					);
+		else
+			Intersection_SetIntersection(
+					xs, 
+					i, 
+					Intersection_GetIntersection(xs2, i - count1)
+					);
+	}
+	Intersection_Destroy(&xs1);
+	Intersection_Destroy(&xs2);
+	return xs;
+}
+
+static void MergeSortIntersections(int i, int j, Intersections xs, Intersections dummy)
+{
+	if( i >= j)
+		return;
+
+	int middle = (i+j)/2;
+	MergeSortIntersections(i, middle, xs, dummy);
+	MergeSortIntersections(middle + 1, j, xs, dummy);
+
+	int leftSide = i;
+	int rightSide = middle + 1;
+	for(int k = i; k <= j; k++)
+	{
+		if(leftSide == middle + 1)
+		{
+			Intersection_SetIntersection(dummy, 
+					k, 
+					Intersection_GetIntersection(
+						xs,
+						rightSide
+						)
+					 );
+			rightSide++;
+		}
+		else if(rightSide == j + 1)
+		{
+			Intersection_SetIntersection(
+					dummy, 
+					k, 
+					Intersection_GetIntersection(
+						xs,
+						leftSide
+						)
+					);
+			leftSide++;
+		}
+		else if(Intersection_GetTime(xs, leftSide) < Intersection_GetTime(xs, rightSide))
+		{
+			Intersection_SetIntersection(
+					dummy, 
+					k, 
+					Intersection_GetIntersection(
+						xs,
+						leftSide
+						)
+					);
+			leftSide++;
+		}
+		else{
+			Intersection_SetIntersection(dummy, 
+					k, 
+					Intersection_GetIntersection(
+						xs,
+						rightSide
+						)
+					 );
+			rightSide++;
+		}
+	}
+	for(int k = i; k <= j; k++)
+		Intersection_SetIntersection(
+				xs,
+				k,
+				Intersection_GetIntersection(
+					dummy,
+					k
+					)
+				);
+}
+
+static void SortIntersections(Intersections xs)
+{
+	//Set up merge sort
+	int i = 0;
+	int j = xs->count - 1;
+	Intersections dummy = Intersection_Create(xs->count);
+	MergeSortIntersections(i, j, xs, dummy);
+	Intersection_Destroy(&dummy);
+}
+
+void Intersection_Sort(Intersections xs)
+{
+	if(xs->count <= 1)
+		return;
+	SortIntersections(xs);
+}

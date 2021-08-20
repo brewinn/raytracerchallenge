@@ -15,5 +15,10 @@ TEST_GROUP_RUNNER(Intersection)
 {
 	RUN_TEST_CASE(Intersection, IntersectionStoresTimeAndType);
 	RUN_TEST_CASE(Intersection, AggregateCombinesIntersectionsToIntersections);
-	RUN_TEST_CASE(Intersection, HitAlwaysGivesLowestNonnegativeIntersection);
+}
+TEST_GROUP_RUNNER(MultipleIntersection)
+{
+	RUN_TEST_CASE(MultipleIntersection, HitAlwaysGivesLowestNonnegativeIntersection);
+	RUN_TEST_CASE(MultipleIntersection, CombineMergesTwoIntersections);
+	RUN_TEST_CASE(MultipleIntersection, SortRearrangesIntersectionsBasedOnTime);
 }

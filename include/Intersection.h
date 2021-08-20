@@ -24,5 +24,7 @@ objType Intersection_GetObjectType(const Intersections xs, int index);
 Intersection Intersection_GetIntersection(const Intersections xs, int index);
 Intersections Intersection_Aggregate(int count, const Intersection* intersections);
 bool Intersection_Hit(const Intersections xs, Intersection* hitPtr);
+Intersections Intersection_Combine(const Intersections xs1, const Intersections xs2);
+void Intersection_Sort(Intersections xs);
 
 #endif /* __INTERSECTION__ */
