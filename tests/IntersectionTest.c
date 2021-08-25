@@ -1,7 +1,10 @@
 #include "unity_fixture.h"
 #include "Intersection.h"
+#include "Sphere.h"
+#include <stdlib.h>
 
 static Intersections xs;
+static Sphere sphere;
 static int xsCount = 2;
 
 TEST_GROUP(Intersections);
@@ -9,11 +12,13 @@ TEST_GROUP(Intersections);
 TEST_SETUP(Intersections)
 {
 	xs = Intersection_Create(xsCount);
+	sphere = Sphere_Create();
 }
 
 TEST_TEAR_DOWN(Intersections)
 {
 	Intersection_Destroy(&xs);
+	Sphere_Destroy(&sphere);
 }
 
 TEST(Intersections, IntersectionsStoresIntersectionCount)
@@ -34,56 +39,59 @@ TEST(Intersections, IntersectionsStoresTimes)
 
 TEST(Intersections, IntersectionsStoresObjectType)
 {
-	Intersection_SetObjectType(xs, 0, SPHERE);
-	Intersection_SetObjectType(xs, 1, SPHERE);
-	objType xsZeroType = Intersection_GetObjectType(xs, 0);
-	objType xsOneType = Intersection_GetObjectType(xs, 1);
-	TEST_ASSERT_EQUAL_INT(SPHERE, xsZeroType);
-	TEST_ASSERT_EQUAL_INT(SPHERE, xsOneType);
+	Intersection_SetObject(xs, 0, NULL);
+	Intersection_SetObject(xs, 1, sphere);
+	TEST_ASSERT_EQUAL_PTR(
+			NULL,
+			Intersection_GetObject(xs, 0)
+			);
+	TEST_ASSERT_EQUAL_PTR(
+			sphere,
+			Intersection_GetObject(xs, 1)
+			);
 }
 
 TEST(Intersections, CanSetAndReturnIntersections)
 {
 	Intersection x = { 
 		.time = 1,
-		.type = SPHERE
+		.object = sphere
 	};
 	Intersection_SetIntersection(xs, 0, x);
 	Intersection actualIntersection = Intersection_GetIntersection(xs, 0);
+	void* actualObject = Intersection_GetObject(xs, 0);
 	TEST_ASSERT_EQUAL_FLOAT(1, actualIntersection.time);
-	TEST_ASSERT_EQUAL_INT(SPHERE, actualIntersection.type);
+	TEST_ASSERT_EQUAL_PTR(sphere, actualObject);
 }
 
 TEST(Intersections, HitForTwoPositiveTimesReturnsSmallerTime)
 {
 	Intersection_SetTime(xs, 0, 1.0);
 	Intersection_SetTime(xs, 1, 2.0);
-	Intersection_SetObjectType(xs, 0, SPHERE);
-	Intersection_SetObjectType(xs, 1, SPHERE);
+	Intersection_SetObject(xs, 0, NULL);
+	Intersection_SetObject(xs, 1, NULL);
 	Intersection hit;
 	Intersection_Hit(xs, &hit);
 	TEST_ASSERT_EQUAL_FLOAT(1.0, hit.time);
-	TEST_ASSERT_EQUAL_INT(SPHERE, hit.type);
 }
 
 TEST(Intersections, HitForOnePositiveTimeReturnsPositiveTime)
 {
 	Intersection_SetTime(xs, 0, -1.0);
 	Intersection_SetTime(xs, 1, 1.0);
-	Intersection_SetObjectType(xs, 0, SPHERE);
-	Intersection_SetObjectType(xs, 1, SPHERE);
+	Intersection_SetObject(xs, 0, NULL);
+	Intersection_SetObject(xs, 1, NULL);
 	Intersection hit;
 	Intersection_Hit(xs, &hit);
 	TEST_ASSERT_EQUAL_FLOAT(1.0, hit.time);
-	TEST_ASSERT_EQUAL_INT(SPHERE, hit.type);
 }
 
 TEST(Intersections, HitForAllNegativeTimesReturnsFalse)
 {
 	Intersection_SetTime(xs, 0, -2.0);
 	Intersection_SetTime(xs, 1, -1.0);
-	Intersection_SetObjectType(xs, 0, SPHERE);
-	Intersection_SetObjectType(xs, 1, SPHERE);
+	Intersection_SetObject(xs, 0, NULL);
+	Intersection_SetObject(xs, 1, NULL);
 	Intersection hit;
 	TEST_ASSERT_FALSE(Intersection_Hit(xs, &hit));
 }
@@ -102,21 +110,21 @@ TEST(Intersection, IntersectionStoresTimeAndType)
 {
 	Intersection x = { 
 		.time = 3.5,
-		.type = SPHERE
+		.object = NULL
 	};
 	TEST_ASSERT_EQUAL_FLOAT(3.5, x.time);
-	TEST_ASSERT_EQUAL_INT(SPHERE, x.type);
+	TEST_ASSERT_EQUAL_PTR(NULL, x.object);
 }
 
 TEST(Intersection, AggregateCombinesIntersectionsToIntersections)
 {
 	Intersection x1 = { 
 		.time = 1.0,
-		.type = SPHERE
+		.object = NULL
 	};
 	Intersection x2 = { 
 		.time = 2.0,
-		.type = SPHERE
+		.object = NULL
 	};
 	Intersection array[2] = {x1, x2};
 	Intersections xs = Intersection_Aggregate(2, array);
@@ -137,19 +145,19 @@ TEST_SETUP(MultipleIntersection)
 {
 	x1 = (Intersection) { 
 		.time = 5,
-		.type = SPHERE
+		.object = NULL
 	};
 	 x2 = (Intersection) { 
 		.time = 7,
-		.type = SPHERE
+		.object = NULL
 	};
 	 x3 = (Intersection) { 
 		.time = -3,
-		.type = SPHERE
+		.object = NULL
 	};
 	 x4 = (Intersection) { 
 		.time = 2,
-		.type = SPHERE
+		.object = NULL
 	};
 }
 
@@ -165,7 +173,6 @@ TEST(MultipleIntersection, HitAlwaysGivesLowestNonnegativeIntersection)
 	Intersection hit;
 	Intersection_Hit(xs, &hit);
 	TEST_ASSERT_EQUAL_FLOAT(2, hit.time);
-	TEST_ASSERT_EQUAL_INT(SPHERE, hit.type);
 }
 
 TEST(MultipleIntersection, CombineMergesTwoIntersections)

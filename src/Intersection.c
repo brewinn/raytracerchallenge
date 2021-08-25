@@ -41,10 +41,10 @@ void Intersection_SetTime(Intersections xs, int index, float time)
 	xs->intersections[index].time = time;
 }
 
-void Intersection_SetObjectType(Intersections xs, int index, objType type)
+void Intersection_SetObject(Intersections xs, int index, Sphere object)
 {
 	CheckWithinBounds(xs, index);
-	xs->intersections[index].type = type;
+	xs->intersections[index].object = object;
 }
 
 void Intersection_SetIntersection(Intersections xs, int index, Intersection intersection)
@@ -64,10 +64,10 @@ float Intersection_GetTime(const Intersections xs, int index)
 	return xs->intersections[index].time;
 }
 
-objType Intersection_GetObjectType(const Intersections xs, int index)
+Sphere Intersection_GetObject(const Intersections xs, int index)
 {
 	CheckWithinBounds(xs, index);
-	return xs->intersections[index].type;
+	return xs->intersections[index].object;
 }
 
 Intersection Intersection_GetIntersection(const Intersections xs, int index)
@@ -88,14 +88,14 @@ Intersections Intersection_Aggregate(int count, const Intersection* intersection
 
 bool Intersection_Hit(const Intersections xs, Intersection* hitPtr)
 {
-	Intersection currentHit = {-1, NONE};
+	Intersection currentHit = {-1, NULL};
 	for(int k = 0; k < xs->count; k++)
 	{
 		float xtime = xs->intersections[k].time;
 		if(xtime > 0 && (xtime < currentHit.time || currentHit.time < 0))
 		{
 			currentHit.time = xtime;
-			currentHit.type = xs->intersections[k].type;
+			currentHit.object = xs->intersections[k].object;
 		}
 	}
 
