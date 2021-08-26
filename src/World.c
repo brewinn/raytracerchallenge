@@ -96,3 +96,35 @@ Intersections World_Intersect(const World world, Ray ray)
 	Intersection_Sort(xs);
 	return xs;
 }
+
+Color World_ShadeHit(const World world, Computation comp)
+{
+	Color color = Color_Create(0, 0, 0);
+	for(int i = 0; i < World_GetLightCount(world); i++)
+	{
+		color = Color_Add(
+				Material_Lighting(
+					Sphere_GetMaterial(comp.object),
+					*World_GetLight(world, i),
+					comp.point,
+					comp.eyev,
+					comp.normalv),
+				color
+				);
+	}
+	return color;
+}
+
+Color World_ColorAt(const World world, Ray ray)
+{
+	Intersections xs = World_Intersect(world, ray);
+	Intersection hit;
+	if(!Intersection_Hit(xs, &hit))
+	{
+		Intersection_Destroy(&xs);
+		return Color_Create(0, 0, 0);
+	}
+	Intersection_Destroy(&xs);
+	Computation comp = Intersection_PrepareComputations(hit, ray);
+	return World_ShadeHit(world, comp);
+}

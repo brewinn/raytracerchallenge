@@ -55,7 +55,9 @@ Intersections Sphere_Intersect(const Sphere sphere, Ray ray)
 
 	Intersections xs = Intersection_Create(2);
 	Intersection_SetTime(xs, 0, timeOne);
+	Intersection_SetObject(xs, 0 , sphere);
 	Intersection_SetTime(xs, 1, timeTwo);
+	Intersection_SetObject(xs, 1 , sphere);
 	return xs;
 }
 

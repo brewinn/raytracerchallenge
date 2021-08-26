@@ -4,9 +4,7 @@
 #include "Ray.h"
 #include <stdbool.h>
 
-#ifndef __SPHERE__
 typedef struct SphereStruct* Sphere;
-#endif /* __SPHERE__ */
 
 typedef struct IntersectionsStruct* Intersections;
 typedef struct Intersection{

@@ -101,3 +101,79 @@ TEST(DefaultWorld, IntersectionWithRay)
 	TEST_ASSERT_EQUAL_FLOAT(6, Intersection_GetTime(xs, 3));
 	Intersection_Destroy(&xs);
 }
+
+TEST(DefaultWorld, ShadingAnExteriorIntersection)
+{
+	Ray ray = Ray_Create(
+			Tuple_CreatePoint(0, 0, -5),
+			Tuple_CreateVector(0, 0, 1)
+			);
+	Sphere shape = World_GetObject(world, 0);
+	Intersection x = {4, shape};
+	Computation comp = Intersection_PrepareComputations(x, ray);
+	Color c = World_ShadeHit(world, comp);
+	TEST_ASSERT_EQUAL_FLOAT(0.38066, c.red);
+	TEST_ASSERT_EQUAL_FLOAT(0.47583, c.green);
+	TEST_ASSERT_EQUAL_FLOAT(0.2854959, c.blue);
+}
+
+TEST(DefaultWorld, ShadingAnInteriorIntersection)
+{
+	Light* light = World_GetLight(world, 0);
+	light->position = Tuple_CreatePoint(0, 0.25, 0);
+	Ray ray = Ray_Create(
+			Tuple_CreatePoint(0, 0, 0),
+			Tuple_CreateVector(0, 0, 1)
+			);
+	Sphere shape = World_GetObject(world, 1);
+	Intersection x = {0.5, shape};
+	Computation comp = Intersection_PrepareComputations(x, ray);
+	Color c = World_ShadeHit(world, comp);
+	TEST_ASSERT_EQUAL_FLOAT(0.90498, c.red);
+	TEST_ASSERT_EQUAL_FLOAT(0.90498, c.green);
+	TEST_ASSERT_EQUAL_FLOAT(0.90498, c.blue);
+}
+
+TEST(DefaultWorld, ColorWhenRayMisses)
+{
+	Ray ray = Ray_Create(
+			Tuple_CreatePoint(0, 0, -5),
+			Tuple_CreateVector(0, 1, 0)
+			);
+	Color c = World_ColorAt(world, ray);
+	TEST_ASSERT_EQUAL_FLOAT(0.0, c.red);
+	TEST_ASSERT_EQUAL_FLOAT(0.0, c.green);
+	TEST_ASSERT_EQUAL_FLOAT(0.0, c.blue);
+}
+
+TEST(DefaultWorld, ColorWhenRayHits)
+{
+	Ray ray = Ray_Create(
+			Tuple_CreatePoint(0, 0, -5),
+			Tuple_CreateVector(0, 0, 1)
+			);
+	Color c = World_ColorAt(world, ray);
+	TEST_ASSERT_EQUAL_FLOAT(0.38066, c.red);
+	TEST_ASSERT_EQUAL_FLOAT(0.47583, c.green);
+	TEST_ASSERT_EQUAL_FLOAT(0.2854959, c.blue);
+}
+
+TEST(DefaultWorld, ColorWithIntersectionBehindRay)
+{
+	Sphere outer = World_GetObject(world, 0);
+	Material outerMat = Sphere_GetMaterial(outer);
+	outerMat.ambient = 1;
+	Sphere_SetMaterial(outer, outerMat);
+	Sphere inner = World_GetObject(world, 1);
+	Material innerMat = Sphere_GetMaterial(inner);
+	innerMat.ambient = 1;
+	Sphere_SetMaterial(inner, innerMat);
+	Ray ray = Ray_Create(
+			Tuple_CreatePoint(0, 0, 0.75),
+			Tuple_CreateVector(0, 0, -1)
+			);
+	Color c = World_ColorAt(world, ray);
+	TEST_ASSERT_EQUAL_FLOAT(innerMat.color.red, c.red);
+	TEST_ASSERT_EQUAL_FLOAT(innerMat.color.green, c.green);
+	TEST_ASSERT_EQUAL_FLOAT(innerMat.color.blue, c.blue);
+}
