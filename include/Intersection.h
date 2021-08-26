@@ -1,6 +1,7 @@
 #ifndef __INTERSECTION__
 #define __INTERSECTION__
 
+#include "Ray.h"
 #include <stdbool.h>
 
 #ifndef __SPHERE__
@@ -12,6 +13,14 @@ typedef struct Intersection{
 	float time;
 	Sphere object;
 } Intersection;
+typedef struct Computation{
+	float time;
+	Sphere object;
+	Tuple point;
+	Tuple eyev;
+	Tuple normalv;
+	bool inside;
+} Computation;
 
 Intersections Intersection_Create(int xsCount);
 void Intersection_Destroy(Intersections* xsPtr);
@@ -26,5 +35,6 @@ Intersections Intersection_Aggregate(int count, const Intersection* intersection
 bool Intersection_Hit(const Intersections xs, Intersection* hitPtr);
 Intersections Intersection_Combine(const Intersections xs1, const Intersections xs2);
 void Intersection_Sort(Intersections xs);
+Computation Intersection_PrepareComputations(Intersection x, Ray ray);
 
 #endif /* __INTERSECTION__ */

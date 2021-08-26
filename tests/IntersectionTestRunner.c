@@ -22,3 +22,15 @@ TEST_GROUP_RUNNER(MultipleIntersection)
 	RUN_TEST_CASE(MultipleIntersection, CombineMergesTwoIntersections);
 	RUN_TEST_CASE(MultipleIntersection, SortRearrangesIntersectionsBasedOnTime);
 }
+
+TEST_GROUP_RUNNER(Computation)
+{
+	RUN_TEST_CASE(Computation, ComputationContainsTime);
+	RUN_TEST_CASE(Computation, ComputationContainsObject);
+	RUN_TEST_CASE(Computation, ComputationContainsPoint);
+	RUN_TEST_CASE(Computation, ComputationContainsEyev);
+	RUN_TEST_CASE(Computation, ComputationContainsNormalv);
+	RUN_TEST_CASE(Computation, InsideFalseWhenIntersectionOutside);
+	RUN_TEST_CASE(Computation, InsideTrueWhenIntersectionInside);
+}
+

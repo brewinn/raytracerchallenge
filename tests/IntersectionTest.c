@@ -145,19 +145,19 @@ TEST_SETUP(MultipleIntersection)
 {
 	x1 = (Intersection) { 
 		.time = 5,
-		.object = NULL
+			.object = NULL
 	};
-	 x2 = (Intersection) { 
+	x2 = (Intersection) { 
 		.time = 7,
-		.object = NULL
+			.object = NULL
 	};
-	 x3 = (Intersection) { 
+	x3 = (Intersection) { 
 		.time = -3,
-		.object = NULL
+			.object = NULL
 	};
-	 x4 = (Intersection) { 
+	x4 = (Intersection) { 
 		.time = 2,
-		.object = NULL
+			.object = NULL
 	};
 }
 
@@ -203,4 +203,65 @@ TEST(MultipleIntersection, SortRearrangesIntersectionsBasedOnTime)
 	TEST_ASSERT_EQUAL_FLOAT(2, xOne);
 	TEST_ASSERT_EQUAL_FLOAT(5, xTwo);
 	TEST_ASSERT_EQUAL_FLOAT(7, xThree);
+}
+
+static Computation comp;
+
+TEST_GROUP(Computation);
+
+TEST_SETUP(Computation)
+{
+	Ray ray = Ray_Create(
+			Tuple_CreatePoint(0, 0, -5),
+			Tuple_CreateVector(0, 0, 1)
+			);
+	sphere = Sphere_Create();
+	Intersection x = {4, sphere};
+	comp = Intersection_PrepareComputations(x, ray);
+}
+
+TEST_TEAR_DOWN(Computation)
+{
+	Sphere_Destroy(&sphere);
+}
+
+TEST(Computation, ComputationContainsTime)
+{
+	TEST_ASSERT_EQUAL_FLOAT(4, comp.time);
+}
+
+TEST(Computation, ComputationContainsObject)
+{
+	TEST_ASSERT_EQUAL_PTR(sphere, comp.object);
+}
+
+TEST(Computation, ComputationContainsPoint)
+{
+	TEST_ASSERT_EQUAL_FLOAT(-1, comp.point.z);
+}
+
+TEST(Computation, ComputationContainsEyev)
+{
+	TEST_ASSERT_EQUAL_FLOAT(-1, comp.eyev.z);
+}
+
+TEST(Computation, ComputationContainsNormalv)
+{
+	TEST_ASSERT_EQUAL_FLOAT(-1, comp.normalv.z);
+}
+
+TEST(Computation, InsideFalseWhenIntersectionOutside)
+{
+	TEST_ASSERT_FALSE(comp.inside);
+}
+
+TEST(Computation, InsideTrueWhenIntersectionInside)
+{
+	Ray ray = Ray_Create(
+			Tuple_CreatePoint(0, 0, 0),
+			Tuple_CreateVector(0, 0, 1)
+			);
+	Intersection x = {1, sphere};
+	comp = Intersection_PrepareComputations(x, ray);
+	TEST_ASSERT(comp.inside);
 }

@@ -1,4 +1,5 @@
 #include "Intersection.h"
+#include "Sphere.h"
 #include <stdlib.h>
 
 typedef struct IntersectionsStruct{
@@ -164,7 +165,7 @@ static void MergeSortIntersections(int i, int j, Intersections xs, Intersections
 						xs,
 						rightSide
 						)
-					 );
+					);
 			rightSide++;
 		}
 		else if(rightSide == j + 1)
@@ -198,7 +199,7 @@ static void MergeSortIntersections(int i, int j, Intersections xs, Intersections
 						xs,
 						rightSide
 						)
-					 );
+					);
 			rightSide++;
 		}
 	}
@@ -228,4 +229,23 @@ void Intersection_Sort(Intersections xs)
 	if(xs->count <= 1)
 		return;
 	SortIntersections(xs);
+}
+
+Computation Intersection_PrepareComputations(Intersection x, Ray ray)
+{
+	Tuple position = Ray_Position(ray, x.time);
+	Computation comp = {
+		.time = x.time,
+		.object = x.object,
+		.point = position,
+		.eyev = Tuple_Negate(ray.direction),
+		.normalv = Sphere_NormalAt(x.object, position),
+		.inside = false
+	};
+	if(Tuple_Dot(comp.normalv, comp.eyev) < 0)
+	{
+		comp.inside = true;
+		comp.normalv = Tuple_Negate(comp.normalv);
+	}
+	return comp;
 }
