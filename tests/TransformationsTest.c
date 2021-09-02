@@ -154,6 +154,98 @@ TEST(Transformations, RotationAboutZAxisMovesPoint)
 	AssertTupleFloatsEqual();
 }
 
+static Matrix expectedTransformation;
+TEST_GROUP(ViewTransformation);
+
+TEST_SETUP(ViewTransformation)
+{
+}
+
+TEST_TEAR_DOWN(ViewTransformation)
+{
+	Matrix_Destroy(&transformation);
+	Matrix_Destroy(&expectedTransformation);
+}
+
+static void AssertMatricesEqual(Matrix expected, Matrix actual)
+{
+	int columns = Matrix_GetColumns(expected);
+	int rows = Matrix_GetRows(expected);
+	TEST_ASSERT_EQUAL_INT(columns, Matrix_GetColumns(actual));
+	TEST_ASSERT_EQUAL_INT(rows, Matrix_GetRows(actual));
+	for(int i = 0; i < rows; i++)
+		for(int j = 0; j < columns; j++)
+			TEST_ASSERT_FLOAT_WITHIN(
+					1e-05,
+					Matrix_ValueAt(expected, i, j),
+					Matrix_ValueAt(actual, i, j)
+					);
+}
+
+TEST(ViewTransformation, DefaultOrientation)
+{
+	Tuple from = Tuple_CreatePoint(0, 0, 0);
+	Tuple to = Tuple_CreatePoint(0, 0, -1);
+	Tuple up = Tuple_CreateVector(0, 1, 0);
+	transformation = Transformation_ViewTransform(from, to, up);
+	expectedTransformation = Matrix_Identity(4);
+	AssertMatricesEqual(expectedTransformation, transformation);
+}
+
+TEST(ViewTransformation, PositiveZDirection)
+{
+	Tuple from = Tuple_CreatePoint(0, 0, 0);
+	Tuple to = Tuple_CreatePoint(0, 0, 1);
+	Tuple up = Tuple_CreateVector(0, 1, 0);
+	transformation = Transformation_ViewTransform(from, to, up);
+	expectedTransformation = Transformation_Scale(-1, 1, -1);
+	AssertMatricesEqual(expectedTransformation, transformation);
+}
+
+TEST(ViewTransformation, TransformMovesTheWorld)
+{
+	Tuple from = Tuple_CreatePoint(0, 0, 8);
+	Tuple to = Tuple_CreatePoint(0, 0, 0);
+	Tuple up = Tuple_CreateVector(0, 1, 0);
+	transformation = Transformation_ViewTransform(from, to, up);
+	expectedTransformation = Transformation_Translation(0, 0, -8);
+	AssertMatricesEqual(expectedTransformation, transformation);
+}
+
+static void SetArbitraryViewTransform()
+{
+	expectedTransformation = Matrix_Create(4,4);
+	Matrix_SetValue(expectedTransformation, 0, 0, -0.50709);
+	Matrix_SetValue(expectedTransformation, 0, 1, 0.50709);
+	Matrix_SetValue(expectedTransformation, 0, 2, 0.67612);
+	Matrix_SetValue(expectedTransformation, 0, 3, -2.36643);
+
+	Matrix_SetValue(expectedTransformation, 1, 0, 0.76772);
+	Matrix_SetValue(expectedTransformation, 1, 1, 0.60609);
+	Matrix_SetValue(expectedTransformation, 1, 2, 0.12122);
+	Matrix_SetValue(expectedTransformation, 1, 3, -2.82843);
+
+	Matrix_SetValue(expectedTransformation, 2, 0, -0.35857);
+	Matrix_SetValue(expectedTransformation, 2, 1, 0.59761);
+	Matrix_SetValue(expectedTransformation, 2, 2, -0.71714);
+	Matrix_SetValue(expectedTransformation, 2, 3, 0);
+
+	Matrix_SetValue(expectedTransformation, 3, 0, 0);
+	Matrix_SetValue(expectedTransformation, 3, 1, 0);
+	Matrix_SetValue(expectedTransformation, 3, 2, 0);
+	Matrix_SetValue(expectedTransformation, 3, 3, 1);
+}
+
+TEST(ViewTransformation, ArbitraryViewTransformation)
+{
+	Tuple from = Tuple_CreatePoint(1, 3, 2);
+	Tuple to = Tuple_CreatePoint(4, -2, 8);
+	Tuple up = Tuple_CreateVector(1, 1, 0);
+	transformation = Transformation_ViewTransform(from, to, up);
+	SetArbitraryViewTransform();
+	AssertMatricesEqual(expectedTransformation, transformation);
+}
+
 TEST_GROUP(Shears);
 
 TEST_SETUP(Shears)

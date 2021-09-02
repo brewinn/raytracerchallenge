@@ -15,6 +15,7 @@ static void RunAllTests(void)
 	RUN_TEST_GROUP(Matrix);
 	RUN_TEST_GROUP(MatrixOperations);
 	RUN_TEST_GROUP(Transformations);
+	RUN_TEST_GROUP(ViewTransformation);
 	RUN_TEST_GROUP(Shears);
 	RUN_TEST_GROUP(TransformationSequence);
 	RUN_TEST_GROUP(Ray);

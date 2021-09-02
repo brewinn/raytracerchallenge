@@ -15,6 +15,15 @@ TEST_GROUP_RUNNER(Transformations)
 	RUN_TEST_CASE(Transformations, RotationAboutZAxisMovesPoint);
 }
 
+
+TEST_GROUP_RUNNER(ViewTransformation)
+{
+	RUN_TEST_CASE(ViewTransformation, DefaultOrientation);
+	RUN_TEST_CASE(ViewTransformation, PositiveZDirection);
+	RUN_TEST_CASE(ViewTransformation, TransformMovesTheWorld);
+	RUN_TEST_CASE(ViewTransformation, ArbitraryViewTransformation);
+}
+
 TEST_GROUP_RUNNER(Shears)
 {
 	RUN_TEST_CASE(Shears, ShearXInProportionToY);
@@ -30,3 +39,4 @@ TEST_GROUP_RUNNER(TransformationSequence)
 	RUN_TEST_CASE(TransformationSequence, IndividualTransformationsAreAppliedSequentially);
 	RUN_TEST_CASE(TransformationSequence, ChainedTransformationsAreAppliedInReverseOrder);
 }
+

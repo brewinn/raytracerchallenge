@@ -67,3 +67,32 @@ Matrix Transformation_Shear(float Xy, float Xz, float Yx, float Yz, float Zx, fl
 	Matrix_SetValue(shear, 2, 1, Zy);
 	return shear;
 }
+
+Matrix Transformation_ViewTransform(Tuple from, Tuple to, Tuple up)
+{
+	Tuple forward = Tuple_Normalize(Tuple_Subtract(to, from));
+	Tuple left = Tuple_Cross(forward, Tuple_Normalize(up));
+	Tuple trueUp = Tuple_Cross(left, forward);
+	Matrix orientation = Matrix_Create(4, 4);
+
+	Matrix_SetValue(orientation, 0, 0, left.x);
+	Matrix_SetValue(orientation, 0, 1, left.y);
+	Matrix_SetValue(orientation, 0, 2, left.z);
+
+	Matrix_SetValue(orientation, 1, 0, trueUp.x);
+	Matrix_SetValue(orientation, 1, 1, trueUp.y);
+	Matrix_SetValue(orientation, 1, 2, trueUp.z);
+
+	Matrix_SetValue(orientation, 2, 0, -forward.x);
+	Matrix_SetValue(orientation, 2, 1, -forward.y);
+	Matrix_SetValue(orientation, 2, 2, -forward.z);
+
+	Matrix_SetValue(orientation, 3, 3, 1);
+
+	Matrix translation = Transformation_Translation(-from.x, -from.y, -from.z);
+	Matrix transformation = Matrix_Multiply(orientation, translation);
+	Matrix_Destroy(&orientation);
+	Matrix_Destroy(&translation);
+
+	return transformation;
+}
