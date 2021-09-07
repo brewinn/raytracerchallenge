@@ -34,6 +34,7 @@ static void RunAllTests(void)
 	RUN_TEST_GROUP(MaterialLighting);
 	RUN_TEST_GROUP(World);
 	RUN_TEST_GROUP(DefaultWorld);
+	RUN_TEST_GROUP(Camera);
 }
 
 int main(int argc, const char * argv[])
