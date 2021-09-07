@@ -71,7 +71,7 @@ This section contains a list of changes (mostly refactors) that are planned but 
 - [x] Change Makefiles to be more resilient to added sources
 - [ ] Add _Shape_ 'parent struct' to deal with multiple shapes
 	- This probably won't be necessary until chapter 9
-- [ ] Add _Shape_ pointer or similar identifier to _Intersection_
+- [x] Add _Shape_ pointer or similar identifier to _Intersection_
 	- The end of chapter 6 implied that there should be a reference in _Intersection_
 
 ## Contributing
