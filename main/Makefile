@@ -34,7 +34,7 @@ BIN := projectile.program \
 
 all: run clean
 
-run: projectile clockface sphereCast
+run: projectile clockface sphereCast sphereCastWithCamera
 
 projectile: projectile.program
 	@echo "Running "$<"..."
