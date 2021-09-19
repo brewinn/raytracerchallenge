@@ -4,9 +4,9 @@ A WIP implementation of a ray tracer based on the book by Jamis Buck.
 ## Description
 
 This project seeks to implement a ray tracer based on _The Ray Tracer
-Challenge_ by Jamis Buck in C. Everything up to chapter 6 has been implemented
+Challenge_ by Jamis Buck in C. Everything up to chapter 7 has been implemented
 so far. While there is not a full ray-tracer just yet, the underlying elements are
-falling into place. Additionally, three programs in the _main_ directory have been made which produce
+falling into place. Additionally, four programs in the _main_ directory have been made which produce
 images that can be seen in the _img_ folder. 
 
 ## Usage
@@ -48,7 +48,7 @@ in the _img_ directory are the results of previous compilations.
 - [x] Chapter 4: Matrix Transformations
 - [x] Chapter 5: Ray-Sphere Intersections
 - [x] Chapter 6: Light and Shading
-- [ ] Chapter 7: Making a Scene
+- [x] Chapter 7: Making a Scene
 - [ ] Chapter 8: Shadows
 - [ ] Chapter 9: Planes
 - [ ] Chapter 10: Patterns
@@ -63,16 +63,13 @@ in the _img_ directory are the results of previous compilations.
 ## TO-DO
 
 This section contains a list of changes (mostly refactors) that are planned but not yet implemented.
+Completed items will occasionally be pruned.
 
-- [x] Swap parameter order of _Canvas_WriteToPPM_ function
-- [x] Change Makefiles to attain project's directory automatically
-	- Used a workaround, must invoke Makefiles from their respective directories
-- [x] Add _const_ modifiers were appropriate
-- [x] Change Makefiles to be more resilient to added sources
 - [ ] Add _Shape_ 'parent struct' to deal with multiple shapes
 	- This probably won't be necessary until chapter 9
-- [x] Add _Shape_ pointer or similar identifier to _Intersection_
-	- The end of chapter 6 implied that there should be a reference in _Intersection_
+- [ ] Add warnings to compiler flags, and deal with them
+- [ ] Extract commonly used test functions to separate utility file
+- [ ] Change memory allocation/deallocation to be more consistent and intuitive
 
 ## Contributing
 
