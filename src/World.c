@@ -82,6 +82,17 @@ Sphere World_GetObject(const World world, int index)
 	return LinkedList_ValueAt(world->objectList, index);
 }
 
+void World_AddLight(const World world, Light* lightPtr)
+{
+	LinkedList_Append(world->lightList, lightPtr);
+}
+
+void World_AddObject(const World world, Sphere object)
+{
+	LinkedList_Append(world->objectList, object);
+}
+
+
 Intersections World_Intersect(const World world, Ray ray)
 {
 	Intersections xs = Intersection_Create(0);
