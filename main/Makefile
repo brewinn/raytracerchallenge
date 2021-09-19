@@ -4,14 +4,15 @@
 #  projectile: compile, link, and run projectile program
 #  clockface: compile, link, and run clockface program
 #  sphereCast: compile, link, and run sphereCast program
+#  sphereCastWithCamera: compile, link, and run sphereCastWithCamera program
 #  clean: remove program binaries, if present
 #  cleanall: remove programs binaries and object files, if present
 
-.PHONY = all run projectile clockface sphereCast clean cleanall
+.PHONY = all run projectile clockface sphereCast sphereCastWithCamera clean cleanall
 .SECONDARY:; # Prevents make from removing program object files
 
 CC = gcc
-CFLAGS = -lm
+CFLAGS = -lm -g
 
 BASE_DIR = ..
 SRC_DIR = $(BASE_DIR)/src
@@ -28,7 +29,8 @@ DEP_FILES := $(patsubst %.o, %.d, $(OBJ_FILES))
 OBJ := $(addprefix $(OBJ_DIR)/,$(OBJ_FILES))
 BIN := projectile.program \
        clockface.program \
-       sphereCast.program
+       sphereCast.program \
+       sphereCastWithCamera.program
 
 all: run clean
 
@@ -49,6 +51,11 @@ clockface: clockface.program
 sphereCast: sphereCast.program
 	@echo -n "Running "$<"..."
 	@./sphereCast.program
+	@echo "Done."
+
+sphereCastWithCamera: sphereCastWithCamera.program
+	@echo -n "Running "$<"..."
+	@./sphereCastWithCamera.program
 	@echo "Done."
 
 clean:
