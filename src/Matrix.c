@@ -39,11 +39,11 @@ void Matrix_Destroy(Matrix * matrixPtr)
 
 static bool WithinMatrixBounds(Matrix matrix, int row, int column)
 {
-	if(row < 0 | row > (matrix->nrows - 1))
+	if(row < 0 || row > (matrix->nrows - 1))
 	{
 		return false;
 	}
-	if(column < 0 | column > (matrix->ncolumns - 1))
+	if(column < 0 || column > (matrix->ncolumns - 1))
 	{
 		return false;
 	}
@@ -188,10 +188,10 @@ static void SetMatrixDiagonal(Matrix matrix, float value)
 	if(matrix->nrows > matrix->ncolumns)
 		dimension = matrix->ncolumns;
 	for(int k = 0; k < dimension; k++)
-		Matrix_SetValue(matrix, k, k, 1);
+		Matrix_SetValue(matrix, k, k, value);
 }
 
-const Matrix Matrix_Identity(int dimension)
+Matrix Matrix_Identity(int dimension)
 {
 	Matrix identity = Matrix_Create(dimension, dimension);
 	SetMatrixDiagonal(identity, 1);
@@ -281,7 +281,7 @@ float Matrix_Determinant(const Matrix matrix)
 	float determinant = 0;
 	for(int j = 0; j < matrix->ncolumns; j++)
 		determinant += Matrix_ValueAt(matrix, 0, j) 
-			     * Matrix_Cofactor(matrix, 0, j);
+			* Matrix_Cofactor(matrix, 0, j);
 	return determinant;
 }
 

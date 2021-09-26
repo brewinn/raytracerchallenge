@@ -65,7 +65,7 @@ void plotTrajectory(Canvas canvas, Projectile projectile, Environment environmen
 	Canvas_WriteToPPM(canvas, "trajectory.ppm");
 }
 
-int main(int argc, char ** argv)
+int main(void)
 {
 	Tuple position = Tuple_CreatePoint(0, 1, 0);
 	Tuple velocity = Tuple_Multiply(Tuple_Normalize(Tuple_CreateVector(1, 1.8, 0)), 11.25);

@@ -5,11 +5,6 @@
 
 enum {VECTOR, POINT};
 
-static void Tuple_Print(Tuple t)
-{
-	printf("Tuple values: x=%f, y=%f, z=%f, w=%f\n", t.x, t.y, t.z, t.w);
-}
-
 Tuple Tuple_Create(float x, float y, float z, float w)
 {
 	Tuple tuple = {x, y, z, w};
@@ -62,9 +57,9 @@ Tuple Tuple_Subtract(Tuple tuple1, Tuple tuple2)
 Tuple Tuple_Negate(Tuple tuple)
 {
 	return Tuple_Create(-tuple.x, 
-			    -tuple.y, 
-			    -tuple.z, 
-			    -tuple.w);
+			-tuple.y, 
+			-tuple.z, 
+			-tuple.w);
 }
 
 Tuple Tuple_Multiply(Tuple tuple, float scalar)

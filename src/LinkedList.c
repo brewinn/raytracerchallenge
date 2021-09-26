@@ -15,7 +15,7 @@ LinkedList LinkedList_Create()
 {
 	LinkedList list = calloc(1, sizeof(struct LinkedListStruct));
 	list->head = NULL;
-	int length = 0;
+	list->length = 0;
 	return list;
 }
 
@@ -71,7 +71,7 @@ void LinkedList_Append(LinkedList list, void* data)
 		list->head = newNode;
 		return;
 	}
-	
+
 	Node* runner = list->head;
 	while(runner->next != NULL)
 		runner = runner->next;

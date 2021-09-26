@@ -7,12 +7,12 @@
 
 static bool CanvasOutOfBounds(Canvas canvas, int x, int y)
 {
-	if(x > canvas.width | x < 0)
+	if(x > canvas.width || x < 0)
 	{
 		return true;
 	}
 
-	if(y > canvas.height | y < 0)
+	if(y > canvas.height || y < 0)
 	{
 		return true;
 	}

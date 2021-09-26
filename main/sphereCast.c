@@ -50,19 +50,14 @@ static void CastSphere(Canvas canvas, Sphere sphere, Light light)
 	Tuple rayOrigin = Tuple_CreatePoint(0, 0, -5);
 	float wallZ = 10;
 	float wallSize = 7;
-	int canvasPixels = canvas.width;
-	float pixelSize = wallSize/canvasPixels;
-	float half = wallSize/2;
 
 	CastAllRays(canvas, sphere, rayOrigin, wallSize, wallZ, light);
 }
 
-int main(int argc, char ** argv)
+int main(void)
 {
 	int canvasPixels = 100;
 	Canvas canvas = Canvas_Create(canvasPixels, canvasPixels);
-
-	Color red = Color_Create(1, 0, 0);
 
 	Matrix transformation = Matrix_Identity(4);
 

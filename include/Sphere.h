@@ -6,8 +6,6 @@
 #include "Matrix.h"
 #include "Materials.h"
 
-typedef struct SphereStruct* Sphere;
-
 Sphere Sphere_Create(void);
 void Sphere_Destroy(Sphere* spherePtr);
 int Sphere_GetId(const Sphere sphere);

@@ -7,8 +7,11 @@
 #include <math.h>
 #include <stdlib.h>
 
+#ifndef M_PI
+#    define M_PI 3.14159265358979323846
+#endif
 
-int main(int argc, char ** argv)
+int main(void)
 {
 	Matrix t1, t2, t3, t4, m1, m2;
 

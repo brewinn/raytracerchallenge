@@ -12,7 +12,7 @@
 .SECONDARY:; # Prevents make from removing program object files
 
 CC = gcc
-CFLAGS = -lm -g
+CFLAGS = -lm -g -Wall -Wextra -std=c99 -pedantic
 
 BASE_DIR = ..
 SRC_DIR = $(BASE_DIR)/src

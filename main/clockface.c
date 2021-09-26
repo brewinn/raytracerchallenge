@@ -2,7 +2,11 @@
 #include "Canvas.h"
 #include <math.h>
 
-int main(int argc, char ** argv)
+#ifndef M_PI
+#    define M_PI 3.14159265358979323846
+#endif
+
+int main(void)
 {
 	int canvasWidth = 80, canvasHeight = 80;
 	Canvas canvas = Canvas_Create(canvasWidth, canvasHeight);
