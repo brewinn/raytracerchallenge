@@ -13,7 +13,7 @@
 .PHONY = all run runv verbose runl memcheck clean cleanall
 
 CC = gcc
-CFLAGS = -lm
+CFLAGS = -lm -Wall -Wextra -std=c99 -pedantic
 
 BASE_DIR = ..
 OBJ_DIR = $(BASE_DIR)/obj
