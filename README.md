@@ -68,7 +68,7 @@ Completed items will occasionally be pruned.
 - [ ] Add _Shape_ 'parent struct' to deal with multiple shapes
 	- This probably won't be necessary until chapter 9
 - [x] Add warnings to compiler flags, and deal with them
-- [ ] Extract commonly used test functions to separate utility file
+- [x] Extract commonly used test functions to separate utility file
 - [ ] Change memory allocation/deallocation to be more consistent and intuitive
 
 ## Contributing
