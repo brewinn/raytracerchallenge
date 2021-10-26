@@ -75,7 +75,7 @@ Completed items will occasionally be pruned.
 
 This is a personal project and hence is not seeking additional collaborators.
 That said, code reviews and bug reports are welcome. If you find something
-wrong, feel free to contact the current maintainer (brewinn@protonmail.com).
+wrong, feel free to contact the me (brewinn@protonmail.com).
 
 ## License
 
@@ -87,4 +87,5 @@ the _LICENSE_ file in the project's root directory.
 
 ## Project Status
 
-The project is currently in active development.
+The project is currently in active development. The development is likely going
+to be fairly slow moving forward, as I'm split between work and school.
