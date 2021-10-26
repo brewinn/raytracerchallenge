@@ -113,7 +113,7 @@ TEST(Matrix, MatrixAssignDestroysRightHandSide)
 TEST(Matrix, MatrixCopySetsOneMatrixEqualToAnother)
 {
     Matrix identity = Matrix_Identity(3);
-    Matrix_Copy(matrix, identity);
+    Matrix_Transfer(matrix, identity);
     TEST_ASSERT_EQUAL_FLOAT(1, Matrix_ValueAt(matrix, 0, 0));
     TEST_ASSERT_EQUAL_FLOAT(0, Matrix_ValueAt(matrix, 1, 0));
     TEST_ASSERT_EQUAL_FLOAT(1, Matrix_ValueAt(matrix, 2, 2));
@@ -121,7 +121,7 @@ TEST(Matrix, MatrixCopySetsOneMatrixEqualToAnother)
 
 TEST(Matrix, MatrixCopyCanTakeAnRValue)
 {
-    Matrix_Copy(matrix, Matrix_Identity(2));
+    Matrix_Transfer(matrix, Matrix_Identity(2));
     TEST_ASSERT_EQUAL_FLOAT(1, Matrix_ValueAt(matrix, 0, 0));
     TEST_ASSERT_EQUAL_FLOAT(0, Matrix_ValueAt(matrix, 1, 0));
     TEST_ASSERT_EQUAL_FLOAT(1, Matrix_ValueAt(matrix, 1, 1));
@@ -141,7 +141,7 @@ TEST(Matrix, MultiplicationOfMatrixAndTuple)
 
 TEST(Matrix, IdentityReturnsNXNDimensionalIdentityMatrix)
 {
-    Matrix_Copy(matrix, Matrix_Identity(4));
+    Matrix_Transfer(matrix, Matrix_Identity(4));
     TEST_ASSERT_EQUAL_FLOAT(1, Matrix_ValueAt(matrix, 0, 0));
     TEST_ASSERT_EQUAL_FLOAT(0, Matrix_ValueAt(matrix, 2, 0));
     TEST_ASSERT_EQUAL_FLOAT(1, Matrix_ValueAt(matrix, 3, 3));
@@ -150,7 +150,7 @@ TEST(Matrix, IdentityReturnsNXNDimensionalIdentityMatrix)
 
 TEST(Matrix, SubmatrixRemovesOneRowAndOneColumn)
 {
-    Matrix_Copy(matrix, Matrix_Submatrix(matrix, 2, 3));
+    Matrix_Transfer(matrix, Matrix_Submatrix(matrix, 2, 3));
     TEST_ASSERT_EQUAL_INT(3, Matrix_GetRows(matrix));
     TEST_ASSERT_EQUAL_INT(3, Matrix_GetColumns(matrix));
 }
@@ -158,7 +158,7 @@ TEST(Matrix, SubmatrixRemovesOneRowAndOneColumn)
 TEST(Matrix, SubmatrixRemovesValuesFromSpecifiedRowAndColumn)
 {
     FillMatrixValues(matrix, FillCellNumber);
-    Matrix_Copy(matrix, Matrix_Submatrix(matrix, 3, 2));
+    Matrix_Transfer(matrix, Matrix_Submatrix(matrix, 3, 2));
     TEST_ASSERT_EQUAL_FLOAT(0, Matrix_ValueAt(matrix, 0, 0));
     TEST_ASSERT_EQUAL_FLOAT(5, Matrix_ValueAt(matrix, 1, 1));
     TEST_ASSERT_EQUAL_FLOAT(11, Matrix_ValueAt(matrix, 2, 2));
@@ -174,7 +174,7 @@ static void FillNonsingular2X2(Matrix matrix)
 
 TEST(Matrix, DeterminantOf2X2Matrix)
 {
-    Matrix_Copy(matrix, Matrix_Create(2, 2));
+    Matrix_Transfer(matrix, Matrix_Create(2, 2));
     FillNonsingular2X2(matrix);
     float determinant = Matrix_Determinant(matrix);
     TEST_ASSERT_EQUAL_FLOAT(-1.0, determinant);
@@ -197,7 +197,7 @@ static void FillNonsingular3X3(Matrix matrix)
 
 TEST(Matrix, MinorOf3X3Matrix)
 {
-    Matrix_Copy(matrix, Matrix_Create(3, 3));
+    Matrix_Transfer(matrix, Matrix_Create(3, 3));
     FillNonsingular3X3(matrix);
     float minor = Matrix_Minor(matrix, 1, 0);
     TEST_ASSERT_EQUAL_FLOAT(25, minor);
@@ -205,7 +205,7 @@ TEST(Matrix, MinorOf3X3Matrix)
 
 TEST(Matrix, CofactorOf3X3Matrix)
 {
-    Matrix_Copy(matrix, Matrix_Create(3, 3));
+    Matrix_Transfer(matrix, Matrix_Create(3, 3));
     FillNonsingular3X3(matrix);
     float cofactor = Matrix_Cofactor(matrix, 0, 0);
     float minor = Matrix_Minor(matrix, 0, 0);
@@ -254,9 +254,9 @@ TEST(Matrix, SingularMatrixHasDeterminantOfZero)
 
 TEST(Matrix, MatrixInverseReturnsInverseForNonsingularMatrix)
 {
-    Matrix_Copy(matrix, Matrix_Create(2, 2));
+    Matrix_Transfer(matrix, Matrix_Create(2, 2));
     FillNonsingular2X2(matrix);
-    Matrix_Copy(matrix, Matrix_Inverse(matrix));
+    Matrix_Transfer(matrix, Matrix_Inverse(matrix));
 
     TEST_ASSERT_EQUAL_FLOAT(-3, Matrix_ValueAt(matrix, 0, 0));
     TEST_ASSERT_EQUAL_FLOAT(2, Matrix_ValueAt(matrix, 0, 1));
@@ -309,7 +309,7 @@ TEST(MatrixOperations, MultiplcationByIdentityReturnsIdenticalMatrix)
 {
     FillMatrixValues(matrix1, FillAdd);
     Matrix identity = Matrix_Identity(4);
-    Matrix_Copy(matrix2, Matrix_Multiply(matrix1, identity));
+    Matrix_Transfer(matrix2, Matrix_Multiply(matrix1, identity));
     Matrix_Destroy(&identity);
     AssertMatricesEqual(matrix1, matrix2);
 }
@@ -337,15 +337,15 @@ static void AssertMatrixTransposed(Matrix matrix1, Matrix matrix2)
 TEST(MatrixOperations, MatrixTransposeSwapsRowsAndColumns)
 {
     FillMatrixValues(matrix1, FillSubtract);
-    Matrix_Copy(matrix2, Matrix_Transpose(matrix1));
+    Matrix_Transfer(matrix2, Matrix_Transpose(matrix1));
     AssertMatrixTransposed(matrix1, matrix2);
 }
 
 TEST(MatrixOperations, MatrixTimesInverseGivesIdentity)
 {
     FillNonsingular4X4(matrix1);
-    Matrix_Copy(matrix2, Matrix_Inverse(matrix1));
-    Matrix_Copy(matrix2, Matrix_Multiply(matrix1, matrix2));
-    Matrix_Copy(matrix1, Matrix_Identity(4));
+    Matrix_Transfer(matrix2, Matrix_Inverse(matrix1));
+    Matrix_Transfer(matrix2, Matrix_Multiply(matrix1, matrix2));
+    Matrix_Transfer(matrix1, Matrix_Identity(4));
     TEST_ASSERT(Matrix_Equals(matrix1, matrix2));
 }

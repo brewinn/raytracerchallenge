@@ -299,7 +299,7 @@ TEST(TransformationSequence, IndividualTransformationsAreAppliedSequentially)
 TEST(TransformationSequence, ChainedTransformationsAreAppliedInReverseOrder)
 {
     transformation = Matrix_Multiply(scale, rotation);
-    Matrix_Copy(transformation, Matrix_Multiply(translation, transformation));
+    Matrix_Transfer(transformation, Matrix_Multiply(translation, transformation));
     actual = Matrix_MultiplyTuple(transformation, point);
     Matrix_Destroy(&transformation);
     expected = Tuple_CreatePoint(15, 0, 7);

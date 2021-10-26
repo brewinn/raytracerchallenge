@@ -14,7 +14,7 @@ int Matrix_GetRows(const Matrix matrix);
 int Matrix_GetColumns(const Matrix matrix);
 bool Matrix_Equals(const Matrix matrix1, const Matrix matrix2);
 void Matrix_Assign(Matrix * lhsPtr, Matrix * rhsPtr);
-void Matrix_Copy(Matrix destination, const Matrix source);
+void Matrix_Transfer(Matrix destination, const Matrix source);
 Matrix Matrix_Multiply(const Matrix matrix1, const Matrix matrix2);
 Tuple Matrix_MultiplyTuple(const Matrix matrix, Tuple tuple);
 Matrix Matrix_Identity(int dimension);
