@@ -70,6 +70,7 @@ Completed items will occasionally be pruned.
 - [x] Add warnings to compiler flags, and deal with them
 - [x] Extract commonly used test functions to separate utility file
 - [ ] Change memory allocation/deallocation to be more consistent and intuitive
+    - I've changed some functions to help with memory, but this is an ongoing effort
 
 ## Contributing
 
