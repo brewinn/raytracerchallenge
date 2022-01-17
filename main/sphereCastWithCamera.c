@@ -40,12 +40,8 @@ int main(void)
     Matrix_Transfer(m1, Matrix_Multiply(t1, t2));
     Matrix_Transfer(t3, Transformation_RotationX(M_PI/2));
     Matrix_Transfer(t4, Transformation_Scale(10, 0.01, 10));
-    Matrix_Transfer(m2, Matrix_Multiply(t3, t4));
-    Matrix_Destroy(&t3);
-    Matrix_Destroy(&t4);
-    Matrix rightWallTransform = Matrix_Multiply(m1, m2);
-    Matrix_Destroy(&m1);
-    Matrix_Destroy(&m2);
+    Matrix_Transfer(m2, Matrix_DestructiveMultiply(&t3, &t4));
+    Matrix rightWallTransform = Matrix_DestructiveMultiply(&m1, &m2);
     Sphere_SetTransformation(rightWall, rightWallTransform);
     Sphere_SetMaterial(rightWall, floorMaterial);
 
@@ -72,10 +68,8 @@ int main(void)
     Sphere left = Sphere_Create();
     Matrix_Transfer(t1, Transformation_Translation(-1.5, 0.33, -0.75));
     Matrix_Transfer(t2, Transformation_Scale(0.33, 0.33, 0.33));
-    Matrix leftTransform = Matrix_Multiply(t1, t2);
+    Matrix leftTransform = Matrix_DestructiveMultiply(&t1, &t2);
     Sphere_SetTransformation(left, leftTransform);
-    Matrix_Destroy(&t1);
-    Matrix_Destroy(&t2);
     Material leftMaterial = Material_Create();
     leftMaterial.color = Color_Create(1, 0.8, 0.1);
     leftMaterial.diffuse = 0.7;
