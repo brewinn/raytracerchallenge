@@ -41,7 +41,7 @@ TEST_TEAR_DOWN(MaterialLighting)
 {
 }
 
-TEST(MaterialLighting, LightingWithLightBetweenTheLightAndTheSurface)
+TEST(MaterialLighting, LightingWithEyeBetweenTheLightAndTheSurface)
 {
     Tuple eyev = Tuple_CreateVector(0, 0, -1);
     Tuple normalv = Tuple_CreateVector(0, 0, -1);
@@ -60,7 +60,7 @@ TEST(MaterialLighting, LightingWithLightBetweenTheLightAndTheSurface)
     AssertColorsEqual(expected, result);
 }
 
-TEST(MaterialLighting, LightingWithLightBetweenTheLightAndTheSurfaceOffset45Degrees)
+TEST(MaterialLighting, LightingWithEyeBetweenTheLightAndTheSurfaceOffset45Degrees)
 {
     float value = sqrtf(2)/2;
     Tuple eyev = Tuple_CreateVector(0, value, -value);
