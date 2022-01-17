@@ -314,6 +314,20 @@ TEST(MatrixOperations, MultiplcationByIdentityReturnsIdenticalMatrix)
     AssertMatricesEqual(matrix1, matrix2);
 }
 
+TEST(MatrixOperations, DestructiveMultiplicationOfTwoMatrices)
+{
+    Matrix temp1 = Matrix_Create(4,4);
+    Matrix temp2 = Matrix_Create(4,4);
+    FillMatrixValues(temp1, FillAdd);
+    FillMatrixValues(temp2, FillSubtract);
+    Matrix result = Matrix_DestructiveMultiply(&temp1, &temp2);
+    Matrix_Assign(&matrix1, &result);
+
+    TEST_ASSERT_EQUAL_FLOAT(14, Matrix_ValueAt(matrix1, 0, 0));
+    TEST_ASSERT_EQUAL_FLOAT(0, Matrix_ValueAt(matrix1, 1, 2));
+    TEST_ASSERT_EQUAL_FLOAT(-4, Matrix_ValueAt(matrix1, 3, 2));
+}
+
 static void AssertDimensionsTransposed(Matrix matrix1, Matrix matrix2)
 {
     if(Matrix_GetRows(matrix1) != Matrix_GetColumns(matrix2))

@@ -32,6 +32,7 @@ TEST_GROUP_RUNNER(MatrixOperations)
 	RUN_TEST_CASE(MatrixOperations, MatrixEqualsReturnsFalseForDifferentMatrices);
 	RUN_TEST_CASE(MatrixOperations, MultiplicationOfTwoMatrices);
 	RUN_TEST_CASE(MatrixOperations, MultiplcationByIdentityReturnsIdenticalMatrix);
+	RUN_TEST_CASE(MatrixOperations, DestructiveMultiplicationOfTwoMatrices);
 	RUN_TEST_CASE(MatrixOperations, MatrixTransposeSwapsRowsAndColumns);
 	RUN_TEST_CASE(MatrixOperations, MatrixTimesInverseGivesIdentity);
 }

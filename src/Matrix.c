@@ -146,6 +146,22 @@ Matrix Matrix_Multiply(const Matrix matrix1, const Matrix matrix2)
     return MultiplyValidMatrices(matrix1, matrix2);
 }
 
+Matrix Matrix_DestructiveMultiply(Matrix * lhsPtr, Matrix * rhsPtr)
+{
+    Matrix matrix1 = *lhsPtr;
+    Matrix matrix2 = *rhsPtr;
+    bool CanMultiplyMatrices = matrix1->ncolumns == matrix2->nrows;
+    if(!CanMultiplyMatrices)
+    {
+        /* Error message? */
+        exit(-1);
+    }
+    Matrix result = MultiplyValidMatrices(matrix1, matrix2);
+    Matrix_Destroy(lhsPtr);
+    Matrix_Destroy(rhsPtr);
+    return result;
+}
+
 static Matrix TupleToMatrix(Tuple tuple)
 {
     Matrix mtuple = Matrix_Create(4, 1);
