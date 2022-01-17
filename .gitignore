@@ -13,3 +13,7 @@ vgcore*
 
 # Ignore ctags
 tags
+
+# Ignore certain generated folders
+~/*
+1
