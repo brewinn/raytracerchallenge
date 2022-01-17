@@ -13,7 +13,7 @@
 .PHONY = all run runv verbose runl memcheck clean cleanall
 
 CC = gcc
-CFLAGS = -lm -Wall -Wextra -std=c99 -pedantic
+CFLAGS = -g -lm -Wall -Wextra -std=c99 -pedantic
 
 BASE_DIR = ..
 OBJ_DIR = $(BASE_DIR)/obj
@@ -61,7 +61,7 @@ verbose: runv clean
 runl: AllTests.test
 	@echo "Running tests with memcheck..."
 	@echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-	@-valgrind --leak-check=yes ./AllTests.test
+	@-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./AllTests.test
 	@echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	@echo "Done."
 
