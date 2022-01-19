@@ -84,7 +84,7 @@ runl: AllTests.test
 
 runle: AllTests.test
 	@echo "Checking tests for memory errors..."
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./AllTests.test
+	@valgrind --error-exitcode=1 --leak-check=full --show-leak-kinds=all --track-origins=yes ./AllTests.test
 	@echo "Done."
 
 memcheck: runl clean
