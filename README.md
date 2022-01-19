@@ -12,7 +12,7 @@ images that can be seen in the _img_ folder.
 
 ## Usage
 
-This project is built on a Linux (Arch-based) distribution. It is not tested
+This project is built on a Linux distribution. It is not tested
 for Windows or MacOS.
 
 Project can be run using one of the Makefiles in either the project root, the
