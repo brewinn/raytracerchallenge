@@ -15,7 +15,8 @@ vgcore*
 tags
 
 # Ignore certain generated folders
-~/*
+**/~/*
+**/1/*
 1
 
 # Ignore generated programs
