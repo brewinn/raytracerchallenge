@@ -1,5 +1,5 @@
 
-name: Testing CI
+name: Tests
   
 on:
   
