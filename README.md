@@ -1,3 +1,4 @@
+[![Testing CI](https://github.com/brewinn/raytracerchallenge/actions/workflows/tests.yml/badge.svg)](https://github.com/brewinn/raytracerchallenge/actions/workflows/tests.yml)
 # Ray Tracer Challenge 
 A WIP implementation of a ray tracer based on the book by Jamis Buck.
 
