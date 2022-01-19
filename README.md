@@ -5,10 +5,12 @@ A WIP implementation of a ray tracer based on the book by Jamis Buck.
 ## Description
 
 This project seeks to implement a ray tracer based on _The Ray Tracer
-Challenge_ by Jamis Buck in C. Everything up to chapter 7 has been implemented
+Challenge_ by Jamis Buck in C. Everything up to chapter 8 has been implemented
 so far. While there is not a full ray-tracer just yet, the underlying elements are
-falling into place. Additionally, four programs in the _main_ directory have been made which produce
-images that can be seen in the _img_ folder. 
+falling into place. Additionally, five programs in the _main_ directory have
+been made which produce images that can be seen in the _img_ folder. Note that
+the programs where produced at the end of a particular chapter and may not
+behave properly with the code from later chapters.
 
 ## Usage
 
@@ -50,7 +52,7 @@ in the _img_ directory are the results of previous compilations.
 - [x] Chapter 5: Ray-Sphere Intersections
 - [x] Chapter 6: Light and Shading
 - [x] Chapter 7: Making a Scene
-- [ ] Chapter 8: Shadows
+- [x] Chapter 8: Shadows
 - [ ] Chapter 9: Planes
 - [ ] Chapter 10: Patterns
 - [ ] Chapter 11: Reflection and Refraction
