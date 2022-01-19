@@ -8,12 +8,14 @@
 #  delete binaries
 #  buildclean: compile, link, and run tests and programs after removing all
 #  objects and binaries
+#  build: compile, but do not link, the files in the source directory
 #  clean: remove binaries, if present
 #  cleanall: remove binaries and object files, if present
 
-.PHONY = all test program memcheck verbose buildclean clean cleanall
+.PHONY = all test program memcheck verbose buildclean build clean cleanall
 
 BASE_DIR = .
+SRC_DIR = $(BASE_DIR)/src
 OBJ_DIR = $(BASE_DIR)/obj
 PROGRAM_DIR = $(BASE_DIR)/main
 TESTS_DIR = $(BASE_DIR)/tests
@@ -48,6 +50,13 @@ verbose:
 	@echo "Done."
 
 buildclean: cleanall all
+
+build:
+	@echo "Compiling sources..."
+	@echo "================================"
+	@$(MAKE) -C $(SRC_DIR)
+	@echo "================================"
+	@echo "Done."
 
 clean:
 	@echo "Removing test binaries..."
