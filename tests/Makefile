@@ -10,7 +10,7 @@
 #  clean: remove test binaries, if present
 #  cleanall: remove test binaries and object files, if present
 
-.PHONY = all run runv verbose runl memcheck clean cleanall
+.PHONY = all run runv verbose runl rune memcheck memtest clean cleanall
 
 CC = gcc
 CFLAGS = -g -Wall -Wextra -std=c99 -pedantic
@@ -66,7 +66,14 @@ runl: AllTests.test
 	@echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	@echo "Done."
 
+rune: AllTests.test
+	@echo "Checking tests for memory errors..."
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./AllTests.test
+	@echo "Done."
+
 memcheck: runl clean
+
+memtest: rune clean
 
 clean:
 	@echo -n "Cleaning up test binaries..."

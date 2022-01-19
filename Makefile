@@ -8,11 +8,14 @@
 #  delete binaries
 #  buildclean: compile, link, and run tests and programs after removing all
 #  objects and binaries
-#  build: compile, but do not link, the files in the source directory
 #  clean: remove binaries, if present
 #  cleanall: remove binaries and object files, if present
+#
+# The following commands are used primarily for github actions:
+#  build: compile, but do not link, the files in the source directory
+#  memtest: run a memory check, but do not suppress errors produced by valgrind
 
-.PHONY = all test program memcheck verbose buildclean build clean cleanall
+.PHONY = all test program memcheck memtest verbose buildclean build clean cleanall
 
 BASE_DIR = .
 SRC_DIR = $(BASE_DIR)/src
@@ -35,10 +38,18 @@ program:
 	@$(MAKE) -C $(PROGRAM_DIR)
 	@echo "================================"
 	@echo "Done."
+
 memcheck:
 	@echo "Checking tests for memory leaks..."
 	@echo "================================"
 	@$(MAKE) -C $(TESTS_DIR) memcheck
+	@echo "================================"
+	@echo "Done."
+
+memtest:
+	@echo "Checking tests for memory leaks..."
+	@echo "================================"
+	@$(MAKE) -C $(TESTS_DIR) memtest
 	@echo "================================"
 	@echo "Done."
 
