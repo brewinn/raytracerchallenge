@@ -45,6 +45,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Run memory checks
       run: | 
+        echo Installing valgrind...
+        sudo apt install -y valgrind
         echo Running memory check...
         make memcheck
 
