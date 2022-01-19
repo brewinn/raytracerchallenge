@@ -14,8 +14,9 @@
 # The following commands are used primarily for github actions:
 #  build: compile, but do not link, the files in the source directory
 #  memtest: run a memory check, but do not suppress errors produced by valgrind
+#  testcheck: run the tests, but do not suppress errors
 
-.PHONY = all test program memcheck memtest verbose buildclean build clean cleanall
+.PHONY = all test testcheck program memcheck memtest verbose buildclean build clean cleanall
 
 BASE_DIR = .
 SRC_DIR = $(BASE_DIR)/src
@@ -29,6 +30,13 @@ test:
 	@echo "Compiling and running tests..."
 	@echo "================================"
 	@$(MAKE) -C $(TESTS_DIR)
+	@echo "================================"
+	@echo "Done."
+
+testcheck:
+	@echo "Compiling and running tests..."
+	@echo "================================"
+	@$(MAKE) -C $(TESTS_DIR) check
 	@echo "================================"
 	@echo "Done."
 
