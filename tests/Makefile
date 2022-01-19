@@ -13,7 +13,8 @@
 .PHONY = all run runv verbose runl memcheck clean cleanall
 
 CC = gcc
-CFLAGS = -g -lm -Wall -Wextra -std=c99 -pedantic
+CFLAGS = -g -Wall -Wextra -std=c99 -pedantic
+LFLAGS = -lm
 
 BASE_DIR = ..
 OBJ_DIR = $(BASE_DIR)/obj
@@ -80,7 +81,7 @@ cleanall:
 
 AllTests.test: $(OBJ)
 	@echo -n "Linking all tests..."
-	@$(CC) $(CFLAGS) $(OBJ) -o AllTests.test
+	@$(CC) $(OBJ) -o AllTests.test $(LFLAGS)
 	@echo "Done."
 
 $(OBJ_DIR)/%.o: %.c
