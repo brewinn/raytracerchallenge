@@ -61,7 +61,7 @@ TEST_SETUP(Matrix)
 
 TEST_TEAR_DOWN(Matrix)
 {
-    Matrix_Destroy(&matrix);
+    //Matrix_Destroy(&matrix);
 }
 
 TEST(Matrix, MatrixStoresFloats)
@@ -69,7 +69,7 @@ TEST(Matrix, MatrixStoresFloats)
     Matrix_SetValue(matrix, 0, 0, 1);
     Matrix_SetValue(matrix, 2, 1, 2.5);
     Matrix_SetValue(matrix, 3, 3, 3.0);
-    TEST_ASSERT_EQUAL_FLOAT(0, Matrix_ValueAt(matrix, 0, 0));
+    TEST_ASSERT_EQUAL_FLOAT(1, Matrix_ValueAt(matrix, 0, 0));
     TEST_ASSERT_EQUAL_FLOAT(2.5, Matrix_ValueAt(matrix, 2, 1));
     TEST_ASSERT_EQUAL_FLOAT(3.0, Matrix_ValueAt(matrix, 3, 3));
 }
