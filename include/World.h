@@ -19,5 +19,6 @@ void World_AddObject(const World world, Sphere object);
 Intersections World_Intersect(const World world, Ray ray);
 Color World_ShadeHit(const World world, Computation comp);
 Color World_ColorAt(const World world, Ray ray);
+bool World_IsShadowed(const World world, Tuple point);
 
 #endif /* __WORLD__ */

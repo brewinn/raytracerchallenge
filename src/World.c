@@ -119,7 +119,8 @@ Color World_ShadeHit(const World world, Computation comp)
 					*World_GetLight(world, i),
 					comp.point,
 					comp.eyev,
-					comp.normalv),
+					comp.normalv,
+                    false), //TODO: Replace with appropriate call
 				color
 				);
 	}
@@ -138,4 +139,22 @@ Color World_ColorAt(const World world, Ray ray)
 	Intersection_Destroy(&xs);
 	Computation comp = Intersection_PrepareComputations(hit, ray);
 	return World_ShadeHit(world, comp);
+}
+
+bool World_IsShadowed(const World world, Tuple point){
+    bool retVal = false;
+    int lightIndex = 0;
+    Light* light = World_GetLight(world, lightIndex);
+    Tuple direction = Tuple_Subtract(light->position, point);
+    float distance = Tuple_Magnitude(direction);
+    direction = Tuple_Normalize(direction);
+    Ray shadowRay = Ray_Create(point, direction);
+    Intersections xs = World_Intersect(world, shadowRay);
+    Intersection hit;
+    if(Intersection_Hit(xs, &hit)){
+            if(hit.time < distance)
+                retVal = true;
+            }
+    Intersection_Destroy(&xs);
+    return retVal;
 }

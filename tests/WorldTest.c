@@ -164,3 +164,31 @@ TEST(DefaultWorld, ColorWithIntersectionBehindRay)
     actualColor = World_ColorAt(world, ray);
     AssertColorsEqual(innerMat.color, actualColor);
 }
+
+TEST(DefaultWorld, NoShadowWhenNothingIsCollinearWithPointAndLight)
+{
+    Tuple point = Tuple_CreatePoint(0, 10, 0);
+    bool pointIsShadowed = World_IsShadowed(world, point);
+    TEST_ASSERT_FALSE(pointIsShadowed);
+}
+
+TEST(DefaultWorld, ShadowWhenObjectBetweenThePointAndTheLight)
+{
+    Tuple point = Tuple_CreatePoint(10, -10, 10);
+    bool pointIsShadowed = World_IsShadowed(world, point);
+    TEST_ASSERT_TRUE(pointIsShadowed);
+}
+
+TEST(DefaultWorld, NoShadowWhenObjectIsBehindTheLight)
+{
+    Tuple point = Tuple_CreatePoint(-20, 20, -20);
+    bool pointIsShadowed = World_IsShadowed(world, point);
+    TEST_ASSERT_FALSE(pointIsShadowed);
+}
+
+TEST(DefaultWorld, NoShadowWhenObjectIsBehindThePoint)
+{
+    Tuple point = Tuple_CreatePoint(-2, 2, -2);
+    bool pointIsShadowed = World_IsShadowed(world, point);
+    TEST_ASSERT_FALSE(pointIsShadowed);
+}

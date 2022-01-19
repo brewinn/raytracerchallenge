@@ -17,4 +17,8 @@ TEST_GROUP_RUNNER(DefaultWorld)
 	RUN_TEST_CASE(DefaultWorld, ColorWhenRayMisses);
 	RUN_TEST_CASE(DefaultWorld, ColorWhenRayHits);
 	RUN_TEST_CASE(DefaultWorld, ColorWithIntersectionBehindRay);
+	RUN_TEST_CASE(DefaultWorld, NoShadowWhenNothingIsCollinearWithPointAndLight);
+	RUN_TEST_CASE(DefaultWorld, ShadowWhenObjectBetweenThePointAndTheLight);
+	RUN_TEST_CASE(DefaultWorld, NoShadowWhenObjectIsBehindTheLight);
+	RUN_TEST_CASE(DefaultWorld, NoShadowWhenObjectIsBehindThePoint);
 }
