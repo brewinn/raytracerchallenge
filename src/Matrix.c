@@ -10,7 +10,7 @@ typedef struct MatrixStruct{
 
 Matrix Matrix_Create(int nrows, int ncolumns)
 {
-    Matrix matrix = malloc(sizeof(MatrixStruct));
+    Matrix matrix = malloc(sizeof(MatrixStruct))
     matrix->nrows = nrows;
     matrix->ncolumns = ncolumns;
     matrix->values = (float **)calloc(nrows, sizeof(float *));
