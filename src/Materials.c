@@ -74,7 +74,7 @@ static Color CalculateSpecular(Material material, Light light, Tuple point, Tupl
 	return specular;
 }
 
-Color Material_Lighting(Material material, Light light, Tuple point, Tuple eyev, Tuple normalv)
+Color Material_Lighting(Material material, Light light, Tuple point, Tuple eyev, Tuple normalv, bool inShadow)
 {
 	Color ambient = CalculateAmbient(material, light);
 	if(lightIsOppositeSurface(light, point, normalv))

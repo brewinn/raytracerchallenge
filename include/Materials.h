@@ -13,7 +13,7 @@ typedef struct Material{
 } Material;
 
 Material Material_Create();
-Color Material_Lighting(Material material, Light light, Tuple point, Tuple eyev, Tuple normalv);
+Color Material_Lighting(Material material, Light light, Tuple point, Tuple eyev, Tuple normalv, bool inShadow);
 
 #endif /* __MATERIALS__ */
 
