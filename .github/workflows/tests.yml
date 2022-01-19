@@ -48,14 +48,5 @@ jobs:
         echo Installing valgrind...
         sudo apt install -y valgrind
         echo Running memory check...
-        make memcheck
+        make memtest
 
-  clean:
-
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Clean objects and binaries
-      run: | 
-        echo Cleaning objects and binaries...
-        make cleanall
