@@ -1,7 +1,5 @@
 #include "Utilities.h"
 
-#define EPSILON 1.0e-05f
-
 static float absoluteValue(float f)
 {
 	if(f < 0)

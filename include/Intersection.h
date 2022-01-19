@@ -18,6 +18,7 @@ typedef struct Computation{
 	Tuple eyev;
 	Tuple normalv;
 	bool inside;
+    Tuple overPoint;
 } Computation;
 
 Intersections Intersection_Create(int xsCount);

@@ -2,8 +2,11 @@
 #include "World.h"
 #include "Transformations.h"
 #include "TestUtilities.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 static World world;
+static Color actualColor, expectedColor;
 
 TEST_GROUP(World);
 
@@ -34,7 +37,33 @@ TEST(World, DefaultWorldHasPointLightAndTwoSpheres)
     TEST_ASSERT_EQUAL_INT(1, lightCount);
 }
 
-static Color actualColor, expectedColor;
+static Light* pointlight;
+
+TEST(World, ShadeHitGivenAnIntersectionInShadow)
+{
+    world = World_Create();
+    pointlight = Light_AllocatePointLight(
+                    Tuple_CreatePoint(0, 0, -10),
+                    Color_Create(1, 1, 1)
+                );
+    World_AddLight(world, pointlight);
+    Sphere s1 = Sphere_Create();
+    World_AddObject(world, s1);
+    Sphere s2 = Sphere_Create();
+    Matrix transform = Transformation_Translation(0, 0, 10);
+    Sphere_SetTransformation(s2, transform);
+    World_AddObject(world, s2);
+    Ray r = Ray_Create(
+                Tuple_CreatePoint(0, 0, 5),
+                Tuple_CreateVector(0, 0, 1)
+            );
+    Intersection i = {4, s2};
+    Computation comps = Intersection_PrepareComputations(i, r);
+    actualColor = World_ShadeHit(world, comps);
+    expectedColor = Color_Create(0.1, 0.1, 0.1);
+    AssertColorsEqual(expectedColor, actualColor);
+}
+
 
 TEST_GROUP(DefaultWorld);
 
@@ -51,8 +80,6 @@ TEST_TEAR_DOWN(DefaultWorld)
 TEST(DefaultWorld, DefaultWorldLightHasCorrectCharacteristics)
 {
     Light defaultLight = *World_GetLight(world, 0);
-    Tuple lightPosition = defaultLight.position;
-    Color lightIntensity = defaultLight.intensity;
     Light expectedLight = Light_CreatePointLight(
             Tuple_CreatePoint(-10, 10, -10),
             Color_Create(1, 1, 1)

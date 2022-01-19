@@ -4,6 +4,7 @@ TEST_GROUP_RUNNER(World)
 {
 	RUN_TEST_CASE(World, InitializedWorldIsEmpty);
 	RUN_TEST_CASE(World, DefaultWorldHasPointLightAndTwoSpheres);
+	RUN_TEST_CASE(World, ShadeHitGivenAnIntersectionInShadow);
 }
 
 TEST_GROUP_RUNNER(DefaultWorld)

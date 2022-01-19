@@ -111,6 +111,7 @@ Intersections World_Intersect(const World world, Ray ray)
 Color World_ShadeHit(const World world, Computation comp)
 {
 	Color color = Color_Create(0, 0, 0);
+    bool shadowed = World_IsShadowed(world, comp.overPoint);
 	for(int i = 0; i < World_GetLightCount(world); i++)
 	{
 		color = Color_Add(
@@ -120,7 +121,7 @@ Color World_ShadeHit(const World world, Computation comp)
 					comp.point,
 					comp.eyev,
 					comp.normalv,
-                    false), //TODO: Replace with appropriate call
+                    shadowed), 
 				color
 				);
 	}

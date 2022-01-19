@@ -109,16 +109,16 @@ AllTests.test: $(OBJ)
 
 $(OBJ_DIR)/%.o: %.c
 	@echo -n "Compiling "$(notdir $@)"..."
-	@$(CC) -c -I $(UNITY_DIR) -I $(INCLUDE_DIR) $< -o $@
+	@$(CC) -c $(CFLAGS) -I $(UNITY_DIR) -I $(INCLUDE_DIR) $< -o $@
 	@echo "Done."
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE_DIR)/%.h
 	@echo -n "Compiling "$(notdir $@)"..."
-	@$(CC) -c -I $(INCLUDE_DIR) $< -o $@
+	@$(CC) -c $(CFLAGS) -I $(INCLUDE_DIR) $< -o $@
 	@echo "Done."
 
 $(OBJ_DIR)/%.o: $(UNITY_DIR)/%.c $(UNITY_DIR)/%.h
 	@echo -n "Compiling "$(notdir $@)"..."
-	@$(CC) -c -I $(INCLUDE_DIR) $< -o $@
+	@$(CC) -c $(CFLAGS) -I $(INCLUDE_DIR) $< -o $@
 	@echo "Done."
 

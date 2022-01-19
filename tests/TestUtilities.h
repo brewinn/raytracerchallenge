@@ -7,6 +7,7 @@
 #include "Matrix.h"
 #include "Materials.h"
 #include "Lights.h"
+#include "Utilities.h"
 
 void AssertTuplesEqual(Tuple expected, Tuple actual);
 void AssertColorsEqual(Color expected, Color actual);

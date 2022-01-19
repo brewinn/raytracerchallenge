@@ -20,3 +20,5 @@ TEST(Lights, PointLightHasPositionAndIntensity)
     AssertTuplesEqual(pointLight.position, position);
     AssertColorsEqual(pointLight.intensity, intensity);
 }
+
+//TODO Test for alloc

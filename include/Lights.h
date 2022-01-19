@@ -10,5 +10,6 @@ typedef struct Light{
 } Light;
 
 Light Light_CreatePointLight(Tuple position, Color intensity);
+Light* Light_AllocatePointLight(Tuple position, Color intensity);
 
 #endif /* __LIGHTS__ */

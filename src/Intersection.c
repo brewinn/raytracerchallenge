@@ -1,5 +1,6 @@
 #include "Intersection.h"
 #include "Sphere.h"
+#include "Utilities.h"
 #include <stdlib.h>
 
 typedef struct IntersectionsStruct{
@@ -240,12 +241,20 @@ Computation Intersection_PrepareComputations(Intersection x, Ray ray)
 		.point = position,
 		.eyev = Tuple_Negate(ray.direction),
 		.normalv = Sphere_NormalAt(x.object, position),
-		.inside = false
+		.inside = false,
+        .overPoint = position
 	};
 	if(Tuple_Dot(comp.normalv, comp.eyev) < 0)
 	{
 		comp.inside = true;
 		comp.normalv = Tuple_Negate(comp.normalv);
+        comp.overPoint = Tuple_Add(
+                            comp.point,
+                            Tuple_Multiply(
+                                comp.normalv,
+                                EPSILON
+                                )
+                        );
 	}
 	return comp;
 }
