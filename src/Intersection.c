@@ -248,13 +248,17 @@ Computation Intersection_PrepareComputations(Intersection x, Ray ray)
 	{
 		comp.inside = true;
 		comp.normalv = Tuple_Negate(comp.normalv);
-        comp.overPoint = Tuple_Add(
-                            comp.point,
-                            Tuple_Multiply(
-                                comp.normalv,
-                                EPSILON
-                                )
-                        );
 	}
+
+    //Used to prevent acne in the image
+    float offsetFactor = 0.002;
+
+    comp.overPoint = Tuple_Add(
+            comp.point,
+            Tuple_Multiply(
+                comp.normalv,
+                offsetFactor
+                )
+            );
 	return comp;
 }

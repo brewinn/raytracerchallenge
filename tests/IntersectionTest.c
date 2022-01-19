@@ -1,6 +1,8 @@
 #include "unity_fixture.h"
 #include "Intersection.h"
 #include "Sphere.h"
+#include "Transformations.h"
+#include "TestUtilities.h"
 #include <stdlib.h>
 
 static Intersections xs;
@@ -94,6 +96,20 @@ TEST(Intersections, HitForAllNegativeTimesReturnsFalse)
 	Intersection_SetObject(xs, 1, NULL);
 	Intersection hit;
 	TEST_ASSERT_FALSE(Intersection_Hit(xs, &hit));
+}
+
+TEST(Intersections, HitShouldOffsetThePoint)
+{
+    Ray r = Ray_Create(
+                Tuple_CreatePoint(0, 0, -5),
+                Tuple_CreateVector(0, 0, 1)
+            );
+    Matrix transform = Transformation_Translation(0, 0, 1);
+    Sphere_SetTransformation(sphere, transform);
+    Intersection i = {5, sphere};
+    Computation comps = Intersection_PrepareComputations(i, r);
+    TEST_ASSERT_TRUE(comps.overPoint.z < -EPSILON/2);
+    TEST_ASSERT_TRUE(comps.overPoint.z < comps.point.z);
 }
 
 TEST_GROUP(Intersection);

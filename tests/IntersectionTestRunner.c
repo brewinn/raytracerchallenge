@@ -9,6 +9,7 @@ TEST_GROUP_RUNNER(Intersections)
 	RUN_TEST_CASE(Intersections, HitForTwoPositiveTimesReturnsSmallerTime);
 	RUN_TEST_CASE(Intersections, HitForOnePositiveTimeReturnsPositiveTime);
 	RUN_TEST_CASE(Intersections, HitForAllNegativeTimesReturnsFalse);
+	RUN_TEST_CASE(Intersections, HitShouldOffsetThePoint);
 }
 
 TEST_GROUP_RUNNER(Intersection)

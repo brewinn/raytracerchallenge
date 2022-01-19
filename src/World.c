@@ -118,7 +118,7 @@ Color World_ShadeHit(const World world, Computation comp)
 				Material_Lighting(
 					Sphere_GetMaterial(comp.object),
 					*World_GetLight(world, i),
-					comp.point,
+					comp.overPoint,
 					comp.eyev,
 					comp.normalv,
                     shadowed), 
