@@ -61,7 +61,7 @@ TEST_SETUP(Matrix)
 
 TEST_TEAR_DOWN(Matrix)
 {
-    //Matrix_Destroy(&matrix);
+    Matrix_Destroy(&matrix);
 }
 
 TEST(Matrix, MatrixStoresFloats)
