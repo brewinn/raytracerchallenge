@@ -8,7 +8,7 @@
 #  clean: remove program binaries, if present
 #  cleanall: remove programs binaries and object files, if present
 
-.PHONY = all run projectile clockface sphereCast sphereCastWithCamera clean cleanall
+.PHONY = all run projectile clockface sphereCast sphereCastWithCamera sphereCastWithShadows clean cleanall
 .SECONDARY:; # Prevents make from removing program object files
 
 CC = gcc
@@ -30,7 +30,8 @@ OBJ := $(addprefix $(OBJ_DIR)/,$(OBJ_FILES))
 BIN := projectile.program \
        clockface.program \
        sphereCast.program \
-       sphereCastWithCamera.program
+       sphereCastWithCamera.program \
+       sphereCastWithShadows.program
 
 all: run clean
 
@@ -56,6 +57,11 @@ sphereCast: sphereCast.program
 sphereCastWithCamera: sphereCastWithCamera.program
 	@echo -n "Running "$<"..."
 	@./sphereCastWithCamera.program
+	@echo "Done."
+
+sphereCastWithShadows: sphereCastWithShadows.program
+	@echo -n "Running "$<"..."
+	@./sphereCastWithShadows.program
 	@echo "Done."
 
 clean:
