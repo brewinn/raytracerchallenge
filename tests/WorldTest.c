@@ -3,7 +3,6 @@
 #include "Transformations.h"
 #include "TestUtilities.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 static World world;
 static Color actualColor, expectedColor;
@@ -132,7 +131,7 @@ TEST(DefaultWorld, ShadingAnExteriorIntersection)
     Intersection x = {4, shape};
     Computation comp = Intersection_PrepareComputations(x, ray);
     actualColor = World_ShadeHit(world, comp);
-    expectedColor = Color_Create(0.38066, 0.47583, 0.2854959);
+    expectedColor = Color_Create(0.38062, 0.47583, 0.2854959);
     AssertColorsEqual(expectedColor, actualColor);
 }
 
@@ -148,7 +147,7 @@ TEST(DefaultWorld, ShadingAnInteriorIntersection)
     Intersection x = {0.5, shape};
     Computation comp = Intersection_PrepareComputations(x, ray);
     actualColor = World_ShadeHit(world, comp);
-    expectedColor = Color_Create(0.90498, 0.90498, 0.90498);
+    expectedColor = Color_Create(0.9043, 0.9043, 0.9043);
     AssertColorsEqual(expectedColor, actualColor);
 }
 

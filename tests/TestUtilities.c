@@ -11,9 +11,9 @@ void AssertTuplesEqual(Tuple expected, Tuple actual)
 
 void AssertColorsEqual(Color expected, Color actual)
 {
-    TEST_ASSERT_FLOAT_WITHIN(1e-5, expected.red, actual.red);
-    TEST_ASSERT_FLOAT_WITHIN(1e-5, expected.green, actual.green);
-    TEST_ASSERT_FLOAT_WITHIN(1e-5, expected.blue, actual.blue);
+    TEST_ASSERT_FLOAT_WITHIN(1e-4, expected.red, actual.red);
+    TEST_ASSERT_FLOAT_WITHIN(1e-4, expected.green, actual.green);
+    TEST_ASSERT_FLOAT_WITHIN(1e-4, expected.blue, actual.blue);
 }
 
 void AssertRaysEqual(Ray expected, Ray actual)
