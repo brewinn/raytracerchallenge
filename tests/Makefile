@@ -9,11 +9,19 @@
 #   binaries (requires valgrind)
 #  clean: remove test binaries, if present
 #  cleanall: remove test binaries and object files, if present
+#
+# The following commands are used primarily for github actions:
+#  rune: compile, link, and run all tests without suppressing errors
+#  runle: compile, link, run, and monitor memory usage of tests without
+#   suppressing errors
+#  memtest: same as memcheck, but don't suppress errors
+#  check: same as all, but don't suppress errors
 
-.PHONY = all run runv verbose runl memcheck clean cleanall
+.PHONY = all check rune runv verbose runl runle memcheck memtest clean cleanall
 
 CC = gcc
-CFLAGS = -g -lm -Wall -Wextra -std=c99 -pedantic
+CFLAGS = -g -Wall -Wextra -std=c99 -pedantic
+LFLAGS = -lm
 
 BASE_DIR = ..
 OBJ_DIR = $(BASE_DIR)/obj
@@ -42,10 +50,19 @@ TEST_BINS := AllTests.test
 
 all: run clean
 
+check: rune clean
+
 run: AllTests.test
 	@echo "Running tests..."
 	@echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	@-./AllTests.test
+	@echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+	@echo "Done."
+
+rune: AllTests.test
+	@echo "Running tests..."
+	@echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+	@./AllTests.test
 	@echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	@echo "Done."
 
@@ -65,7 +82,14 @@ runl: AllTests.test
 	@echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	@echo "Done."
 
+runle: AllTests.test
+	@echo "Checking tests for memory errors..."
+	@valgrind --error-exitcode=1 --leak-check=full --show-leak-kinds=all --track-origins=yes ./AllTests.test
+	@echo "Done."
+
 memcheck: runl clean
+
+memtest: runle clean
 
 clean:
 	@echo -n "Cleaning up test binaries..."
@@ -80,7 +104,7 @@ cleanall:
 
 AllTests.test: $(OBJ)
 	@echo -n "Linking all tests..."
-	@$(CC) $(CFLAGS) $(OBJ) -o AllTests.test
+	@$(CC) $(OBJ) -o AllTests.test $(LFLAGS)
 	@echo "Done."
 
 $(OBJ_DIR)/%.o: %.c

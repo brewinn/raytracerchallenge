@@ -1,0 +1,52 @@
+
+name: Testing CI
+  
+on:
+  
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+      
+  workflow_dispatch:
+
+    
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v2
+      - name: Compile sources
+        run: |
+          echo Compiling sources
+          make build
+
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build and run tests
+      run: | 
+        echo Running tests...
+        make testcheck
+
+  memory-check:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run memory checks
+      run: | 
+        echo Installing valgrind...
+        sudo apt install -y valgrind
+        echo Running memory check...
+        make memtest
+
