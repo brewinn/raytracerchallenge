@@ -21,3 +21,7 @@ tags
 
 # Ignore generated programs
 *.progam
+
+# Ignore linter files
+.ccls
+.ccls-cache/*
