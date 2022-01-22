@@ -1,12 +1,12 @@
 #ifndef __TEST_UTILITIES__
 #define __TEST_UTILITIES__
 
-#include "Tuple.h"
 #include "Color.h"
-#include "Ray.h"
-#include "Matrix.h"
-#include "Materials.h"
 #include "Lights.h"
+#include "Materials.h"
+#include "Matrix.h"
+#include "Ray.h"
+#include "Tuple.h"
 #include "Utilities.h"
 
 void AssertTuplesEqual(Tuple expected, Tuple actual);

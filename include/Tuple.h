@@ -5,11 +5,11 @@
 
 typedef struct Tuple Tuple;
 
-struct Tuple{
-	float x;
-	float y;
-	float z;
-	float w;
+struct Tuple {
+  float x;
+  float y;
+  float z;
+  float w;
 };
 
 Tuple Tuple_Create(float x, float y, float z, float w);
