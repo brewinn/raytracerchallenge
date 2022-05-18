@@ -91,5 +91,7 @@ the _LICENSE_ file in the project's root directory.
 
 ## Project Status
 
-The project is currently in active development. The development is likely going
-to be fairly slow moving forward, as I'm split between work and school.
+Stalled. In the interest of further developing other projects, I'm setting this
+project aside for the time being. Unfortunately, some quick experimentation has
+suggested that a fairly large rework of the code is required, so it will be
+some time before new features will be added.
